@@ -8,7 +8,7 @@ LIBS		=	$(LIBFT) $(MLX)
 
 SRCS		=	srcs/main.c
 
-SRCS_PG		=	srcs/playground/testmlx.c
+SRCS_PG		=	srcs/playground/testmlx2.c
 
 OBJS		=	$(SRCS:.c=.o)
 INC_PATH	=	-I./inc
