@@ -7,6 +7,8 @@
 #define MAP_HEIGHT 24
 #define SCREEN_WIDTH 1920
 #define SCREEN_HEIGHT 1080
+#define BITS_PER_PIXELS 24
+#define BYTES_PER_PIXELS 3
 #define	FOV	60
 #define GRID_SIZE 1
 
@@ -70,3 +72,6 @@ int worldMap[MAP_WIDTH][MAP_HEIGHT]=
 
 void		*mlx_ptr;
 void		*mlx_win;
+int	bits_per_pixel;
+int	size_line;
+int	endian = 0;

@@ -1,13 +1,38 @@
 #include "cub3d.h"
+#include <stdio.h>
 
-int		mlx_vertline_put(int x, int drawStart, int drawEnd, int color, void *mlx_ptr, void *mlx_win)
+int		mlx_vertline_put(int n, int drawStart, int drawEnd, int color, void *mlx_ptr, void *mlx_win)
 {
 	int i;
 
 	i = drawStart;
 	while (i < drawEnd)
 	{
-		mlx_pixel_put(mlx_ptr, mlx_win, x, i, color);
+		mlx_pixel_put(mlx_ptr, mlx_win, n, i, color);
+		i++;
+	}
+	return 0;
+}
+
+int		img_vertline_put(int n, int drawStart, int drawEnd, int color, char *img_data)
+{
+	int i;
+	int b = bits_per_pixel / 8;
+	unsigned int	ucolor;
+
+	ucolor = mlx_get_color_value(mlx_ptr, color);
+	i = drawStart;
+	(void)ucolor;
+	while (i < drawEnd)
+	{
+		//Blue
+		img_data[i * size_line + n * b] = ucolor & 0xFF;
+		// Green
+		img_data[i * size_line + n * b + 1] = (ucolor >> 8) & 0xFF;
+		// Red
+		img_data[i * size_line + n * b + 2] = (ucolor >> 16) & 0xFF;
+		// 
+		img_data[i * size_line + n * b + 3] = (ucolor >> 24) & 0xFF;
 		i++;
 	}
 	return 0;
@@ -26,42 +51,47 @@ int		darken_color(int color, double dark)
 
 int		draw(void *param)
 {
-	GameEngine *ge;
+	GameEngine	*ge;
+	void		*img;
+	char		*img_data;
 
 	ge = (GameEngine *)param;
 
 	// double time = 0; //time of current frame
 	// double oldTime = 0; //time of previous frame
-
-	int drawStart;
-	int drawEnd;
-	int lineHeight;
-	int color;
-
+	int		drawStart;
+	int		drawEnd;
+	int		lineHeight;
+	int		color;
 	//length of ray from current position to next x or y-side
-	double sideDistX;
-	double sideDistY;
+	double	sideDistX;
+	double	sideDistY;
 	//length of ray from one x or y-side to next x or y-side
-	double deltaDistX;
-	double deltaDistY;
-	double rayDirX;
-	double rayDirY;
-	double cameraX;
+	double	deltaDistX;
+	double	deltaDistY;
+	double	rayDirX;
+	double	rayDirY;
+	double	cameraX;
 	//what direction to step in x or y-direction (either +1 or -1)
-	int stepX;
-	int stepY;
+	int		stepX;
+	int		stepY;
 	//which box of the map we're in
-	int mapX;
-	int mapY;
-	int side; //was a NS or a EW wall hit?
-	int hit = 0; //was there a wall hit?
-	double perpWallDist;
+	int		mapX;
+	int		mapY;
+	int		side; //was a NS or a EW wall hit?
+	int		hit = 0; //was there a wall hit?
+	double	perpWallDist;
 	
-	mlx_clear_window ( mlx_ptr, mlx_win );
-	for(int x = 0; x < SCREEN_WIDTH; x++)
+	//mlx_clear_window ( mlx_ptr, mlx_win );
+	img = mlx_new_image (mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT );
+	img_data = mlx_get_data_addr(img, &bits_per_pixel, &size_line, &endian);
+	//printf("bpp : %ui - sl = %ui - endian = %ui", bits_per_pixel, size_line, endian);
+	//getchar();
+
+	for(int n = 0; n < SCREEN_WIDTH; n++)
 	{
 		//calculate ray position and direction
-		cameraX = 2 * x / (double)SCREEN_WIDTH - 1; //x-coordinate in camera space
+		cameraX = 2 * n / (double)SCREEN_WIDTH - 1; //x-coordinate in camera space
 		rayDirX = ge->dir.x + ge->plane.x * cameraX;
 		rayDirY = ge->dir.y + ge->plane.y * cameraX;
 		//which box of the map we're in
@@ -140,8 +170,11 @@ int		draw(void *param)
 			color = darken_color(color, 0.5);
 
 		//draw the pixels of the stripe as a vertical line
-		mlx_vertline_put(x, drawStart, drawEnd, color, mlx_ptr, mlx_win);
+		
+		img_vertline_put(n, drawStart, drawEnd, color, img_data);
 	}
+	
+	mlx_put_image_to_window(mlx_ptr, mlx_win, img, 0, 0);
 	return 0;
 }
 
@@ -209,6 +242,8 @@ int 	main()
 
 	mlx_loop_hook(mlx_ptr, &draw, &ge);
 	mlx_key_hook(mlx_win, &key_hook, &ge);
+	mlx_hook(mlx_win, X11_KEY_PRESS, X11_KEY_PRESS_M, &key_hook, &ge);
+	mlx_hook(mlx_win, X11_KEY_RELEASE, X11_KEY_RELEASE_M, &key_hook, &ge);
 	mlx_loop(mlx_ptr);
 
 }
