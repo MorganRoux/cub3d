@@ -1,11 +1,12 @@
 #include <mlx.h>
 #include <math.h>
 #include "libftprintf.h"
+#include "keys.h"
 
 #define MAP_WIDTH 24
 #define MAP_HEIGHT 24
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 480
+#define SCREEN_WIDTH 1920
+#define SCREEN_HEIGHT 1080
 #define	FOV	60
 #define GRID_SIZE 1
 
@@ -28,7 +29,10 @@ typedef struct	player
 
 typedef struct	game_engine
 {
+	double	moveSpeed;
+	double	rotSpeed;
 	s_vect	dir;
+	s_vect	plane;
 	s_vect	delta;
 	s_vect	dist;
 	Player	pl;
