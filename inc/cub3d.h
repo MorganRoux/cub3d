@@ -5,8 +5,8 @@
 
 #define MAP_WIDTH 24
 #define MAP_HEIGHT 24
-#define SCREEN_WIDTH 1920
-#define SCREEN_HEIGHT 1080
+#define SCREEN_WIDTH 640
+#define SCREEN_HEIGHT 480
 #define TEX_WIDTH 64
 #define TEX_HEIGHT 64
 #define BYTES_PER_PIXELS 3
@@ -76,8 +76,10 @@ void		*mlx_win;
 int	bits_per_pixel;
 int	size_line;
 int	endian = 0;
-int *(texture[8]);
+int sl_tex;
+char *texture[8];
 /*Uint32 buffer[screenHeight][screenWidth]; // y-coordinate first because it works per scanline
   std::vector texture[8];*/
-
-  void		*img2;
+void		*img2[8];
+char 		*path[100] = {"eagle.xpm", "bluestone.xpm", "colorstone.xpm", "greystone.xpm", 
+						"mossy.xpm", "purplestone.xpm", "redbrick.xpm", "wood.xpm"};

@@ -14,6 +14,23 @@ int		mlx_vertline_put(int n, int drawStart, int drawEnd, int color, void *mlx_pt
 	return 0;
 }
 
+int		test_display(char *data)
+{
+	char *data2;
+	int bpp, sl, e;
+	data2 = mlx_get_data_addr(img2, &bpp, &sl, &e);
+
+	for(int x = 0; x<SCREEN_WIDTH;x++)
+	{
+		for (int y = 0; y< SCREEN_HEIGHT; y++)
+		{
+			for (int k =0; k<4;k++)
+				data[y * size_line + x*4 + k] = data2[(y % 64) * sl + (x%64)*4 + k]; 
+		}
+	}
+	
+	return 0;
+}
 // int		img_vertline_put(int n, int drawStart, int drawEnd, int color, char *img_data)
 // {
 // 	int i;
@@ -38,7 +55,7 @@ int		mlx_vertline_put(int n, int drawStart, int drawEnd, int color, void *mlx_pt
 // 	return 0;
 // }
 
-int		img_vertline_put(int img_line, int drawStart, int drawEnd, int *tex, int texX, char *img_data)
+int		img_vertline_put(int img_line, int drawStart, int drawEnd, char *tex, int texX, char *img_data)
 {
 	int i;
 	int b = bits_per_pixel / 8;
@@ -55,14 +72,16 @@ int		img_vertline_put(int img_line, int drawStart, int drawEnd, int *tex, int te
 		texY = (int)texPos & (TEX_HEIGHT - 1);
 		ucolor = mlx_get_color_value(mlx_ptr, tex[texY * TEX_WIDTH + texX]);
 		texPos += step;
-		//Blue
-		img_data[i * size_line + img_line * b] = ucolor & 0xFF;
-		// Green
-		img_data[i * size_line + img_line * b + 1] = (ucolor >> 8) & 0xFF;
-		// Red
-		img_data[i * size_line + img_line * b + 2] = (ucolor >> 16) & 0xFF;
-		// 
-		img_data[i * size_line + img_line * b + 3] = (ucolor >> 24) & 0xFF;
+		for (int k =0; k<4;k++)
+				img_data[i * size_line + img_line*b + k] = tex[texY * sl_tex + texX*b + k]; 
+		// //Blue
+		// img_data[i * size_line + img_line * b] = tex[texY * TEX_WIDTH + texX];
+		// // Green
+		// img_data[i * size_line + img_line * b + 1] = tex[texY * TEX_WIDTH + texX + 1];
+		// // Red
+		// img_data[i * size_line + img_line * b + 2] = tex[texY * TEX_WIDTH + texX + 2];
+		// // 
+		// img_data[i * size_line + img_line * b + 3] = tex[texY * TEX_WIDTH + texX + 3];
 		i++;
 	}
 	return 0;
@@ -96,8 +115,6 @@ int		draw(void *param)
 
 	ge = (GameEngine *)param;
 
-// mlx_put_image_to_window(mlx_ptr, mlx_win, img2, 0, 0);
-// return 0;
 	// double time = 0; //time of current frame
 	// double oldTime = 0; //time of previous frame
 	int		drawStart;
@@ -126,8 +143,11 @@ int		draw(void *param)
 	//mlx_clear_window ( mlx_ptr, mlx_win );
 	img = mlx_new_image (mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT );
 	img_data = mlx_get_data_addr(img, &bits_per_pixel, &size_line, &endian);
-	//printf("bpp : %ui - sl = %ui - endian = %ui", bits_per_pixel, size_line, endian);
+	//printf("bpp : %u - sl = %u - endian = %u", bits_per_pixel, size_line, endian);
 	//getchar();
+// 	test_display(img_data);
+// 	mlx_put_image_to_window(mlx_ptr, mlx_win, img, 0, 0);
+// return 0;
 
 	for(int n = 0; n < SCREEN_WIDTH; n++)
 	{
@@ -290,44 +310,17 @@ int 	main()
 	if ((mlx_ptr = mlx_init()) == NULL)
 		return (0);
 	
-	img2 = mlx_xpm_file_to_image(mlx_ptr, ft_strjoin(pics_dir,"eagle.xpm"), &w, &h);
-	printf("w : %d h : %d p : %p", w, h, img2);
-	char *img_data = mlx_get_data_addr(img2, &bits_per_pixel, &size_line, &endian);
-	(void)img_data;
 	//generate some textures
 	for(int i=0; i<8; i++)
 	{
-		texture[i] = (int *)malloc(sizeof(int) * TEX_HEIGHT * TEX_WIDTH);
+		int bpp, e;
+		img2[i] = mlx_xpm_file_to_image(mlx_ptr, ft_strjoin(pics_dir,path[i]), &w, &h);
+		//printf("w : %d h : %d p : %p", w, h, img2[i]);
+		texture[i] = mlx_get_data_addr(img2[i], &bpp, &sl_tex, &e);//(int *)malloc(sizeof(int) * TEX_HEIGHT * TEX_WIDTH);
 	}
 
-	for(int x = 0; x < TEX_WIDTH; x++)
-	{
-		for(int y = 0; y < TEX_HEIGHT; y++)
-		{
-			int xorcolor = (x * 256 / TEX_WIDTH) ^ (y * 256 / TEX_HEIGHT);
-			//int xcolor = x * 256 / texWidth;
-			int ycolor = y * 256 / TEX_HEIGHT;
-			int xycolor = y * 128 / TEX_HEIGHT + x * 128 / TEX_WIDTH;
-			texture[0][y * TEX_WIDTH + x] = 65536 * 254 * (x != y && x != TEX_WIDTH - y); //flat red texture with black cross
-			texture[1][y * TEX_WIDTH + x] = xycolor + 256 * xycolor + 65536 * xycolor; //sloped greyscale
-			texture[2][y * TEX_WIDTH + x] = 256 * xycolor + 65536 * xycolor; //sloped yellow gradient
-			texture[3][y * TEX_WIDTH + x] = xorcolor + 256 * xorcolor + 65536 * xorcolor; //xor greyscale
-			texture[4][y * TEX_WIDTH + x] = 256 * xorcolor; //xor green
-			texture[5][y * TEX_WIDTH + x] = 65536 * 192 * (x % 16 && y % 16); //red bricks
-			texture[6][y * TEX_WIDTH + x] = 65536 * ycolor; //red gradient
-			texture[7][y * TEX_WIDTH + x] = 128 + 256 * 128 + 65536 * 128; //flat grey texture
-
-			// texture[5][y * TEX_WIDTH + x] = img_data[y * TEX_WIDTH + x] + (img_data[y * TEX_WIDTH + x + 1] << 8)
-			// 								+ (img_data[y * TEX_WIDTH + x + 2] << 16);
-		}
-	}
-
-	
 	if ((mlx_win = mlx_new_window(mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT, "Raycaster")) == NULL)
 		return (0);
-
-	
-	
 
 	mlx_loop_hook(mlx_ptr, &draw, &ge);
 	mlx_key_hook(mlx_win, &key_hook, &ge);
