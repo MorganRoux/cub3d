@@ -6,9 +6,13 @@ LIBFT		=	$(LIBFT_DIR)/libftprintf.a
 MLX			=	$(MLX_DIR)/libmlx.a
 LIBS		=	$(LIBFT) $(MLX)
 
-SRCS		=	srcs/main.c
+SRCS		=	srcs/main.c \
+				srcs/display.c \
+				srcs/hooks.c \
+				srcs/move.c \
+				srcs/dda.c
 
-SRCS_PG		=	srcs/playground/testmlx2.c
+SRCS_PG		=	srcs/playground/testmlx2_copy.c
 
 OBJS		=	$(SRCS:.c=.o)
 INC_PATH	=	-I./inc
