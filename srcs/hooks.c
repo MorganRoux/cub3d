@@ -1,13 +1,5 @@
 #include "cub3d.h"
 
-extern void		*mlx_ptr;
-extern void		*mlx_win;
-
-extern s_img		textures[8];
-extern const char *tex_dir;
-extern char 		*tex_path[100];
-extern int worldMap[MAP_HEIGHT][MAP_WIDTH];
-
 int		main_hook(void *param)
 {
 	GameEngine *ge;

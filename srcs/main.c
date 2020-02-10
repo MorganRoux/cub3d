@@ -28,14 +28,6 @@ int worldMap[MAP_HEIGHT][MAP_WIDTH]=
   {4,4,4,4,4,4,4,4,4,4,1,1,1,2,2,2,2,2,2,3,3,3,3,3}
 };
 
-void		*mlx_ptr;
-void		*mlx_win;
-
-s_img		textures[8];
-const char *tex_dir = "/Users/mroux/42Cursus/cub3d/repo/srcs/playground/";
-char 		*tex_path[100] = {"eagle.xpm", "bluestone.xpm", "colorstone.xpm", "greystone.xpm", 
-						"mossy.xpm", "purplestone.xpm", "redbrick.xpm", "wood.xpm"};
-
 void	initEngine(GameEngine *ge)
 {
 	ge->moveSpeed = 0.1; //the constant value is in squares/second
@@ -48,37 +40,41 @@ void	initEngine(GameEngine *ge)
 	ge->plane.y = 0.66; //the 2d raycaster version of camera plane
 }
 
-void	load_textures(s_img *tex, int n)
+void	load_textures(GameEngine *ge, int n)
 {
-	int i;
+	int		i;
+	s_img	*tex;
+	char	*tex_path[100] = {"eagle.xpm", "bluestone.xpm", "colorstone.xpm", "greystone.xpm", 
+							"mossy.xpm", "purplestone.xpm", "redbrick.xpm", "wood.xpm"};
 
 	i = 0;
 	while (i<n)
 	{
-		tex[i].p_img = mlx_xpm_file_to_image(mlx_ptr, ft_strjoin(tex_dir,tex_path[i]), &tex[i].w, &tex[i].h);
-		tex[i].data = mlx_get_data_addr(tex[i].p_img, &tex[i].bits_per_pixels, &tex[i].size_line, &tex[i].endian);
+		tex = &ge->textures[i];
+		tex->p_img = mlx_xpm_file_to_image(ge->mlx_ptr, ft_strjoin(TEX_DIR,tex_path[i]), &tex->w, &tex->h);
+		tex->data = mlx_get_data_addr(tex->p_img, &tex->bits_per_pixels, &tex->size_line, &tex->endian);
 		i++;
 	}
 }
 
 void	set_hooks(GameEngine *ge)
 {
-	mlx_loop_hook(mlx_ptr, &main_hook, ge);
-	mlx_key_hook(mlx_win, &key_hook, ge);
-	mlx_hook(mlx_win, X11_KEY_PRESS, X11_KEY_PRESS_M, &key_hook, ge);
-	mlx_hook(mlx_win, X11_KEY_RELEASE, X11_KEY_RELEASE_M, &key_hook, ge);
+	mlx_loop_hook(ge->mlx_ptr, &main_hook, ge);
+	mlx_key_hook(ge->mlx_win, &key_hook, ge);
+	mlx_hook(ge->mlx_win, X11_KEY_PRESS, X11_KEY_PRESS_M, &key_hook, ge);
+	mlx_hook(ge->mlx_win, X11_KEY_RELEASE, X11_KEY_RELEASE_M, &key_hook, ge);
 }
 
 int 	main()
 {
-	GameEngine ge;
-
+	GameEngine	ge;
+	
 	initEngine(&ge);
-	if ((mlx_ptr = mlx_init()) == NULL)
+	if ((ge.mlx_ptr = mlx_init()) == NULL)
 		return (0);
-	load_textures(textures, 8);
-	if ((mlx_win = mlx_new_window(mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT, "Raycaster")) == NULL)
+	load_textures(&ge, 8);
+	if ((ge.mlx_win = mlx_new_window(ge.mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT, "Raycaster")) == NULL)
 		return (0);
 	set_hooks(&ge);
-	mlx_loop(mlx_ptr);
+	mlx_loop(ge.mlx_ptr);
 }

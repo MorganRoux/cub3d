@@ -14,6 +14,7 @@
 #define TEX_WIDTH 64
 #define TEX_HEIGHT 64
 #define BYTES_PER_PIXELS 3
+#define TEX_DIR "/Users/mroux/42Cursus/cub3d/repo/srcs/playground/"
 
 typedef struct	vect
 {
@@ -26,19 +27,6 @@ typedef struct	player
 	s_vect	pos;
 }				Player;
 
-typedef struct	game_engine
-{
-	double	moveSpeed;
-	double	rotSpeed;
-	s_vect	dir;
-	s_vect	plane;
-	s_vect	delta;
-	s_vect	dist;
-	Player	pl;
-	double	d_alpha; 
-	double	alpha[SCREEN_WIDTH];
-}				GameEngine;
-
 typedef	struct	image
 {
 	void	*p_img;
@@ -49,6 +37,23 @@ typedef	struct	image
 	int		bits_per_pixels;
 	int		endian;
 }				s_img;
+
+typedef struct	game_engine
+{
+	void		*mlx_ptr;
+	void		*mlx_win;
+	int			*map;
+	s_img		textures[8];
+	double	moveSpeed;
+	double	rotSpeed;
+	s_vect	dir;
+	s_vect	plane;
+	s_vect	delta;
+	s_vect	dist;
+	Player	pl;
+	double	d_alpha; 
+	double	alpha[SCREEN_WIDTH];
+}				GameEngine;
 
 typedef struct DDA
 {
