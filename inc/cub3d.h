@@ -1,6 +1,7 @@
 #include <mlx.h>
 #include <math.h>
 #include <time.h>
+#include <stdio.h>
 
 #include "libftprintf.h"
 #include "keys.h"
@@ -87,3 +88,16 @@ char 		*path[100] = {"eagle.xpm", "bluestone.xpm", "colorstone.xpm", "greystone.
 						"mossy.xpm", "purplestone.xpm", "redbrick.xpm", "wood.xpm"};
 
  clock_t start = 0, end = 0;
+
+
+void	initEngine(GameEngine *ge);
+
+void	move_front(GameEngine *ge);
+void	move_back(GameEngine *ge);
+void	rot_left(GameEngine *ge);
+void	rot_right(GameEngine *ge);
+
+int		key_hook(int keycode,void *param);
+int		main_hook(void *param);
+
+int		draw(void *param);
