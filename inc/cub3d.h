@@ -7,10 +7,11 @@
 #define MAP_HEIGHT 24
 #define SCREEN_WIDTH 1920
 #define SCREEN_HEIGHT 1080
-#define TEX_WIDTH 640
-#define TEX_HEIGHT 480
+#define TEX_WIDTH 64
+#define TEX_HEIGHT 64
 #define BYTES_PER_PIXELS 3
 
+const char *pics_dir = "/Users/mroux/42Cursus/cub3d/repo/srcs/playground/";
 
 typedef struct	vect
 {
@@ -78,3 +79,5 @@ int	endian = 0;
 int *(texture[8]);
 /*Uint32 buffer[screenHeight][screenWidth]; // y-coordinate first because it works per scanline
   std::vector texture[8];*/
+
+  void		*img2;

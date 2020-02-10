@@ -96,6 +96,8 @@ int		draw(void *param)
 
 	ge = (GameEngine *)param;
 
+// mlx_put_image_to_window(mlx_ptr, mlx_win, img2, 0, 0);
+// return 0;
 	// double time = 0; //time of current frame
 	// double oldTime = 0; //time of previous frame
 	int		drawStart;
@@ -272,7 +274,6 @@ int		key_hook(int keycode,void *param)
 int 	main()
 {
 	GameEngine ge;
-	//void		*img;
 
 	ge.moveSpeed = 0.1; //the constant value is in squares/second
 	ge.rotSpeed = 0.02; //the constant value is in radians/second
@@ -285,7 +286,14 @@ int 	main()
 	int h,w;
 	h = 0;
 	w = 0;
+
+	if ((mlx_ptr = mlx_init()) == NULL)
+		return (0);
 	
+	img2 = mlx_xpm_file_to_image(mlx_ptr, ft_strjoin(pics_dir,"eagle.xpm"), &w, &h);
+	printf("w : %d h : %d p : %p", w, h, img2);
+	char *img_data = mlx_get_data_addr(img2, &bits_per_pixel, &size_line, &endian);
+	(void)img_data;
 	//generate some textures
 	for(int i=0; i<8; i++)
 	{
@@ -308,18 +316,19 @@ int 	main()
 			texture[5][y * TEX_WIDTH + x] = 65536 * 192 * (x % 16 && y % 16); //red bricks
 			texture[6][y * TEX_WIDTH + x] = 65536 * ycolor; //red gradient
 			texture[7][y * TEX_WIDTH + x] = 128 + 256 * 128 + 65536 * 128; //flat grey texture
+
+			// texture[5][y * TEX_WIDTH + x] = img_data[y * TEX_WIDTH + x] + (img_data[y * TEX_WIDTH + x + 1] << 8)
+			// 								+ (img_data[y * TEX_WIDTH + x + 2] << 16);
 		}
 	}
 
-	if ((mlx_ptr = mlx_init()) == NULL)
-		return (0);
+	
 	if ((mlx_win = mlx_new_window(mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT, "Raycaster")) == NULL)
 		return (0);
 
-	// img = mlx_xpm_file_to_image(mlx_ptr, "/Users/Morgan/Dropbox/42/work/cub3d/srcs/playground/eagle.xpm", &w, &h);
-	// printf("w : %d h : %d p : %p", w, h, img);
-	// getchar();
 	
+	
+
 	mlx_loop_hook(mlx_ptr, &draw, &ge);
 	mlx_key_hook(mlx_win, &key_hook, &ge);
 	mlx_hook(mlx_win, X11_KEY_PRESS, X11_KEY_PRESS_M, &key_hook, &ge);
