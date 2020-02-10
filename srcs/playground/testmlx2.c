@@ -143,11 +143,6 @@ int		draw(void *param)
 	//mlx_clear_window ( mlx_ptr, mlx_win );
 	img = mlx_new_image (mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT );
 	img_data = mlx_get_data_addr(img, &bits_per_pixel, &size_line, &endian);
-	//printf("bpp : %u - sl = %u - endian = %u", bits_per_pixel, size_line, endian);
-	//getchar();
-// 	test_display(img_data);
-// 	mlx_put_image_to_window(mlx_ptr, mlx_win, img, 0, 0);
-// return 0;
 
 	for(int n = 0; n < SCREEN_WIDTH; n++)
 	{
@@ -244,6 +239,16 @@ int		draw(void *param)
 	}
 	
 	mlx_put_image_to_window(mlx_ptr, mlx_win, img, 0, 0);
+
+	//Compute FPS
+    double cpu_time_used;
+    int FPS;
+	end = clock();
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+	FPS = 1.0 / cpu_time_used;
+	mlx_string_put(mlx_ptr, mlx_win, 0,20,0x00FFFFFF, ft_strjoin("FPS", ft_itoa(FPS)));
+	start = clock();
+
 	return 0;
 }
 
@@ -296,7 +301,7 @@ int 	main()
 	GameEngine ge;
 
 	ge.moveSpeed = 0.1; //the constant value is in squares/second
-	ge.rotSpeed = 0.02; //the constant value is in radians/second
+	ge.rotSpeed = 0.06; //the constant value is in radians/second
 	ge.pl.pos.x = 22;
 	ge.pl.pos.y = 12;  //x and y start position
 	ge.dir.x = -1;
@@ -310,7 +315,7 @@ int 	main()
 	if ((mlx_ptr = mlx_init()) == NULL)
 		return (0);
 	
-	//generate some textures
+	//load some textures
 	for(int i=0; i<8; i++)
 	{
 		int bpp, e;

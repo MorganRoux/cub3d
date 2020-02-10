@@ -1,5 +1,7 @@
 #include <mlx.h>
 #include <math.h>
+#include <time.h>
+
 #include "libftprintf.h"
 #include "keys.h"
 
@@ -83,3 +85,5 @@ char *texture[8];
 void		*img2[8];
 char 		*path[100] = {"eagle.xpm", "bluestone.xpm", "colorstone.xpm", "greystone.xpm", 
 						"mossy.xpm", "purplestone.xpm", "redbrick.xpm", "wood.xpm"};
+
+ clock_t start = 0, end = 0;
