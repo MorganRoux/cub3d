@@ -50,19 +50,22 @@ int	detect_collision(s_dda *dda)
 
 int	get_line_height(s_dda *dda, int side, GameEngine *ge)
 {
-	int tex_x;
+	int		tex_x;
+	double	perpWallDist;
+	int		lineHeight;
+	double	wall_x;
 
-	dda->perpWallDist = (side == 0) ? (dda->mapX - ge->pl.pos.x + (1 - dda->stepX) / 2) / dda->rayDirX : 
+	perpWallDist = (side == 0) ? (dda->mapX - ge->pl.pos.x + (1 - dda->stepX) / 2) / dda->rayDirX : 
 									(dda->mapY - ge->pl.pos.y + (1 - dda->stepY) / 2) / dda->rayDirY;
-	dda->lineHeight = (int)(SCREEN_HEIGHT / dda->perpWallDist);
-	dda->drawStart = -dda->lineHeight / 2 + SCREEN_HEIGHT / 2;
+	lineHeight = (int)(SCREEN_HEIGHT / perpWallDist);
+	dda->drawStart = -lineHeight / 2 + SCREEN_HEIGHT / 2;
 	dda->drawStart = (dda->drawStart < 0) ? 0 : dda->drawStart;
-	dda->drawEnd = dda->lineHeight / 2 + SCREEN_HEIGHT / 2;
+	dda->drawEnd = lineHeight / 2 + SCREEN_HEIGHT / 2;
 	dda->drawEnd = (dda->drawEnd >= SCREEN_HEIGHT) ? SCREEN_HEIGHT - 1 : dda->drawEnd;
-	dda->wallX = (side == 0) ? ge->pl.pos.y + dda->perpWallDist * dda->rayDirY :
-								ge->pl.pos.x + dda->perpWallDist * dda->rayDirX;
-	dda->wallX -= floor((dda->wallX));
-	tex_x = (int)(dda->wallX * (double)(TEX_WIDTH));
+	wall_x = (side == 0) ? ge->pl.pos.y + perpWallDist * dda->rayDirY :
+								ge->pl.pos.x + perpWallDist * dda->rayDirX;
+	wall_x -= floor((wall_x));
+	tex_x = (int)(wall_x * (double)(TEX_WIDTH));
 	if(side == 0 && dda->rayDirX > 0) 
 		tex_x = TEX_WIDTH - tex_x - 1;
 	if(side == 1 && dda->rayDirY < 0) 

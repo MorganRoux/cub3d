@@ -65,25 +65,23 @@ int		draw(void *param)
 	s_dda		dda;
 	int			n;
 	int			tex_x;
+	
 	ge = (GameEngine *)param;
 	n = 0;
-	//mlx_clear_window ( mlx_ptr, mlx_win );
 	img.p_img = mlx_new_image (mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT );
 	img.data = mlx_get_data_addr(img.p_img, &img.bits_per_pixels, &img.size_line, &img.endian);
-
-	// test_display(&img);
-	// mlx_put_image_to_window(mlx_ptr, mlx_win, img.p_img, 0, 0);
-	// 	mlx_string_put(mlx_ptr, mlx_win, 0, 20, 0x00FFFFFF, ft_strjoin("FPS", ft_itoa(compute_FPS())));
-	// return 0;
-
 	while(n < SCREEN_WIDTH)
 	{
 		tex_x = compute_dda(&dda, n, ge);
 		img_vertline_put(n, dda.drawStart, dda.drawEnd, &textures[worldMap[dda.mapX][dda.mapY] - 1], tex_x, &img);
 		n++;
 	}
-	
 	mlx_put_image_to_window(mlx_ptr, mlx_win, img.p_img, 0, 0);
 	mlx_string_put(mlx_ptr, mlx_win, 0, 20, 0x00FFFFFF, ft_strjoin("FPS", ft_itoa(compute_FPS())));
 	return 0;
 }
+
+	// test_display(&img);
+	// mlx_put_image_to_window(mlx_ptr, mlx_win, img.p_img, 0, 0);
+	// 	mlx_string_put(mlx_ptr, mlx_win, 0, 20, 0x00FFFFFF, ft_strjoin("FPS", ft_itoa(compute_FPS())));
+	// return 0;

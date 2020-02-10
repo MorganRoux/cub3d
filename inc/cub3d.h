@@ -54,7 +54,7 @@ typedef struct DDA
 {
 	int		drawStart;
 	int		drawEnd;
-	int		lineHeight;
+	//int		lineHeight;
 	//length of ray from current position to next x or y-side
 	double	sideDistX;
 	double	sideDistY;
@@ -70,8 +70,8 @@ typedef struct DDA
 	//which box of the map we're in
 	int		mapX;
 	int		mapY;
-	double	perpWallDist;
-	double	wallX; //where exactly the wall was hit
+	//double	perpWallDist;
+	//double	wallX; //where exactly the wall was hit
 }				s_dda;
 
 void	initEngine(GameEngine *ge);
