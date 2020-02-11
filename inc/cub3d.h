@@ -86,3 +86,5 @@ int		main_hook(void *param);
 int		compute_fps();
 int		img_vertline_put(int img_x, int drawStart, int drawEnd, s_img *tex, int tex_x, s_img *img);
 int		draw(void *param);
+
+int		load_cub_file(GameEngine *ge, char *path);
