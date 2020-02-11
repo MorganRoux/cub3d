@@ -4,7 +4,7 @@ int worldMap[MAP_HEIGHT][MAP_WIDTH]=
 {
   {4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,7,7,7,7,7,7,7,7},
   {4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,7},
-  {4,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7},
+  {4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7},
   {4,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7},
   {4,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,7},
   {4,0,4,0,0,0,0,5,5,5,5,5,5,5,5,5,7,7,0,7,7,7,7,7},
@@ -32,8 +32,8 @@ void	initEngine(GameEngine *ge)
 {
 	ge->moveSpeed = 0.1; //the constant value is in squares/second
 	ge->rotSpeed = 0.06; //the constant value is in radians/second
-	ge->pl.pos.x = 22;
-	ge->pl.pos.y = 12;  //x and y start position
+	ge->pl.pos.x = 2;
+	ge->pl.pos.y = 2;  //x and y start position
 	ge->dir.x = -1;
 	ge->dir.y = 0; //initial direction vector
 	ge->plane.x = 0;

@@ -21,7 +21,7 @@ FLAGS		=	-Wall -Wextra -Werror
 INC_PATH	=	-I./inc
 COMPILE		=	$(CC) $(FLAGS) $(INC_PATH) -L$(LIBFT_DIR) -lftprintf -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit 
 
-%.o : %.c	$(SRCS)
+%.o : %.c	
 			$(CC) $(FLAGS) $(INC_PATH) -c $<  -o $(<:.c=.o)
 
 all:		$(NAME)

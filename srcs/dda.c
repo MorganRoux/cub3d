@@ -42,7 +42,7 @@ int	detect_collision(s_dda *dda)
 			side = 1;
 		}
 		//Check if ray has hit a wall
-		if(worldMap[dda->mapX][dda->mapY] > 0) 
+		if(worldMap[dda->mapY][dda->mapX] > 0) 
 			hit = 1;
 	}
 	return (side);
