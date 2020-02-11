@@ -48,35 +48,24 @@ typedef struct	game_engine
 	double	rotSpeed;
 	s_vect	dir;
 	s_vect	plane;
-	s_vect	delta;
-	s_vect	dist;
 	Player	pl;
-	double	d_alpha; 
-	double	alpha[SCREEN_WIDTH];
 }				GameEngine;
 
 typedef struct DDA
 {
 	int		drawStart;
 	int		drawEnd;
-	//int		lineHeight;
-	//length of ray from current position to next x or y-side
 	double	sideDistX;
 	double	sideDistY;
-	//length of ray from one x or y-side to next x or y-side
 	double	deltaDistX;
 	double	deltaDistY;
 	double	rayDirX;
 	double	rayDirY;
 	double	cameraX;
-	//what direction to step in x or y-direction (either +1 or -1)
 	int		stepX;
 	int		stepY;
-	//which box of the map we're in
 	int		mapX;
 	int		mapY;
-	//double	perpWallDist;
-	//double	wallX; //where exactly the wall was hit
 }				s_dda;
 
 int		initEngine(GameEngine *ge);
@@ -93,6 +82,6 @@ void	rot_right(GameEngine *ge);
 int		key_hook(int keycode,void *param);
 int		main_hook(void *param);
 
-int		compute_FPS();
+int		compute_fps();
 int		img_vertline_put(int img_x, int drawStart, int drawEnd, s_img *tex, int tex_x, s_img *img);
 int		draw(void *param);
