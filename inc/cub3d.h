@@ -40,10 +40,10 @@ typedef	struct	image
 
 typedef struct	game_engine
 {
-	void		*mlx_ptr;
-	void		*mlx_win;
-	int			*map;
-	s_img		textures[8];
+	void	*mlx_ptr;
+	void	*mlx_win;
+	int		*map;
+	s_img	textures[8];
 	double	moveSpeed;
 	double	rotSpeed;
 	s_vect	dir;
@@ -79,10 +79,10 @@ typedef struct DDA
 	//double	wallX; //where exactly the wall was hit
 }				s_dda;
 
-void	initEngine(GameEngine *ge);
+int		initEngine(GameEngine *ge);
 
 void	init_dda(s_dda *dda, int n, GameEngine *ge);
-int		detect_collision(s_dda *dda);
+int		detect_collision(s_dda *dda, GameEngine *ge);
 int		compute_dda(s_dda *dda, int n, GameEngine *ge);
 
 void	move_front(GameEngine *ge);

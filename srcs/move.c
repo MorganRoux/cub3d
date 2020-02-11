@@ -1,9 +1,10 @@
 #include "cub3d.h"
 
-extern int worldMap[MAP_HEIGHT * MAP_WIDTH];
-
 void	move_front(GameEngine *ge)
 {
+	int	*worldMap;
+
+	worldMap = ge->map;
 	if(worldMap[(int)(ge->pl.pos.y) * MAP_WIDTH + (int)(ge->pl.pos.x + ge->dir.x * ge->moveSpeed)] == 0) 
 			ge->pl.pos.x += ge->dir.x * ge->moveSpeed;
 	if(worldMap[(int)(ge->pl.pos.y + ge->dir.y * ge->moveSpeed) * MAP_WIDTH + (int)(ge->pl.pos.x)] == 0) 
@@ -12,6 +13,9 @@ void	move_front(GameEngine *ge)
 
 void	move_back(GameEngine *ge)
 {
+	int	*worldMap;
+
+	worldMap = ge->map;
 	if(worldMap[(int)(ge->pl.pos.y) * MAP_WIDTH + (int)(ge->pl.pos.x - ge->dir.x * ge->moveSpeed)] == 0) 
 			ge->pl.pos.x -= ge->dir.x * ge->moveSpeed;
 	if(worldMap[(int)(ge->pl.pos.y - ge->dir.y * ge->moveSpeed) * MAP_WIDTH + (int)(ge->pl.pos.x)] == 0) 

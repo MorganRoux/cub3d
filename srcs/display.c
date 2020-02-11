@@ -53,24 +53,32 @@ int		img_vertline_put(int img_x, int drawStart, int drawEnd, s_img *tex, int tex
 	return 0;
 }
 
+void	compute_img(GameEngine *ge, s_img *img)
+{
+	s_dda	dda;
+	int		tex_x;
+	int		n;
+	int		*worldMap;
+
+	n = 0;
+	worldMap = ge->map;
+	img->p_img = mlx_new_image (ge->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT );
+	img->data = mlx_get_data_addr(img->p_img, &img->bits_per_pixels, &img->size_line, &img->endian);
+	while(n < SCREEN_WIDTH)
+	{
+		tex_x = compute_dda(&dda, n, ge);
+		img_vertline_put(n, dda.drawStart, dda.drawEnd, &ge->textures[worldMap[dda.mapY * MAP_WIDTH + dda.mapX] - 1], tex_x, img);
+		n++;
+	}
+}
+
 int		draw(void *param)
 {
 	GameEngine	*ge;
 	s_img		img;	
-	s_dda		dda;
-	int			n;
-	int			tex_x;
-
+	
 	ge = (GameEngine *)param;
-	n = 0;
-	img.p_img = mlx_new_image (ge->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT );
-	img.data = mlx_get_data_addr(img.p_img, &img.bits_per_pixels, &img.size_line, &img.endian);
-	while(n < SCREEN_WIDTH)
-	{
-		tex_x = compute_dda(&dda, n, ge);
-		img_vertline_put(n, dda.drawStart, dda.drawEnd, &ge->textures[worldMap[dda.mapY * MAP_WIDTH + dda.mapX] - 1], tex_x, &img);
-		n++;
-	}
+	compute_img(ge, &img);
 	mlx_put_image_to_window(ge->mlx_ptr, ge->mlx_win, img.p_img, 0, 0);
 	mlx_string_put(ge->mlx_ptr, ge->mlx_win, 0, 20, 0x00FFFFFF, ft_strjoin("FPS", ft_itoa(compute_FPS())));
 	return 0;

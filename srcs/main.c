@@ -1,6 +1,8 @@
 #include "cub3d.h"
 
-int worldMap[MAP_HEIGHT * MAP_WIDTH]=
+int	initEngine(GameEngine *ge)
+{
+	int worldMap[MAP_HEIGHT * MAP_WIDTH]=
 {
   4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,7,7,7,7,7,7,7,7,
   4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,7,
@@ -28,8 +30,6 @@ int worldMap[MAP_HEIGHT * MAP_WIDTH]=
   4,4,4,4,4,4,4,4,4,4,1,1,1,2,2,2,2,2,2,3,3,3,3,3
 };
 
-void	initEngine(GameEngine *ge)
-{
 	ge->moveSpeed = 0.1; //the constant value is in squares/second
 	ge->rotSpeed = 0.06; //the constant value is in radians/second
 	ge->pl.pos.x = 2;
@@ -38,6 +38,11 @@ void	initEngine(GameEngine *ge)
 	ge->dir.y = 0; //initial direction vector
 	ge->plane.x = 0;
 	ge->plane.y = 0.66; //the 2d raycaster version of camera plane
+	if(!(ge->map = (int *)malloc(sizeof(int) * MAP_HEIGHT * MAP_WIDTH)))
+		return (0);
+	for (int i=0; i < MAP_WIDTH * MAP_HEIGHT; i++)
+		ge->map[i] = worldMap[i];
+	return (1);
 }
 
 void	load_textures(GameEngine *ge, int n)

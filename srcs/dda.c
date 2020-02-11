@@ -20,11 +20,13 @@ void	init_dda(s_dda *dda, int n, GameEngine *ge)
 	dda->sideDistY = (dda->rayDirY < 0) ? (ge->pl.pos.y - dda->mapY) * dda->deltaDistY : (dda->mapY + 1.0 - ge->pl.pos.y) * dda->deltaDistY;
 }
 
-int	detect_collision(s_dda *dda)
+int	detect_collision(s_dda *dda, GameEngine *ge)
 {
 	int	hit;
 	int	side; //was a NS or a EW wall hit?
+	int	*worldMap;
 
+	worldMap = ge->map;
 	hit = 0;
 	while (hit == 0)
 	{
@@ -80,7 +82,7 @@ int		compute_dda(s_dda *dda, int n, GameEngine *ge)
 	int tex_x;
 
 	init_dda(dda, n, ge);
-	side = detect_collision(dda);
+	side = detect_collision(dda, ge);
 	tex_x = get_line_height(dda, side, ge);
 	return tex_x;
 }
