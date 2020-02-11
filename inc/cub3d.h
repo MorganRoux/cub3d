@@ -3,6 +3,7 @@
 #include <math.h>
 #include <time.h>
 #include <stdio.h>
+#include <fcntl.h>
 
 #include "libftprintf.h"
 #include "keys.h"

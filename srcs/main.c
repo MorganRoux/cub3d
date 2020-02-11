@@ -75,12 +75,13 @@ void	set_hooks(GameEngine *ge)
 	mlx_hook(ge->mlx_win, X11_KEY_RELEASE, X11_KEY_RELEASE_M, &key_hook, ge);
 }
 
-int		main(void)
+int		main(int argc, char *argv[])
 {
 	GameEngine	ge;
-
 	initEngine(&ge);
 	if ((ge.mlx_ptr = mlx_init()) == NULL)
+		return (0);
+	if (load_cub_file(&ge, argv[1]) < 0)
 		return (0);
 	load_textures(&ge, 8);
 	if ((ge.mlx_win = mlx_new_window(ge.mlx_ptr, SCREEN_WIDTH,
