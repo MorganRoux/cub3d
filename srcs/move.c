@@ -1,20 +1,20 @@
 #include "cub3d.h"
 
-extern int worldMap[MAP_HEIGHT][MAP_WIDTH];
+extern int worldMap[MAP_HEIGHT * MAP_WIDTH];
 
 void	move_front(GameEngine *ge)
 {
-	if(worldMap[(int)(ge->pl.pos.y)][(int)(ge->pl.pos.x + ge->dir.x * ge->moveSpeed)] == 0) 
+	if(worldMap[(int)(ge->pl.pos.y) * MAP_WIDTH + (int)(ge->pl.pos.x + ge->dir.x * ge->moveSpeed)] == 0) 
 			ge->pl.pos.x += ge->dir.x * ge->moveSpeed;
-	if(worldMap[(int)(ge->pl.pos.y + ge->dir.y * ge->moveSpeed)][(int)(ge->pl.pos.x)] == 0) 
+	if(worldMap[(int)(ge->pl.pos.y + ge->dir.y * ge->moveSpeed) * MAP_WIDTH + (int)(ge->pl.pos.x)] == 0) 
 		ge->pl.pos.y += ge->dir.y * ge->moveSpeed;
 }
 
 void	move_back(GameEngine *ge)
 {
-	if(worldMap[(int)(ge->pl.pos.y)][(int)(ge->pl.pos.x - ge->dir.x * ge->moveSpeed)] == 0) 
+	if(worldMap[(int)(ge->pl.pos.y) * MAP_WIDTH + (int)(ge->pl.pos.x - ge->dir.x * ge->moveSpeed)] == 0) 
 			ge->pl.pos.x -= ge->dir.x * ge->moveSpeed;
-	if(worldMap[(int)(ge->pl.pos.y - ge->dir.y * ge->moveSpeed)][(int)(ge->pl.pos.x)] == 0) 
+	if(worldMap[(int)(ge->pl.pos.y - ge->dir.y * ge->moveSpeed) * MAP_WIDTH + (int)(ge->pl.pos.x)] == 0) 
 		ge->pl.pos.y -= ge->dir.y * ge->moveSpeed;
 }
 

@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-extern int worldMap[MAP_HEIGHT][MAP_WIDTH];
+extern int worldMap[MAP_HEIGHT * MAP_WIDTH];
 
 void	init_dda(s_dda *dda, int n, GameEngine *ge)
 {
@@ -42,7 +42,7 @@ int	detect_collision(s_dda *dda)
 			side = 1;
 		}
 		//Check if ray has hit a wall
-		if(worldMap[dda->mapY][dda->mapX] > 0) 
+		if(worldMap[dda->mapY * MAP_WIDTH + dda->mapX] > 0) 
 			hit = 1;
 	}
 	return (side);

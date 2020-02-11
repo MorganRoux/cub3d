@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-extern int worldMap[MAP_HEIGHT][MAP_WIDTH];
+extern int worldMap[MAP_HEIGHT * MAP_WIDTH];
 
 int		compute_FPS()
 {
@@ -68,7 +68,7 @@ int		draw(void *param)
 	while(n < SCREEN_WIDTH)
 	{
 		tex_x = compute_dda(&dda, n, ge);
-		img_vertline_put(n, dda.drawStart, dda.drawEnd, &ge->textures[worldMap[dda.mapY][dda.mapX] - 1], tex_x, &img);
+		img_vertline_put(n, dda.drawStart, dda.drawEnd, &ge->textures[worldMap[dda.mapY * MAP_WIDTH + dda.mapX] - 1], tex_x, &img);
 		n++;
 	}
 	mlx_put_image_to_window(ge->mlx_ptr, ge->mlx_win, img.p_img, 0, 0);
