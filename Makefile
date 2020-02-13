@@ -10,7 +10,11 @@ SRCS		=	srcs/main.c \
 				srcs/display.c \
 				srcs/hooks.c \
 				srcs/move.c \
-				srcs/dda.c
+				srcs/dda.c \
+				srcs/cub_file.c \
+				srcs/loaders.c \
+				srcs/gnl/get_next_line.c \
+				srcs/gnl/get_next_line_utils.c
 
 SRCS_PG		=	srcs/playground/testmlx2_copy.c
 

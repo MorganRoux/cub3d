@@ -6,6 +6,7 @@
 #include <fcntl.h>
 
 #include "libftprintf.h"
+#include "get_next_line.h"
 #include "keys.h"
 
 #define MAP_WIDTH 24
@@ -16,6 +17,8 @@
 #define TEX_HEIGHT 64
 #define BYTES_PER_PIXELS 3
 #define TEX_DIR "/Users/mroux/42Cursus/cub3d/repo/srcs/playground/"
+#define ERROR -1
+#define	OK 0
 
 typedef struct	vect
 {
@@ -23,10 +26,12 @@ typedef struct	vect
 	double y;
 }				s_vect;
 
-typedef struct	player
+typedef struct	pxl_color
 {
-	s_vect	pos;
-}				Player;
+	int r;
+	int v;
+	int	b;
+}				s_color;
 
 typedef	struct	image
 {
@@ -37,19 +42,40 @@ typedef	struct	image
 	int		size_line;
 	int		bits_per_pixels;
 	int		endian;
+	char	*path;
 }				s_img;
+
+typedef struct	world_map
+{
+/*
+** 	Textures ; NO, SO, EA, WE
+** 	Colors : Floor, ceil
+*/
+	char	*p_map;
+	int		w;
+	int		h;
+	s_img	textures[4];
+	s_color	color[2];
+	s_img	sprite;
+}				s_map;
+
+typedef struct	player
+{
+	s_vect	pos;
+}				s_player;
 
 typedef struct	game_engine
 {
-	void	*mlx_ptr;
-	void	*mlx_win;
-	int		*map;
-	s_img	textures[8];
-	double	moveSpeed;
-	double	rotSpeed;
-	s_vect	dir;
-	s_vect	plane;
-	Player	pl;
+	void		*mlx_ptr;
+	void		*mlx_win;
+	int			*map;
+	s_map		smap;
+	s_img		textures[8];
+	double		moveSpeed;
+	double		rotSpeed;
+	s_vect		dir;
+	s_vect		plane;
+	s_player	pl;
 }				GameEngine;
 
 typedef struct DDA
@@ -88,3 +114,8 @@ int		img_vertline_put(int img_x, int drawStart, int drawEnd, s_img *tex, int tex
 int		draw(void *param);
 
 int		load_cub_file(GameEngine *ge, char *path);
+int		load_map_dimensions(GameEngine *ge, char *line);
+int		load_colors(GameEngine *ge, char *line);
+int		load_sprite(GameEngine *ge, char *line);
+int		load_map(GameEngine *ge, int fd, char *line);
+int		load_textures(GameEngine *ge, char *line);

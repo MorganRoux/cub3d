@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   cub_file.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:14:07 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/11 18:47:26 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/13 20:05:20 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ void	check_line(GameEngine *ge, int fd, char *line)
 		load_sprite(ge, line);
 	else if (line[0] == '1')
 		load_map(ge, fd, line);
-	else if (line[0] == 'NO' || line[0] == 'SO' || 
-		line[0] == 'EA' || line[0] == 'WE')
+	else if (ft_strncmp(line, "NO", 2) == 0
+		|| ft_strncmp(line, "SO", 2) == 0
+		|| ft_strncmp(line, "EA", 2) == 0
+		|| ft_strncmp(line, "WE", 2) == 0)
 		load_textures(ge, line);
 }
 
@@ -36,7 +38,11 @@ int		load_cub_file(GameEngine *ge, char *path)
 	if ((fd = open(path, O_RDONLY)) < 0)
 		return (0);
 	while(get_next_line(fd, &line))
+	{
 		check_line(ge, fd, line);
+		free(line);
+	}
 	check_line(ge, fd, line);
+	free(line);
 	return (1);
 }

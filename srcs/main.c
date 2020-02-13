@@ -45,7 +45,7 @@ int	initEngine(GameEngine *ge)
 	return (1);
 }
 
-void	load_textures(GameEngine *ge, int n)
+void	load_tex(GameEngine *ge, int n)
 {
 	int		i;
 	s_img	*tex;
@@ -79,14 +79,17 @@ int		main(int argc, char *argv[])
 {
 	GameEngine	ge;
 	initEngine(&ge);
+	
 	if ((ge.mlx_ptr = mlx_init()) == NULL)
+		return (0);
+	if (argc != 2)
 		return (0);
 	if (load_cub_file(&ge, argv[1]) < 0)
 		return (0);
-	load_textures(&ge, 8);
-	if ((ge.mlx_win = mlx_new_window(ge.mlx_ptr, SCREEN_WIDTH,
-									SCREEN_HEIGHT, "Raycaster")) == NULL)
-		return (0);
-	set_hooks(&ge);
-	mlx_loop(ge.mlx_ptr);
+	// load_tex(&ge, 8);
+	// if ((ge.mlx_win = mlx_new_window(ge.mlx_ptr, SCREEN_WIDTH,
+	// 								SCREEN_HEIGHT, "Raycaster")) == NULL)
+	// 	return (0);
+	// set_hooks(&ge);
+	// mlx_loop(ge.mlx_ptr);
 }
