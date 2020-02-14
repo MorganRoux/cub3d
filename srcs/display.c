@@ -75,7 +75,7 @@ void	compute_img(GameEngine *ge, s_img *img)
 	s_dda	dda;
 	int		tex_x;
 	int		n;
-	int		*world_map;
+	char		*world_map;
 
 	n = 0;
 	world_map = ge->map;

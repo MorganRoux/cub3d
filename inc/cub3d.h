@@ -16,7 +16,7 @@
 #define TEX_WIDTH 64
 #define TEX_HEIGHT 64
 #define BYTES_PER_PIXELS 3
-#define TEX_DIR "/Users/mroux/42Cursus/cub3d/repo/srcs/playground/"
+#define TEX_DIR "/Users/Morgan/Dropbox/42/work/cub3d/srcs/playground/"
 #define ERROR -1
 #define	OK 0
 
@@ -68,7 +68,7 @@ typedef struct	game_engine
 {
 	void		*mlx_ptr;
 	void		*mlx_win;
-	int			*map;
+	char		*map;
 	s_map		smap;
 	s_img		textures[8];
 	double		moveSpeed;

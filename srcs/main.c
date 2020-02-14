@@ -38,7 +38,7 @@ int	initEngine(GameEngine *ge)
 	ge->dir.y = 0;
 	ge->plane.x = 0;
 	ge->plane.y = 0.66;
-	if (!(ge->map = (int *)malloc(sizeof(int) * MAP_HEIGHT * MAP_WIDTH)))
+	if (!(ge->map = (char *)malloc(sizeof(int) * MAP_HEIGHT * MAP_WIDTH)))
 		return (0);
 	for (int i=0; i < MAP_WIDTH * MAP_HEIGHT; i++)
 		ge->map[i] = worldMap[i];
@@ -79,17 +79,18 @@ int		main(int argc, char *argv[])
 {
 	GameEngine	ge;
 	initEngine(&ge);
+	(void) argv;
 	
 	if ((ge.mlx_ptr = mlx_init()) == NULL)
 		return (0);
 	if (argc != 2)
 		return (0);
-	if (load_cub_file(&ge, argv[1]) < 0)
-		return (0);
-	// load_tex(&ge, 8);
-	// if ((ge.mlx_win = mlx_new_window(ge.mlx_ptr, SCREEN_WIDTH,
-	// 								SCREEN_HEIGHT, "Raycaster")) == NULL)
+	// if (load_cub_file(&ge, argv[1]) < 0)
 	// 	return (0);
-	// set_hooks(&ge);
-	// mlx_loop(ge.mlx_ptr);
+	load_tex(&ge, 8);
+	if ((ge.mlx_win = mlx_new_window(ge.mlx_ptr, SCREEN_WIDTH,
+									SCREEN_HEIGHT, "Raycaster")) == NULL)
+		return (0);
+	set_hooks(&ge);
+	mlx_loop(ge.mlx_ptr);
 }

@@ -73,7 +73,7 @@ int		load_line(GameEngine *ge, char *line, int *n)
 	if (*line != '1')
 		return (ERROR);
 	while(*line != 0)
-		ge->smap.p_map[(*n)++]= *line++;
+		ge->smap.p_map[(*n)++]= *line++ - '0';
 	n--;
 	if (*--line != '1')
 		return (ERROR);
@@ -106,6 +106,18 @@ int		load_map(GameEngine *ge, int fd, char *firstline)
 	check_map();
 	return (OK);
 }
+int		get_tex_orientation(char l)
+{
+	if (l == 'N')
+		return (0);
+	if (l == 'S')
+		return (1);
+	if (l == 'E')
+		return (2);
+	if (l == 'W')
+		return (3);
+	return (ERROR);
+}
 
 int		load_textures(GameEngine *ge, char *line)
 {
@@ -113,7 +125,7 @@ int		load_textures(GameEngine *ge, char *line)
 	char	**param;
 
 	param = ft_split(line, ' ');
-	tex = &ge->smap.textures[0];
+	tex = &ge->smap.textures[get_tex_orientation(line[0])];
 	tex->path = param[1];
 	tex->p_img = mlx_xpm_file_to_image(
 					ge->mlx_ptr,

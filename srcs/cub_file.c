@@ -19,7 +19,7 @@ void	check_line(GameEngine *ge, int fd, char *line)
 		load_map_dimensions(ge, line);
 	else if (line[0] == 'F' || line[0] == 'C')
 		load_colors(ge, line);
-	else if (line[0] == 'S')
+	else if (ft_strncmp(line, "S ", 2) == 0)
 		load_sprite(ge, line);
 	else if (line[0] == '1')
 		load_map(ge, fd, line);

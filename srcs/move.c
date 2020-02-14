@@ -14,7 +14,7 @@
 
 void	move_front(GameEngine *ge)
 {
-	int		*world_map;
+	char		*world_map;
 	double	new_x;
 	double	new_y;
 
@@ -29,7 +29,7 @@ void	move_front(GameEngine *ge)
 
 void	move_back(GameEngine *ge)
 {
-	int		*world_map;
+	char		*world_map;
 	double	new_x;
 	double	new_y;
 
