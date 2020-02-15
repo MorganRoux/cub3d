@@ -37,7 +37,7 @@ int		detect_collision(s_dda *dda, GameEngine *ge)
 	int	side;
 	char	*world_map;
 
-	world_map = ge->map;
+	world_map = ge->smap.p_map;
 	hit = 0;
 	while (hit == 0)
 	{

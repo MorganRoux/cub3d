@@ -20,7 +20,7 @@ void	move_front(GameEngine *ge)
 
 	new_x = ge->pl.pos.x + ge->dir.x * ge->moveSpeed;
 	new_y = ge->pl.pos.y + ge->dir.y * ge->moveSpeed;
-	world_map = ge->map;
+	world_map = ge->smap.p_map;
 	if (world_map[(int)(ge->pl.pos.y) * MAP_WIDTH + (int)new_x] == 0)
 		ge->pl.pos.x = new_x;
 	if (world_map[(int)new_y * MAP_WIDTH + (int)(ge->pl.pos.x)] == 0)
@@ -35,7 +35,7 @@ void	move_back(GameEngine *ge)
 
 	new_x = ge->pl.pos.x - ge->dir.x * ge->moveSpeed;
 	new_y = ge->pl.pos.y - ge->dir.y * ge->moveSpeed;
-	world_map = ge->map;
+	world_map = ge->smap.p_map;
 	if (world_map[(int)(ge->pl.pos.y) * MAP_WIDTH + (int)new_x] == 0)
 		ge->pl.pos.x = new_x;
 	if (world_map[(int)new_y * MAP_WIDTH + (int)(ge->pl.pos.x)] == 0)

@@ -61,6 +61,23 @@ int		load_sprite(GameEngine *ge, char *line)
 	return (OK);
 }
 
+void	*ft_realloc(void *p, size_t l, size_t newsize)
+{
+	char	*ret;
+	char	*ptr;
+	size_t	n;
+
+	n = -1;
+	ptr = p;
+	if (!(ret = (char *)malloc(newsize)))
+		return (NULL);
+	while (++n < l)
+		ret[n] = ptr[n];
+	while (++n < newsize)
+		ret[n] = 0;
+	return ((void *)ret);
+}
+
 int		load_line(GameEngine *ge, char *line, int *n)
 {
 	if ((int)ft_strlen(line) != ge->smap.w)
@@ -70,18 +87,27 @@ int		load_line(GameEngine *ge, char *line, int *n)
 	}
 	if (!(ge->smap.p_map = ft_strnjoin(ge->smap.p_map, line, ft_strlen(ge->smap.p_map) + ge->smap.w)))
 		return ERROR;
-	if (*line != '1')
-		return (ERROR);
-	while(*line != 0)
-		ge->smap.p_map[(*n)++]= *line++ - '0';
-	n--;
-	if (*--line != '1')
-		return (ERROR);
+	// if (*line != '1')
+	// 	return (ERROR);
+	// while(*line != 0)
+	// 	ge->smap.p_map[(*n)++]= *line++ - '0';
+	// //n--;
+	*n = *n + ge->smap.w;
+	// if (*--line != '1')
+	// 	return (ERROR);
 	return (OK);
 }
 
-int		check_map(void)
+int		check_map(char *map)
 {
+	size_t	n;
+
+	n = 0;
+	while (n < ft_strlen(map))
+	{
+		map[n] = map[n] - '0';
+		n++;
+	}
 	return (0);
 }
 
@@ -103,7 +129,7 @@ int		load_map(GameEngine *ge, int fd, char *firstline)
 	}
 	load_line(ge, line, &n);
 	free(line);
-	check_map();
+//	check_map(ge->smap.p_map);
 	return (OK);
 }
 int		get_tex_orientation(char l)

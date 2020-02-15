@@ -119,3 +119,5 @@ int		load_colors(GameEngine *ge, char *line);
 int		load_sprite(GameEngine *ge, char *line);
 int		load_map(GameEngine *ge, int fd, char *line);
 int		load_textures(GameEngine *ge, char *line);
+
+int check_map(char *map);

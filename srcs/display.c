@@ -78,7 +78,7 @@ void	compute_img(GameEngine *ge, s_img *img)
 	char		*world_map;
 
 	n = 0;
-	world_map = ge->map;
+	world_map = ge->smap.p_map;
 	img->p_img = mlx_new_image(ge->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
 	img->data = mlx_get_data_addr(img->p_img, &img->bits_per_pixels,
 								&img->size_line, &img->endian);
