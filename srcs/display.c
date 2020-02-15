@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:42:09 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/15 15:18:43 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/15 15:26:34 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		compute_fps(void)
 ** 		{
 ** 			for (int k =0; k<4;k++)
 ** 				img->data[y * img->size_line + x*4 + k] =
-**	ge->textures[2].data[(y % 64) * ge->textures[2].size_line + (x%64)*4 + k];
+**	ge->smap.textures[2].data[(y % 64) * ge->smap.textures[2].size_line + (x%64)*4 + k];
 ** 		}
 ** 	}
 ** 	return 0;
@@ -86,7 +86,7 @@ void	compute_img(GameEngine *ge, s_img *img)
 	{
 		tex_x = compute_dda(&dda, n, ge);
 		img_vertline_put(n, &dda, ge,
-			&ge->textures[world_map[dda.mapY * ge->smap.w + dda.mapX] - 1],
+			&ge->smap.textures[world_map[dda.mapY * ge->smap.w + dda.mapX] - 1],
 			tex_x, img);
 		n++;
 	}

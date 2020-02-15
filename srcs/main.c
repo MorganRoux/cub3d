@@ -23,7 +23,7 @@ void	load_tex(GameEngine *ge, int n)
 	i = 0;
 	while (i < n)
 	{
-		tex = &ge->textures[i];
+		tex = &ge->smap.textures[i];
 		tex->p_img = mlx_xpm_file_to_image(
 						ge->mlx_ptr,
 						ft_strjoin(TEX_DIR,tex_path[i]),
@@ -55,9 +55,6 @@ int		main(int argc, char *argv[])
 		return (0);
 	if (load_cub_file(&ge, argv[1]) < 0)
 		return (0);
-	load_tex(&ge, 8);
-	printf("%d %d", ge.smap.w, ge.smap.h);
-	getchar();
 	if ((ge.mlx_win = mlx_new_window(ge.mlx_ptr, ge.screen_w,
 									ge.screen_h, "Raycaster")) == NULL)
 		return (0);

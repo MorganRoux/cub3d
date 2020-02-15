@@ -54,7 +54,7 @@ typedef struct	world_map
 	char	*p_map;
 	int		w;
 	int		h;
-	s_img	textures[4];
+	s_img	textures[8];
 	s_color	color[2];
 	s_img	sprite;
 }				s_map;
@@ -70,7 +70,7 @@ typedef struct	game_engine
 	void		*mlx_win;
 	char		*map;
 	s_map		smap;
-	s_img		textures[8];
+	//s_img		textures[8];
 	double		moveSpeed;
 	double		rotSpeed;
 	s_vect		dir;
