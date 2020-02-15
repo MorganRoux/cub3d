@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:04:58 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/11 17:34:29 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/15 15:08:39 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		detect_collision(s_dda *dda, GameEngine *ge)
 			dda->mapY += dda->stepY;
 			side = 1;
 		}
-		if (world_map[dda->mapY * MAP_WIDTH + dda->mapX] > 0)
+		if (world_map[dda->mapY * ge->smap.w + dda->mapX] > 0)
 			hit = 1;
 	}
 	return (side);

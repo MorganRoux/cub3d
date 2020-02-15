@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:42:58 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/11 18:18:19 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/15 15:08:39 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	move_front(GameEngine *ge)
 	new_x = ge->pl.pos.x + ge->dir.x * ge->moveSpeed;
 	new_y = ge->pl.pos.y + ge->dir.y * ge->moveSpeed;
 	world_map = ge->smap.p_map;
-	if (world_map[(int)(ge->pl.pos.y) * MAP_WIDTH + (int)new_x] == 0)
+	if (world_map[(int)(ge->pl.pos.y) * ge->smap.w + (int)new_x] == 0)
 		ge->pl.pos.x = new_x;
-	if (world_map[(int)new_y * MAP_WIDTH + (int)(ge->pl.pos.x)] == 0)
+	if (world_map[(int)new_y * ge->smap.w + (int)(ge->pl.pos.x)] == 0)
 		ge->pl.pos.y = new_y;
 }
 
@@ -36,9 +36,9 @@ void	move_back(GameEngine *ge)
 	new_x = ge->pl.pos.x - ge->dir.x * ge->moveSpeed;
 	new_y = ge->pl.pos.y - ge->dir.y * ge->moveSpeed;
 	world_map = ge->smap.p_map;
-	if (world_map[(int)(ge->pl.pos.y) * MAP_WIDTH + (int)new_x] == 0)
+	if (world_map[(int)(ge->pl.pos.y) * ge->smap.w + (int)new_x] == 0)
 		ge->pl.pos.x = new_x;
-	if (world_map[(int)new_y * MAP_WIDTH + (int)(ge->pl.pos.x)] == 0)
+	if (world_map[(int)new_y * ge->smap.w + (int)(ge->pl.pos.x)] == 0)
 		ge->pl.pos.y = new_y;
 }
 

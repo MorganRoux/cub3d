@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:42:09 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/11 18:09:24 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/15 15:08:39 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	compute_img(GameEngine *ge, s_img *img)
 	{
 		tex_x = compute_dda(&dda, n, ge);
 		img_vertline_put(n, dda.drawStart, dda.drawEnd,
-			&ge->textures[world_map[dda.mapY * MAP_WIDTH + dda.mapX] - 1],
+			&ge->textures[world_map[dda.mapY * ge->smap.w + dda.mapX] - 1],
 			tex_x, img);
 		n++;
 	}

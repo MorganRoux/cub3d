@@ -9,8 +9,8 @@
 #include "get_next_line.h"
 #include "keys.h"
 
-#define MAP_WIDTH 24
-#define MAP_HEIGHT 24
+// #define MAP_WIDTH 24
+// #define MAP_HEIGHT 24
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
 #define TEX_WIDTH 64
