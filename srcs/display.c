@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:42:09 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/15 19:00:07 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/15 19:35:59 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,49 +42,63 @@ int		compute_fps(void)
 ** }
 */
 
+void	copy_pxl(char *dest, char *source, int bpp)
+{
+	int i;
+	i = -1;
+	while (++i < bpp)
+		dest[i] = source[i];
+}
+
+void	copy_ceil(int *img_y, GameEngine *ge, int *img_n, s_img *img, s_dda *dda)
+{
+	while (*img_y < dda->draw_start)
+	{
+		img->data[*img_n] = ge->smap.color[0].r;
+		img->data[*img_n + 1] = ge->smap.color[0].v;
+		img->data[*img_n + 2] = ge->smap.color[0].b;
+		img->data[*img_n + 3] = 0x00;
+		(*img_y)++;
+		*img_n += img->size_line;
+	}
+}
+
+void copy_floor(int *img_y, GameEngine *ge, int *img_n, s_img *img)
+{
+	while (*img_y < ge->screen_h)
+	{
+		img->data[*img_n] = ge->smap.color[1].r;
+		img->data[*img_n + 1] = ge->smap.color[1].v;
+		img->data[*img_n + 2] = ge->smap.color[1].b;
+		img->data[*img_n + 3] = 0x00;
+		(*img_y)++;
+		*img_n += img->size_line;
+	}
+}
+
 int		img_vertline_put(int img_x, s_dda *dda, GameEngine *ge,
 						s_img *tex, int tex_x, s_img *img)
 {
-	int		bytes_per_pxl;
 	double	tex_y;
 	int		img_y;
 	int		tex_n;
 	int		img_n;
 
-	bytes_per_pxl = img->bits_per_pxl / 8;
 	tex_y = (dda->draw_start - ge->screen_h / 2 +
 			(double)dda->line_height / 2) *
 			(double)TEX_HEIGHT / dda->line_height;
-	img_y = 0;//dda->draw_start;
-	while (img_y < dda->draw_start)
-	{
-		img_n = img_y * img->size_line + img_x * bytes_per_pxl;
-		img->data[img_n] = ge->smap.color[0].r;
-		img->data[img_n + 1] = ge->smap.color[0].v;
-		img->data[img_n + 2] = ge->smap.color[0].b;
-		img->data[img_n + 3] = 0x00;
-		img_y++;
-	}
+	img_y = 0;
+	img_n = img_y * img->size_line + img_x * (img->bits_per_pxl / 8);
+	copy_ceil(&img_y, ge, &img_n, img, dda);
 	while (img_y < dda->draw_end)
 	{
-		tex_n = ((int)tex_y & (TEX_HEIGHT - 1)) * tex->size_line + tex_x * bytes_per_pxl;
-		img_n = img_y * img->size_line + img_x * bytes_per_pxl;
-		img->data[img_n] = tex->data[tex_n];
-		img->data[img_n + 1] = tex->data[tex_n + 1];
-		img->data[img_n + 2] = tex->data[tex_n + 2];
-		img->data[img_n + 3] = tex->data[tex_n + 3];
+		tex_n = ((int)tex_y & (TEX_HEIGHT - 1)) * tex->size_line + tex_x * (img->bits_per_pxl / 8);
+		copy_pxl(&(img->data[img_n]), &(tex->data[tex_n]), img->bits_per_pxl / 8);
 		tex_y += (double)TEX_HEIGHT / (double)(dda->line_height);
 		img_y++;
+		img_n += img->size_line;
 	}
-	while (img_y < ge->screen_h)
-	{
-		img_n = img_y * img->size_line + img_x * bytes_per_pxl;
-		img->data[img_n] = ge->smap.color[1].r;
-		img->data[img_n + 1] = ge->smap.color[1].v;
-		img->data[img_n + 2] = ge->smap.color[1].b;
-		img->data[img_n + 3] = 0x00;
-		img_y++;
-	}
+	copy_floor(&img_y, ge, &img_n, img);
 	return (0);
 }
 
@@ -93,10 +107,8 @@ void	compute_img(GameEngine *ge, s_img *img)
 	s_dda	dda;
 	int		tex_x;
 	int		img_x;
-	char	*world_map;
 
 	img_x = 0;
-	world_map = ge->smap.p_map;
 	img->p_img = mlx_new_image(ge->mlx_ptr, ge->screen_w, ge->screen_h);
 	img->data = mlx_get_data_addr(img->p_img, &img->bits_per_pxl,
 								&img->size_line, &img->endian);
@@ -104,7 +116,7 @@ void	compute_img(GameEngine *ge, s_img *img)
 	{
 		tex_x = compute_dda(&dda, img_x, ge);
 		img_vertline_put(img_x, &dda, ge,
-			&ge->smap.textures[world_map[dda.map_y * ge->smap.w + dda.map_x] - 1],
+			&ge->smap.textures[ge->smap.p_map[dda.map_y * ge->smap.w + dda.map_x] - 1],
 			tex_x, img);
 		img_x++;
 	}

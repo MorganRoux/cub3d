@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:04:58 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/15 17:34:00 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/15 19:23:13 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	init_dda(s_dda *dda, int img_x, GameEngine *ge)
 
 int		detect_collision(s_dda *dda, GameEngine *ge)
 {
-	int	hit;
-	int	side;
+	int		hit;
+	int		side;
 	char	*world_map;
 
 	world_map = ge->smap.p_map;
@@ -58,6 +58,7 @@ int		detect_collision(s_dda *dda, GameEngine *ge)
 	}
 	return (side);
 }
+
 /*
 **	get_line_height
 **	Compute height (in pxl) of the line to be drawn on screen
