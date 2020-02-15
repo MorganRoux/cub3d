@@ -6,12 +6,11 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 11:02:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/13 20:29:33 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/15 15:06:41 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 int		load_map_dimensions(GameEngine *ge, char *line)
 {
 	char	**param;
@@ -75,40 +74,27 @@ void	*ft_realloc(void *p, size_t l, size_t newsize)
 		ret[n] = ptr[n];
 	while (++n < newsize)
 		ret[n] = 0;
+	if (p != NULL)
+		free(p);
 	return ((void *)ret);
 }
 
 int		load_line(GameEngine *ge, char *line, int *n)
 {
 	if ((int)ft_strlen(line) != ge->smap.w)
-	{
-		printf("arg");
 		return (ERROR);
-	}
-	if (!(ge->smap.p_map = ft_strnjoin(ge->smap.p_map, line, ft_strlen(ge->smap.p_map) + ge->smap.w)))
+	ge->smap.h++;
+	if (!(ge->smap.p_map = ft_realloc(ge->smap.p_map, *n, *n + ge->smap.w)))
 		return ERROR;
-	// if (*line != '1')
-	// 	return (ERROR);
-	// while(*line != 0)
-	// 	ge->smap.p_map[(*n)++]= *line++ - '0';
-	// //n--;
-	*n = *n + ge->smap.w;
-	// if (*--line != '1')
-	// 	return (ERROR);
+	while(*line != 0)
+		ge->smap.p_map[(*n)++]= *line++ - '0';
 	return (OK);
 }
 
 int		check_map(char *map)
 {
-	size_t	n;
-
-	n = 0;
-	while (n < ft_strlen(map))
-	{
-		map[n] = map[n] - '0';
-		n++;
-	}
-	return (0);
+	(void)map;
+	return (OK);
 }
 
 int		load_map(GameEngine *ge, int fd, char *firstline)
@@ -118,9 +104,8 @@ int		load_map(GameEngine *ge, int fd, char *firstline)
 
 	n = 0;
 	ge->smap.w = ft_strlen(firstline);
-	if (!(ge->smap.p_map = (char *)malloc(sizeof(char))))
-		return (ERROR);
-	ge->smap.p_map[0]= 0;
+	ge->smap.h = 0;
+	ge->smap.p_map = NULL;
 	load_line(ge, firstline, &n);
 	while(get_next_line(fd, &line))
 	{
@@ -129,7 +114,7 @@ int		load_map(GameEngine *ge, int fd, char *firstline)
 	}
 	load_line(ge, line, &n);
 	free(line);
-//	check_map(ge->smap.p_map);
+	check_map(ge->smap.p_map);
 	return (OK);
 }
 int		get_tex_orientation(char l)

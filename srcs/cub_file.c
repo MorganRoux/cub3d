@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:14:07 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/13 20:05:20 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/15 14:42:44 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	check_line(GameEngine *ge, int fd, char *line)
 		load_colors(ge, line);
 	else if (ft_strncmp(line, "S ", 2) == 0)
 		load_sprite(ge, line);
-	else if (line[0] == '1')
+	else if (ft_isdigit(line[0]))
 		load_map(ge, fd, line);
 	else if (ft_strncmp(line, "NO", 2) == 0
 		|| ft_strncmp(line, "SO", 2) == 0
