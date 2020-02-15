@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-int	initEngine(GameEngine *ge)
+int	init_engine(GameEngine *ge)
 {
 	ge->moveSpeed = 0.1;
 	ge->rotSpeed = 0.06;
@@ -46,7 +46,7 @@ void	set_hooks(GameEngine *ge)
 int		main(int argc, char *argv[])
 {
 	GameEngine	ge;
-	initEngine(&ge);
+	init_engine(&ge);
 	(void) argv;
 
 	if ((ge.mlx_ptr = mlx_init()) == NULL)

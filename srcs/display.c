@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:42:09 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/15 15:26:34 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/15 16:17:56 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ int		img_vertline_put(int img_x, s_dda *dda, GameEngine *ge,
 	int		n_img;
 
 	b = img->bits_per_pixels / 8;
-	tex_pos = (dda->drawStart - ge->screen_h / 2 +
-			(double)(dda->drawEnd - dda->drawStart) / 2) *
-			(double)TEX_HEIGHT / (double)(dda->drawEnd - dda->drawStart);
-	img_y = dda->drawStart;
-	while (img_y < dda->drawEnd)
+	tex_pos = (dda->draw_start - ge->screen_h / 2 +
+			(double)(dda->draw_end - dda->draw_start) / 2) *
+			(double)TEX_HEIGHT / (double)(dda->draw_end - dda->draw_start);
+	img_y = dda->draw_start;
+	while (img_y < dda->draw_end)
 	{
 		n_tex = ((int)tex_pos & (TEX_HEIGHT - 1)) * tex->size_line + tex_x * b;
 		n_img = img_y * img->size_line + img_x * b;
@@ -64,7 +64,7 @@ int		img_vertline_put(int img_x, s_dda *dda, GameEngine *ge,
 		img->data[n_img + 1] = tex->data[n_tex + 1];
 		img->data[n_img + 2] = tex->data[n_tex + 2];
 		img->data[n_img + 3] = tex->data[n_tex + 3];
-		tex_pos += (double)TEX_HEIGHT / (double)(dda->drawEnd - dda->drawStart);
+		tex_pos += (double)TEX_HEIGHT / (double)(dda->draw_end - dda->draw_start);
 		img_y++;
 	}
 	return (0);
@@ -75,7 +75,7 @@ void	compute_img(GameEngine *ge, s_img *img)
 	s_dda	dda;
 	int		tex_x;
 	int		n;
-	char		*world_map;
+	char	*world_map;
 
 	n = 0;
 	world_map = ge->smap.p_map;
@@ -86,7 +86,7 @@ void	compute_img(GameEngine *ge, s_img *img)
 	{
 		tex_x = compute_dda(&dda, n, ge);
 		img_vertline_put(n, &dda, ge,
-			&ge->smap.textures[world_map[dda.mapY * ge->smap.w + dda.mapX] - 1],
+			&ge->smap.textures[world_map[dda.map_y * ge->smap.w + dda.map_x] - 1],
 			tex_x, img);
 		n++;
 	}

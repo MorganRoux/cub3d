@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:04:58 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/15 15:15:01 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/15 16:21:18 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 void	init_dda(s_dda *dda, int n, GameEngine *ge)
 {
-	dda->cameraX = 2 * n / (double)ge->screen_w - 1;
-	dda->rayDirX = ge->dir.x + ge->plane.x * dda->cameraX;
-	dda->rayDirY = ge->dir.y + ge->plane.y * dda->cameraX;
-	dda->mapX = (int)(ge->pl.pos.x);
-	dda->mapY = (int)(ge->pl.pos.y);
-	dda->deltaDistX = fabs(1 / dda->rayDirX);
-	dda->deltaDistY = fabs(1 / dda->rayDirY);
-	dda->stepX = (dda->rayDirX < 0) ? -1 : 1;
-	dda->sideDistX = (dda->rayDirX < 0) ?
-					(ge->pl.pos.x - dda->mapX) * dda->deltaDistX :
-					(dda->mapX + 1.0 - ge->pl.pos.x) * dda->deltaDistX;
-	dda->stepY = (dda->rayDirY < 0) ? -1 : 1;
-	dda->sideDistY = (dda->rayDirY < 0) ?
-					(ge->pl.pos.y - dda->mapY) * dda->deltaDistY :
-					(dda->mapY + 1.0 - ge->pl.pos.y) * dda->deltaDistY;
+	dda->camera_x = 2 * n / (double)ge->screen_w - 1;
+	dda->ray_dir_x = ge->dir.x + ge->plane.x * dda->camera_x;
+	dda->ray_dir_y = ge->dir.y + ge->plane.y * dda->camera_x;
+	dda->map_x = (int)(ge->pl.pos.x);
+	dda->map_y = (int)(ge->pl.pos.y);
+	dda->delta_x = fabs(1 / dda->ray_dir_x);
+	dda->delta_y = fabs(1 / dda->ray_dir_y);
+	dda->step_x = (dda->ray_dir_x < 0) ? -1 : 1;
+	dda->side_dist_x = (dda->ray_dir_x < 0) ?
+					(ge->pl.pos.x - dda->map_x) * dda->delta_x :
+					(dda->map_x + 1.0 - ge->pl.pos.x) * dda->delta_x;
+	dda->step_y = (dda->ray_dir_y < 0) ? -1 : 1;
+	dda->side_dist_y = (dda->ray_dir_y < 0) ?
+					(ge->pl.pos.y - dda->map_y) * dda->delta_y :
+					(dda->map_y + 1.0 - ge->pl.pos.y) * dda->delta_y;
 }
 
 int		detect_collision(s_dda *dda, GameEngine *ge)
@@ -41,19 +41,19 @@ int		detect_collision(s_dda *dda, GameEngine *ge)
 	hit = 0;
 	while (hit == 0)
 	{
-		if (dda->sideDistX < dda->sideDistY)
+		if (dda->side_dist_x < dda->side_dist_y)
 		{
-			dda->sideDistX += dda->deltaDistX;
-			dda->mapX += dda->stepX;
+			dda->side_dist_x += dda->delta_x;
+			dda->map_x += dda->step_x;
 			side = 0;
 		}
 		else
 		{
-			dda->sideDistY += dda->deltaDistY;
-			dda->mapY += dda->stepY;
+			dda->side_dist_y += dda->delta_y;
+			dda->map_y += dda->step_y;
 			side = 1;
 		}
-		if (world_map[dda->mapY * ge->smap.w + dda->mapX] > 0)
+		if (world_map[dda->map_y * ge->smap.w + dda->map_x] > 0)
 			hit = 1;
 	}
 	return (side);
@@ -67,21 +67,21 @@ int		get_line_height(s_dda *dda, int side, GameEngine *ge)
 	double	wall_x;
 
 	perp_dist = (side == 0) ?
-		(dda->mapX - ge->pl.pos.x + (1 - dda->stepX) / 2) / dda->rayDirX :
-		(dda->mapY - ge->pl.pos.y + (1 - dda->stepY) / 2) / dda->rayDirY;
+		(dda->map_x - ge->pl.pos.x + (1 - dda->step_x) / 2) / dda->ray_dir_x :
+		(dda->map_y - ge->pl.pos.y + (1 - dda->step_y) / 2) / dda->ray_dir_y;
 	line_height = (int)(ge->screen_h / perp_dist);
-	dda->drawStart = -line_height / 2 + ge->screen_h / 2;
-	dda->drawStart = (dda->drawStart < 0) ? 0 : dda->drawStart;
-	dda->drawEnd = line_height / 2 + ge->screen_h / 2;
-	dda->drawEnd = (dda->drawEnd >= ge->screen_h) ?
-		ge->screen_h - 1 : dda->drawEnd;
-	wall_x = (side == 0) ? ge->pl.pos.y + perp_dist * dda->rayDirY :
-								ge->pl.pos.x + perp_dist * dda->rayDirX;
+	dda->draw_start = -line_height / 2 + ge->screen_h / 2;
+	dda->draw_start = (dda->draw_start < 0) ? 0 : dda->draw_start;
+	dda->draw_end = line_height / 2 + ge->screen_h / 2;
+	dda->draw_end = (dda->draw_end >= ge->screen_h) ?
+		ge->screen_h - 1 : dda->draw_end;
+	wall_x = (side == 0) ? ge->pl.pos.y + perp_dist * dda->ray_dir_y :
+								ge->pl.pos.x + perp_dist * dda->ray_dir_x;
 	wall_x -= floor((wall_x));
 	tex_x = (int)(wall_x * (double)(TEX_WIDTH));
-	if (side == 0 && dda->rayDirX > 0)
+	if (side == 0 && dda->ray_dir_x > 0)
 		tex_x = TEX_WIDTH - tex_x - 1;
-	if (side == 1 && dda->rayDirY < 0)
+	if (side == 1 && dda->ray_dir_y < 0)
 		tex_x = TEX_WIDTH - tex_x - 1;
 	return (tex_x);
 }

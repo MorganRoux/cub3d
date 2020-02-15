@@ -20,6 +20,9 @@
 #define ERROR -1
 #define	OK 0
 
+/*
+** 	Vector(2,1) : x, y
+*/
 typedef struct	vect
 {
 	double x;
@@ -33,6 +36,15 @@ typedef struct	pxl_color
 	int	b;
 }				s_color;
 
+/*
+**	Represent an img in mlx with extra properties
+**	p_imp : 			pointer to the mlx image
+**	data : 				ptr to the pixel data
+**	size_line : 		the number of bytes used to store 
+**						one line of the image in memory
+**	bits_per_pixels :	the depth of the image
+**	path :				if provided, path on disk 
+*/
 typedef	struct	image
 {
 	void	*p_img;
@@ -45,12 +57,14 @@ typedef	struct	image
 	char	*path;
 }				s_img;
 
+/*
+**	Map properties 
+**	p_map : 	ptr to the map
+**	Textures : 	NO, SO, EA, WE
+** 	colors : 	Floor, ceil
+*/
 typedef struct	world_map
 {
-/*
-** 	Textures ; NO, SO, EA, WE
-** 	Colors : Floor, ceil
-*/
 	char	*p_map;
 	int		w;
 	int		h;
@@ -64,13 +78,18 @@ typedef struct	player
 	s_vect	pos;
 }				s_player;
 
+/*
+**	Game Engine properties
+**	mlx_ptr :	use by mlx
+**	mlx_win :	ptr to the screen
+**	dir :		orientation of the player
+**	plane :		orientation of the camera plane
+*/
 typedef struct	game_engine
 {
 	void		*mlx_ptr;
 	void		*mlx_win;
-	char		*map;
 	s_map		smap;
-	//s_img		textures[8];
 	double		moveSpeed;
 	double		rotSpeed;
 	s_vect		dir;
@@ -80,24 +99,32 @@ typedef struct	game_engine
 	int			screen_h;
 }				GameEngine;
 
+/*
+**	Digital Differential Analysis algorithm
+**	draw_start/end:	position on the screen of the column to be drawn
+**	side_dist:	 	length of ray from current position to next x or y-side
+**	delta:			length of ray from one x or y-side to next x or y-side 	
+**	step:			what direction to step in x or y-direction (either +1 or -1)
+**	map:			which box of the map we're in	
+*/
 typedef struct DDA
 {
-	int		drawStart;
-	int		drawEnd;
-	double	sideDistX;
-	double	sideDistY;
-	double	deltaDistX;
-	double	deltaDistY;
-	double	rayDirX;
-	double	rayDirY;
-	double	cameraX;
-	int		stepX;
-	int		stepY;
-	int		mapX;
-	int		mapY;
+	int		draw_start;
+	int		draw_end;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_x;
+	double	delta_y;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	camera_x;
+	int		step_x;
+	int		step_y;
+	int		map_x;
+	int		map_y;
 }				s_dda;
 
-int		initEngine(GameEngine *ge);
+int		init_engine(GameEngine *ge);
 
 void	init_dda(s_dda *dda, int n, GameEngine *ge);
 int		detect_collision(s_dda *dda, GameEngine *ge);
