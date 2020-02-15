@@ -1,11 +1,11 @@
-R 640 480
+R 1920 1080
 NO /Users/mroux/42Cursus/cub3d/repo/srcs/playground/bluestone.xpm
 SO /Users/mroux/42Cursus/cub3d/repo/srcs/playground/greystone.xpm
 WE /Users/mroux/42Cursus/cub3d/repo/srcs/playground/redbrick.xpm
 EA /Users/mroux/42Cursus/cub3d/repo/srcs/playground/mossy.xpm
 S /Users/mroux/42Cursus/cub3d/repo/srcs/playground/redbrick.xpm
-F 220,100,0
-C 225,30,0
+F 100,100,100
+C 2,100,255
 11111111111111111111111111111
 10000000001100000000000000001
 10110000011100000020000010001

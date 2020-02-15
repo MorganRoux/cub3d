@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:42:09 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/15 17:42:10 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/15 19:00:07 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,16 @@ int		img_vertline_put(int img_x, s_dda *dda, GameEngine *ge,
 	tex_y = (dda->draw_start - ge->screen_h / 2 +
 			(double)dda->line_height / 2) *
 			(double)TEX_HEIGHT / dda->line_height;
-	img_y = dda->draw_start;
+	img_y = 0;//dda->draw_start;
+	while (img_y < dda->draw_start)
+	{
+		img_n = img_y * img->size_line + img_x * bytes_per_pxl;
+		img->data[img_n] = ge->smap.color[0].r;
+		img->data[img_n + 1] = ge->smap.color[0].v;
+		img->data[img_n + 2] = ge->smap.color[0].b;
+		img->data[img_n + 3] = 0x00;
+		img_y++;
+	}
 	while (img_y < dda->draw_end)
 	{
 		tex_n = ((int)tex_y & (TEX_HEIGHT - 1)) * tex->size_line + tex_x * bytes_per_pxl;
@@ -65,6 +74,15 @@ int		img_vertline_put(int img_x, s_dda *dda, GameEngine *ge,
 		img->data[img_n + 2] = tex->data[tex_n + 2];
 		img->data[img_n + 3] = tex->data[tex_n + 3];
 		tex_y += (double)TEX_HEIGHT / (double)(dda->line_height);
+		img_y++;
+	}
+	while (img_y < ge->screen_h)
+	{
+		img_n = img_y * img->size_line + img_x * bytes_per_pxl;
+		img->data[img_n] = ge->smap.color[1].r;
+		img->data[img_n + 1] = ge->smap.color[1].v;
+		img->data[img_n + 2] = ge->smap.color[1].b;
+		img->data[img_n + 3] = 0x00;
 		img_y++;
 	}
 	return (0);
