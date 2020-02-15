@@ -29,7 +29,7 @@ void	load_tex(GameEngine *ge, int n)
 						ft_strjoin(TEX_DIR,tex_path[i]),
 						&tex->w, &tex->h);
 		tex->data = mlx_get_data_addr(
-					tex->p_img, &tex->bits_per_pixels,
+					tex->p_img, &tex->bits_per_pxl,
 					&tex->size_line, &tex->endian);
 		i++;
 	}

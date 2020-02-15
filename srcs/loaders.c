@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 11:02:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/15 15:14:04 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/15 17:27:51 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		load_sprite(GameEngine *ge, char *line)
 	if (sprite->p_img == 0)
 		return (ERROR);
 	sprite->data = mlx_get_data_addr(
-				sprite->p_img, &sprite->bits_per_pixels,
+				sprite->p_img, &sprite->bits_per_pxl,
 				&sprite->size_line, &sprite->endian);
 	while (*param != 0)
 		free(*param++);
@@ -145,7 +145,7 @@ int		load_textures(GameEngine *ge, char *line)
 	if (tex->p_img == 0)
 		return (ERROR);
 	tex->data = mlx_get_data_addr(
-				tex->p_img, &tex->bits_per_pixels,
+				tex->p_img, &tex->bits_per_pxl,
 				&tex->size_line, &tex->endian);
 	while (*param != 0)
 		free(*param++);

@@ -52,7 +52,7 @@ typedef	struct	image
 	int		h;
 	int		w;
 	int		size_line;
-	int		bits_per_pixels;
+	int		bits_per_pxl;
 	int		endian;
 	char	*path;
 }				s_img;
@@ -105,6 +105,7 @@ typedef struct	game_engine
 **	side_dist:	 	length of ray from current position to next x or y-side
 **	delta:			length of ray from one x or y-side to next x or y-side 	
 **	step:			what direction to step in x or y-direction (either +1 or -1)
+**	camera_x:		pos on the camera plane. used to build ray_dir	
 **	map:			which box of the map we're in	
 */
 typedef struct DDA
@@ -122,6 +123,7 @@ typedef struct DDA
 	int		step_y;
 	int		map_x;
 	int		map_y;
+	int		line_height;
 }				s_dda;
 
 int		init_engine(GameEngine *ge);
