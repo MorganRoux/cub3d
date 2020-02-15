@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:42:09 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/15 15:08:39 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/15 15:18:43 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int		compute_fps(void)
 /*
 ** int		test_display(GameEngine *ge, s_img *img)
 ** {
-** 	for(int x = 0; x<SCREEN_WIDTH;x++)
+** 	for(int x = 0; x<ge->screen_w;x++)
 ** 	{
-** 		for (int y = 0; y< SCREEN_HEIGHT; y++)
+** 		for (int y = 0; y< ge->screen_h; y++)
 ** 		{
 ** 			for (int k =0; k<4;k++)
 ** 				img->data[y * img->size_line + x*4 + k] =
@@ -42,7 +42,7 @@ int		compute_fps(void)
 ** }
 */
 
-int		img_vertline_put(int img_x, int draw_start, int draw_end,
+int		img_vertline_put(int img_x, s_dda *dda, GameEngine *ge,
 						s_img *tex, int tex_x, s_img *img)
 {
 	int		img_y;
@@ -52,11 +52,11 @@ int		img_vertline_put(int img_x, int draw_start, int draw_end,
 	int		n_img;
 
 	b = img->bits_per_pixels / 8;
-	tex_pos = (draw_start - SCREEN_HEIGHT / 2 +
-			(double)(draw_end - draw_start) / 2) *
-			(double)TEX_HEIGHT / (double)(draw_end - draw_start);
-	img_y = draw_start;
-	while (img_y < draw_end)
+	tex_pos = (dda->drawStart - ge->screen_h / 2 +
+			(double)(dda->drawEnd - dda->drawStart) / 2) *
+			(double)TEX_HEIGHT / (double)(dda->drawEnd - dda->drawStart);
+	img_y = dda->drawStart;
+	while (img_y < dda->drawEnd)
 	{
 		n_tex = ((int)tex_pos & (TEX_HEIGHT - 1)) * tex->size_line + tex_x * b;
 		n_img = img_y * img->size_line + img_x * b;
@@ -64,7 +64,7 @@ int		img_vertline_put(int img_x, int draw_start, int draw_end,
 		img->data[n_img + 1] = tex->data[n_tex + 1];
 		img->data[n_img + 2] = tex->data[n_tex + 2];
 		img->data[n_img + 3] = tex->data[n_tex + 3];
-		tex_pos += (double)TEX_HEIGHT / (double)(draw_end - draw_start);
+		tex_pos += (double)TEX_HEIGHT / (double)(dda->drawEnd - dda->drawStart);
 		img_y++;
 	}
 	return (0);
@@ -79,13 +79,13 @@ void	compute_img(GameEngine *ge, s_img *img)
 
 	n = 0;
 	world_map = ge->smap.p_map;
-	img->p_img = mlx_new_image(ge->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
+	img->p_img = mlx_new_image(ge->mlx_ptr, ge->screen_w, ge->screen_h);
 	img->data = mlx_get_data_addr(img->p_img, &img->bits_per_pixels,
 								&img->size_line, &img->endian);
-	while (n < SCREEN_WIDTH)
+	while (n < ge->screen_w)
 	{
 		tex_x = compute_dda(&dda, n, ge);
-		img_vertline_put(n, dda.drawStart, dda.drawEnd,
+		img_vertline_put(n, &dda, ge,
 			&ge->textures[world_map[dda.mapY * ge->smap.w + dda.mapX] - 1],
 			tex_x, img);
 		n++;

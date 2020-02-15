@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:04:58 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/15 15:08:39 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/15 15:15:01 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_dda(s_dda *dda, int n, GameEngine *ge)
 {
-	dda->cameraX = 2 * n / (double)SCREEN_WIDTH - 1;
+	dda->cameraX = 2 * n / (double)ge->screen_w - 1;
 	dda->rayDirX = ge->dir.x + ge->plane.x * dda->cameraX;
 	dda->rayDirY = ge->dir.y + ge->plane.y * dda->cameraX;
 	dda->mapX = (int)(ge->pl.pos.x);
@@ -69,12 +69,12 @@ int		get_line_height(s_dda *dda, int side, GameEngine *ge)
 	perp_dist = (side == 0) ?
 		(dda->mapX - ge->pl.pos.x + (1 - dda->stepX) / 2) / dda->rayDirX :
 		(dda->mapY - ge->pl.pos.y + (1 - dda->stepY) / 2) / dda->rayDirY;
-	line_height = (int)(SCREEN_HEIGHT / perp_dist);
-	dda->drawStart = -line_height / 2 + SCREEN_HEIGHT / 2;
+	line_height = (int)(ge->screen_h / perp_dist);
+	dda->drawStart = -line_height / 2 + ge->screen_h / 2;
 	dda->drawStart = (dda->drawStart < 0) ? 0 : dda->drawStart;
-	dda->drawEnd = line_height / 2 + SCREEN_HEIGHT / 2;
-	dda->drawEnd = (dda->drawEnd >= SCREEN_HEIGHT) ?
-		SCREEN_HEIGHT - 1 : dda->drawEnd;
+	dda->drawEnd = line_height / 2 + ge->screen_h / 2;
+	dda->drawEnd = (dda->drawEnd >= ge->screen_h) ?
+		ge->screen_h - 1 : dda->drawEnd;
 	wall_x = (side == 0) ? ge->pl.pos.y + perp_dist * dda->rayDirY :
 								ge->pl.pos.x + perp_dist * dda->rayDirX;
 	wall_x -= floor((wall_x));

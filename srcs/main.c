@@ -58,8 +58,8 @@ int		main(int argc, char *argv[])
 	load_tex(&ge, 8);
 	printf("%d %d", ge.smap.w, ge.smap.h);
 	getchar();
-	if ((ge.mlx_win = mlx_new_window(ge.mlx_ptr, SCREEN_WIDTH,
-									SCREEN_HEIGHT, "Raycaster")) == NULL)
+	if ((ge.mlx_win = mlx_new_window(ge.mlx_ptr, ge.screen_w,
+									ge.screen_h, "Raycaster")) == NULL)
 		return (0);
 	set_hooks(&ge);
 	mlx_loop(ge.mlx_ptr);

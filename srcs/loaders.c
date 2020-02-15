@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 11:02:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/15 15:06:41 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/15 15:14:04 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int		load_map_dimensions(GameEngine *ge, char *line)
 	char	**param;
 
 	param = ft_split(line, ' ');
-	ge->smap.w = ft_atoi(param[1]);
-	ge->smap.h = ft_atoi(param[2]);
+	ge->screen_w = ft_atoi(param[1]);
+	ge->screen_h = ft_atoi(param[2]);
 	while (*param != 0)
 		free(*param++);
 	return (OK);

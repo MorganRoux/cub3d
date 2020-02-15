@@ -11,8 +11,8 @@
 
 // #define MAP_WIDTH 24
 // #define MAP_HEIGHT 24
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 480
+// #define SCREEN_WIDTH 640
+// #define SCREEN_HEIGHT 480
 #define TEX_WIDTH 64
 #define TEX_HEIGHT 64
 #define BYTES_PER_PIXELS 3
@@ -76,6 +76,8 @@ typedef struct	game_engine
 	s_vect		dir;
 	s_vect		plane;
 	s_player	pl;
+	int			screen_w;
+	int			screen_h;
 }				GameEngine;
 
 typedef struct DDA
@@ -110,7 +112,8 @@ int		key_hook(int keycode,void *param);
 int		main_hook(void *param);
 
 int		compute_fps();
-int		img_vertline_put(int img_x, int drawStart, int drawEnd, s_img *tex, int tex_x, s_img *img);
+int		img_vertline_put(int img_x, s_dda *dda, GameEngine *ge,
+						s_img *tex, int tex_x, s_img *img);
 int		draw(void *param);
 
 int		load_cub_file(GameEngine *ge, char *path);
