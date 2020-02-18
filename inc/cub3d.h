@@ -9,10 +9,6 @@
 #include "get_next_line.h"
 #include "keys.h"
 
-// #define MAP_WIDTH 24
-// #define MAP_HEIGHT 24
-// #define SCREEN_WIDTH 640
-// #define SCREEN_HEIGHT 480
 #define TEX_WIDTH 64
 #define TEX_HEIGHT 64
 #define BYTES_PER_PIXELS 3
@@ -20,21 +16,29 @@
 #define ERROR -1
 #define	OK 0
 
+typedef enum 
+{
+	NO = 0,
+	SO = 1,
+	EA = 2,
+	WE = 3
+}	t_orientation;
+
 /*
 ** 	Vector(2,1) : x, y
 */
-typedef struct	vect
+typedef struct	t_vect
 {
 	double x;
 	double y;
-}				s_vect;
+}				t_vect;
 
-typedef struct	pxl_color
+typedef struct	s_pxl_color
 {
 	int r;
 	int v;
 	int	b;
-}				s_color;
+}				t_color;
 
 /*
 **	Represent an img in mlx with extra properties
@@ -45,7 +49,7 @@ typedef struct	pxl_color
 **	bits_per_pixels :	the depth of the image
 **	path :				if provided, path on disk 
 */
-typedef	struct	image
+typedef	struct	s_img
 {
 	void	*p_img;
 	char	*data;
@@ -55,7 +59,7 @@ typedef	struct	image
 	int		bits_per_pxl;
 	int		endian;
 	char	*path;
-}				s_img;
+}				t_img;
 
 /*
 **	Map properties 
@@ -68,14 +72,14 @@ typedef struct	world_map
 	char	*p_map;
 	int		w;
 	int		h;
-	s_img	textures[8];
-	s_color	color[2];
-	s_img	sprite;
+	t_img	textures[8];
+	t_color	color[2];
+	t_img	sprite;
 }				s_map;
 
 typedef struct	player
 {
-	s_vect	pos;
+	t_vect	pos;
 }				s_player;
 
 /*
@@ -92,8 +96,8 @@ typedef struct	game_engine
 	s_map		smap;
 	double		moveSpeed;
 	double		rotSpeed;
-	s_vect		dir;
-	s_vect		plane;
+	t_vect		dir;
+	t_vect		plane;
 	s_player	pl;
 	int			screen_w;
 	int			screen_h;
@@ -108,7 +112,7 @@ typedef struct	game_engine
 **	camera_x:		pos on the camera plane. used to build ray_dir	
 **	map:			which box of the map we're in	
 */
-typedef struct DDA
+typedef struct s_dda
 {
 	int		draw_start;
 	int		draw_end;
@@ -124,13 +128,14 @@ typedef struct DDA
 	int		map_x;
 	int		map_y;
 	int		line_height;
-}				s_dda;
+	int		side;
+}				t_dda;
 
 int		init_engine(GameEngine *ge);
 
-void	init_dda(s_dda *dda, int n, GameEngine *ge);
-int		detect_collision(s_dda *dda, GameEngine *ge);
-int		compute_dda(s_dda *dda, int n, GameEngine *ge);
+void	init_dda(t_dda *dda, int img_x, GameEngine *ge);
+void	detect_collision(t_dda *dda, GameEngine *ge);
+int		compute_dda(t_dda *dda, int img_x, GameEngine *ge);
 
 void	move_front(GameEngine *ge);
 void	move_back(GameEngine *ge);
@@ -141,8 +146,8 @@ int		key_hook(int keycode,void *param);
 int		main_hook(void *param);
 
 int		compute_fps();
-int		img_vertline_put(int img_x, s_dda *dda, GameEngine *ge,
-						s_img *tex, int tex_x, s_img *img);
+int		img_vertline_put(int img_x, t_dda *dda, GameEngine *ge,
+						t_img *tex, int tex_x, t_img *img);
 int		draw(void *param);
 
 int		load_cub_file(GameEngine *ge, char *path);

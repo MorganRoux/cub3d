@@ -16,7 +16,7 @@ int	init_engine(GameEngine *ge)
 void	load_tex(GameEngine *ge, int n)
 {
 	int		i;
-	s_img	*tex;
+	t_img	*tex;
 	char	*tex_path[100] = {"eagle.xpm", "bluestone.xpm", "colorstone.xpm", "greystone.xpm",
 							"mossy.xpm", "purplestone.xpm", "redbrick.xpm", "wood.xpm"};
 

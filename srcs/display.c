@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:42:09 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/15 19:35:59 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/18 10:28:43 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	copy_pxl(char *dest, char *source, int bpp)
 		dest[i] = source[i];
 }
 
-void	copy_ceil(int *img_y, GameEngine *ge, int *img_n, s_img *img, s_dda *dda)
+void	copy_ceil(int *img_y, GameEngine *ge, int *img_n, t_img *img, t_dda *dda)
 {
 	while (*img_y < dda->draw_start)
 	{
@@ -63,7 +63,7 @@ void	copy_ceil(int *img_y, GameEngine *ge, int *img_n, s_img *img, s_dda *dda)
 	}
 }
 
-void copy_floor(int *img_y, GameEngine *ge, int *img_n, s_img *img)
+void copy_floor(int *img_y, GameEngine *ge, int *img_n, t_img *img)
 {
 	while (*img_y < ge->screen_h)
 	{
@@ -76,8 +76,8 @@ void copy_floor(int *img_y, GameEngine *ge, int *img_n, s_img *img)
 	}
 }
 
-int		img_vertline_put(int img_x, s_dda *dda, GameEngine *ge,
-						s_img *tex, int tex_x, s_img *img)
+int		img_vertline_put(int img_x, t_dda *dda, GameEngine *ge,
+						t_img *tex, int tex_x, t_img *img)
 {
 	double	tex_y;
 	int		img_y;
@@ -102,9 +102,9 @@ int		img_vertline_put(int img_x, s_dda *dda, GameEngine *ge,
 	return (0);
 }
 
-void	compute_img(GameEngine *ge, s_img *img)
+void	compute_img(GameEngine *ge, t_img *img)
 {
-	s_dda	dda;
+	t_dda	dda;
 	int		tex_x;
 	int		img_x;
 
@@ -125,7 +125,7 @@ void	compute_img(GameEngine *ge, s_img *img)
 int		draw(void *param)
 {
 	GameEngine	*ge;
-	s_img		img;
+	t_img		img;
 
 	ge = (GameEngine *)param;
 	compute_img(ge, &img);

@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 11:02:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/15 17:27:51 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/18 10:28:05 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		load_colors(GameEngine *ge, char *line)
 
 int		load_sprite(GameEngine *ge, char *line)
 {
-	s_img	*sprite;
+	t_img	*sprite;
 	char	**param;
 
 	param = ft_split(line, ' ');
@@ -132,7 +132,7 @@ int		get_tex_orientation(char l)
 
 int		load_textures(GameEngine *ge, char *line)
 {
-	s_img	*tex;
+	t_img	*tex;
 	char	**param;
 
 	param = ft_split(line, ' ');

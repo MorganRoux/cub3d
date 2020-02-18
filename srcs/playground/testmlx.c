@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 13:48:35 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/04 16:50:49 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/18 10:28:05 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ int		key_hook(int keycode,void *param)
 	return 1;
 }
 
-s_vect	intercept_x(GameEngine *ge)
+t_vect	intercept_x(GameEngine *ge)
 {
 	double	dx;
 	double	dy;
 	int 	step;
-	s_vect	pos;
+	t_vect	pos;
 	int		hit;
 
 	hit = 0;

@@ -1,7 +1,7 @@
 #include "cub3d.h"
 #include <stdio.h>
 
-typedef struct DDA
+typedef struct s_dda
 {
 	int		drawStart;
 	int		drawEnd;
@@ -25,14 +25,14 @@ typedef struct DDA
 	int		hit; //was there a wall hit?
 	double	perpWallDist;
 	double wallX; //where exactly the wall was hit
-}				s_dda;
+}				t_dda;
 
 
 int		draw(void *param)
 {
 	GameEngine	*ge;
-	s_img		img;	
-	s_dda		dda;
+	t_img		img;	
+	t_dda		dda;
 	ge = (GameEngine *)param;
 
 	//mlx_clear_window ( mlx_ptr, mlx_win );
