@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 20:37:57 by myoung            #+#    #+#             */
-/*   Updated: 2020/02/05 17:54:41 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/18 15:28:20 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define X11_KEY_RELEASE        3
 # define X11_KEY_RELEASE_M      2
 
-
+# define KEY_ESCAPE 0x35
 # define KEY_A 0
 # define KEY_S 1
 # define KEY_D 2

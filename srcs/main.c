@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-int	init_engine(t_game_engine *ge)
+int		init_engine(t_game_engine *ge)
 {
 	ge->move_speed = 0.1;
 	ge->rot_speed = 0.06;
@@ -14,6 +14,11 @@ int	init_engine(t_game_engine *ge)
 	return (1);
 }
 
+void	exit_game(int code, t_game_engine *ge)
+{
+	mlx_destroy_window(ge->mlx_ptr, ge->mlx_win);
+	exit(code);
+}
 void	load_tex(t_game_engine *ge, int n)
 {
 	int		i;

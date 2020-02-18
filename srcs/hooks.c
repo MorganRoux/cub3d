@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:03:54 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/18 15:16:00 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/18 15:35:08 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int		main_hook(void *param)
 int		key_hook_press(int keycode, void *param)
 {
 	t_game_engine *ge;
-	
 	ge = (t_game_engine *)param;
 	if (keycode == KEY_W)
 		ge->keys = ge->keys | UP;
@@ -50,6 +49,8 @@ int		key_hook_press(int keycode, void *param)
 		ge->keys = ge->keys | ROT_L;
 	else if (keycode == KEY_RIGHT)
 		ge->keys = ge->keys | ROT_R;
+	else if (keycode == KEY_ESCAPE)
+		exit_game(0, ge);
 	return (0);
 }
 
