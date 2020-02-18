@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/18 11:19:09 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/18 12:17:11 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,17 @@ typedef enum
 	EA = 2,
 	WE = 3
 }	t_cardinal;
+
+typedef enum
+{
+	NONE = 0,
+	UP = 0b1,
+	DOWN = 0b10,
+	LEFT = 0b100,
+	RIGHT = 0b1000,
+	ROT_L = 0b10000,
+	ROT_R = 0b100000,
+}	t_keypress;
 
 /*
 ** 	Vector(2,1) : x, y
@@ -90,7 +101,7 @@ typedef struct	s_world_map
 
 typedef struct	s_layer
 {
-	t_vect	pos;
+	t_vect		pos;
 }				t_player;
 
 /*
@@ -104,6 +115,7 @@ typedef struct	s_game_engine
 {
 	void		*mlx_ptr;
 	void		*mlx_win;
+	t_keypress	keys;
 	t_map		smap;
 	double		move_speed;
 	double		rot_speed;
@@ -161,6 +173,8 @@ void			move_back(t_game_engine *ge);
 void			rot_left(t_game_engine *ge);
 void			rot_right(t_game_engine *ge);
 int				key_hook(int keycode, void *param);
+int				key_hook_press(int keycode, void *param);
+int				key_hook_release(int keycode, void *param);
 int				main_hook(void *param);
 
 /*

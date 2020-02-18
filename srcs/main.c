@@ -10,6 +10,7 @@ int	init_engine(t_game_engine *ge)
 	ge->dir.y = 0;
 	ge->plane.x = 0;
 	ge->plane.y = 0.66;
+	ge->keys = NONE;
 	return (1);
 }
 
@@ -38,9 +39,9 @@ void	load_tex(t_game_engine *ge, int n)
 void	set_hooks(t_game_engine *ge)
 {
 	mlx_loop_hook(ge->mlx_ptr, &main_hook, ge);
-	mlx_key_hook(ge->mlx_win, &key_hook, ge);
-	mlx_hook(ge->mlx_win, X11_KEY_PRESS, X11_KEY_PRESS_M, &key_hook, ge);
-	mlx_hook(ge->mlx_win, X11_KEY_RELEASE, X11_KEY_RELEASE_M, &key_hook, ge);
+	//mlx_key_hook(ge->mlx_win, &key_hook, ge);
+	mlx_hook(ge->mlx_win, X11_KEY_PRESS, X11_KEY_PRESS_M, &key_hook_press, ge);
+	mlx_hook(ge->mlx_win, X11_KEY_RELEASE, X11_KEY_RELEASE_M, &key_hook_release, ge);
 }
 
 int		main(int argc, char *argv[])
