@@ -22,7 +22,7 @@ typedef enum
 	SO = 1,
 	EA = 2,
 	WE = 3
-}	t_orientation;
+}	t_cardinal;
 
 /*
 ** 	Vector(2,1) : x, y
@@ -114,21 +114,22 @@ typedef struct	game_engine
 */
 typedef struct s_dda
 {
-	int		draw_start;
-	int		draw_end;
-	double	side_dist_x;
-	double	side_dist_y;
-	double	delta_x;
-	double	delta_y;
-	double	ray_dir_x;
-	double	ray_dir_y;
-	double	camera_x;
-	int		step_x;
-	int		step_y;
-	int		map_x;
-	int		map_y;
-	int		line_height;
-	int		side;
+	int			draw_start;
+	int			draw_end;
+	double		side_dist_x;
+	double		side_dist_y;
+	double		delta_x;
+	double		delta_y;
+	double		ray_dir_x;
+	double		ray_dir_y;
+	double		camera_x;
+	int			step_x;
+	int			step_y;
+	int			map_x;
+	int			map_y;
+	int			line_height;
+	int			side;
+	t_cardinal	card;
 }				t_dda;
 
 int		init_engine(GameEngine *ge);
@@ -136,6 +137,7 @@ int		init_engine(GameEngine *ge);
 void	init_dda(t_dda *dda, int img_x, GameEngine *ge);
 void	detect_collision(t_dda *dda, GameEngine *ge);
 int		compute_dda(t_dda *dda, int img_x, GameEngine *ge);
+t_cardinal	get_wall_orientation(t_dda *dda);
 
 void	move_front(GameEngine *ge);
 void	move_back(GameEngine *ge);

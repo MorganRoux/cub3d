@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 11:02:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/18 10:28:05 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/18 10:39:49 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,20 +117,20 @@ int		load_map(GameEngine *ge, int fd, char *firstline)
 	check_map(ge->smap.p_map);
 	return (OK);
 }
-int		get_tex_orientation(char l)
+t_cardinal	get_tex_orientation(char l)
 {
 	if (l == 'N')
-		return (0);
+		return (NO);
 	if (l == 'S')
-		return (1);
+		return (SO);
 	if (l == 'E')
-		return (2);
+		return (EA);
 	if (l == 'W')
-		return (3);
+		return (WE);
 	return (ERROR);
 }
 
-int		load_textures(GameEngine *ge, char *line)
+int			load_textures(GameEngine *ge, char *line)
 {
 	t_img	*tex;
 	char	**param;

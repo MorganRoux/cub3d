@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:04:58 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/18 10:29:17 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/18 10:59:57 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,24 @@ void	init_dda(t_dda *dda, int img_x, GameEngine *ge)
 					(dda->map_y + 1.0 - ge->pl.pos.y) * dda->delta_y;
 }
 
-void		find_wall_orientation(t_dda *dda)
+/*
+**	find_wall_orientation()
+**	find the texture to apply dependending on the cardinal 
+**	orientation
+**	y = -1 : point to North
+**	y = 1 ; point to South
+**	x = 1 : point to East
+**	x = -1 : point to West
+**	side = 0 : hit along x => E-W
+**	side = 1 : hit along y => S-N
+*/
+t_cardinal	get_wall_orientation(t_dda *dda)
 {
-	(void)dda;
+	if (dda->side == 0)
+		return ((dda->ray_dir_x >= 0) ? WE : EA);
+	else
+		return ((dda->ray_dir_y >= 0) ? SO : NO);
+	
 }
 
 void		detect_collision(t_dda *dda, GameEngine *ge)
@@ -60,7 +75,7 @@ void		detect_collision(t_dda *dda, GameEngine *ge)
 		if (world_map[dda->map_y * ge->smap.w + dda->map_x] > 0)
 			hit = 1;
 	}
-	find_wall_orientation(dda);
+	get_wall_orientation(dda);
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:42:09 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/18 10:28:43 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/18 11:00:25 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,12 +116,17 @@ void	compute_img(GameEngine *ge, t_img *img)
 	{
 		tex_x = compute_dda(&dda, img_x, ge);
 		img_vertline_put(img_x, &dda, ge,
-			&ge->smap.textures[ge->smap.p_map[dda.map_y * ge->smap.w + dda.map_x] - 1],
+			&ge->smap.textures[get_wall_orientation(&dda)],
 			tex_x, img);
 		img_x++;
 	}
 }
 
+/* use to display different blocks -> cf lodev
+**	img_vertline_put(img_x, &dda, ge,
+**			&ge->smap.textures[ge->smap.p_map[dda.map_y * ge->smap.w + dda.map_x] - 1],
+**			tex_x, img);
+*/
 int		draw(void *param)
 {
 	GameEngine	*ge;
