@@ -1,8 +1,9 @@
 - verifier si pas derreur dans la map
 - verifier les leaks
+- improve perfs
 - ajouter un sprite
-- resize de la fenetre, femeture, minimisation, passage dune fenetre a une autre
-- touches aswd, esc
+- femeture
+- touches esc
 - taille fenetre max
 - option -save
 - norme

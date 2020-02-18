@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:42:09 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/18 14:22:16 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/18 15:19:15 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,13 +137,6 @@ int		draw(void *param)
 	mlx_put_image_to_window(ge->mlx_ptr, ge->mlx_win, img.p_img, 0, 0);
 	mlx_string_put(ge->mlx_ptr, ge->mlx_win, 0, 20,
 		0x00FFFFFF, ft_strjoin("FPS", ft_itoa(compute_fps())));
+	mlx_destroy_image(ge->mlx_ptr,img.p_img);
 	return (0);
 }
-
-/*
-** 	test_display(ge, &img);
-** 	mlx_put_image_to_window(ge->mlx_ptr, ge->mlx_win, img.p_img, 0, 0);
-** 		mlx_string_put(ge->mlx_ptr, ge->mlx_win, 0, 20,
-**		0x00FFFFFF, ft_strjoin("FPS", ft_itoa(compute_FPS())));
-** 	return 0;
-*/

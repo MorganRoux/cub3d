@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:03:54 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/18 15:00:14 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/18 15:16:00 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,5 @@ int		key_hook_release(int keycode, void *param)
 		ge->keys = ge->keys & ~ROT_L;
 	else if (keycode == KEY_RIGHT)
 		ge->keys = ge->keys & ~ROT_R;
-	main_hook(param);
 	return (0);
 }
