@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/18 12:17:11 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/18 15:00:42 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,8 @@ t_cardinal		get_wall_orientation(t_dda *dda);
 */
 void			move_front(t_game_engine *ge);
 void			move_back(t_game_engine *ge);
+void			move_left(t_game_engine *ge);
+void			move_right(t_game_engine *ge);
 void			rot_left(t_game_engine *ge);
 void			rot_right(t_game_engine *ge);
 int				key_hook(int keycode, void *param);
