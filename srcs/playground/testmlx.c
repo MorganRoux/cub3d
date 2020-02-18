@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 13:48:35 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/18 10:28:05 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/18 11:16:16 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		key_hook(int keycode,void *param)
 	return 1;
 }
 
-t_vect	intercept_x(GameEngine *ge)
+t_vect	intercept_x(t_game_engine *ge)
 {
 	double	dx;
 	double	dy;
@@ -58,7 +58,7 @@ t_vect	intercept_x(GameEngine *ge)
 	}
 
 }
-initGe(GameEngine *ge)
+initGe(t_game_engine *ge)
 {
 	ge->d_alpha = FOV / (SCREEN_WIDTH - 1);
 	ge->dir.x = 1;
@@ -66,7 +66,7 @@ initGe(GameEngine *ge)
 	ge->pl.pos.x =22;
 	ge->pl.pos.y = 12;
 }
-int		calc(void *mlx_ptr, void *mlx_win, GameEngine *ge)
+int		calc(void *mlx_ptr, void *mlx_win, t_game_engine *ge)
 {
 	int n;
 	initGe(ge);
@@ -94,7 +94,7 @@ int		main(void)
 {
 	void		*mlx_ptr;
 	void		*mlx_win;
-	GameEngine	ge;
+	t_game_engine	ge;
 
 	if ((mlx_ptr = mlx_init()) == NULL)
 		return (0);

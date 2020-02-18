@@ -1,22 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
+/*   Updated: 2020/02/18 11:19:09 by mroux            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <mlx.h>
-#include <math.h>
-#include <time.h>
-#include <stdio.h>
-#include <fcntl.h>
+#ifndef CUB3D_H
+# define CUB3D_H
+# include <mlx.h>
+# include <math.h>
+# include <time.h>
+# include <stdio.h>
+# include <fcntl.h>
+# include "libftprintf.h"
+# include "get_next_line.h"
+# include "keys.h"
+# define TEX_WIDTH 64
+# define TEX_HEIGHT 64
+# define BYTES_PER_PIXELS 3
+# define TEX_DIR "/Users/mroux/42Cursus/cub3d/repo/srcs/playground/"
+# define ERROR -1
+# define OK 0
 
-#include "libftprintf.h"
-#include "get_next_line.h"
-#include "keys.h"
-
-#define TEX_WIDTH 64
-#define TEX_HEIGHT 64
-#define BYTES_PER_PIXELS 3
-#define TEX_DIR "/Users/mroux/42Cursus/cub3d/repo/srcs/playground/"
-#define ERROR -1
-#define	OK 0
-
-typedef enum 
+typedef enum
 {
 	NO = 0,
 	SO = 1,
@@ -27,7 +38,7 @@ typedef enum
 /*
 ** 	Vector(2,1) : x, y
 */
-typedef struct	t_vect
+typedef struct	s_vect
 {
 	double x;
 	double y;
@@ -44,10 +55,10 @@ typedef struct	s_pxl_color
 **	Represent an img in mlx with extra properties
 **	p_imp : 			pointer to the mlx image
 **	data : 				ptr to the pixel data
-**	size_line : 		the number of bytes used to store 
+**	size_line : 		the number of bytes used to store
 **						one line of the image in memory
 **	bits_per_pixels :	the depth of the image
-**	path :				if provided, path on disk 
+**	path :				if provided, path on disk
 */
 typedef	struct	s_img
 {
@@ -62,12 +73,12 @@ typedef	struct	s_img
 }				t_img;
 
 /*
-**	Map properties 
+**	Map properties
 **	p_map : 	ptr to the map
 **	Textures : 	NO, SO, EA, WE
 ** 	colors : 	Floor, ceil
 */
-typedef struct	world_map
+typedef struct	s_world_map
 {
 	char	*p_map;
 	int		w;
@@ -75,12 +86,12 @@ typedef struct	world_map
 	t_img	textures[8];
 	t_color	color[2];
 	t_img	sprite;
-}				s_map;
+}				t_map;
 
-typedef struct	player
+typedef struct	s_layer
 {
 	t_vect	pos;
-}				s_player;
+}				t_player;
 
 /*
 **	Game Engine properties
@@ -89,30 +100,30 @@ typedef struct	player
 **	dir :		orientation of the player
 **	plane :		orientation of the camera plane
 */
-typedef struct	game_engine
+typedef struct	s_game_engine
 {
 	void		*mlx_ptr;
 	void		*mlx_win;
-	s_map		smap;
-	double		moveSpeed;
-	double		rotSpeed;
+	t_map		smap;
+	double		move_speed;
+	double		rot_speed;
 	t_vect		dir;
 	t_vect		plane;
-	s_player	pl;
+	t_player	pl;
 	int			screen_w;
 	int			screen_h;
-}				GameEngine;
+}				t_game_engine;
 
 /*
 **	Digital Differential Analysis algorithm
 **	draw_start/end:	position on the screen of the column to be drawn
 **	side_dist:	 	length of ray from current position to next x or y-side
-**	delta:			length of ray from one x or y-side to next x or y-side 	
+**	delta:			length of ray from one x or y-side to next x or y-side
 **	step:			what direction to step in x or y-direction (either +1 or -1)
-**	camera_x:		pos on the camera plane. used to build ray_dir	
-**	map:			which box of the map we're in	
+**	camera_x:		pos on the camera plane. used to build ray_dir
+**	map:			which box of the map we're in
 */
-typedef struct s_dda
+typedef struct	s_dda
 {
 	int			draw_start;
 	int			draw_end;
@@ -132,31 +143,43 @@ typedef struct s_dda
 	t_cardinal	card;
 }				t_dda;
 
-int		init_engine(GameEngine *ge);
+int				init_engine(t_game_engine *ge);
 
-void	init_dda(t_dda *dda, int img_x, GameEngine *ge);
-void	detect_collision(t_dda *dda, GameEngine *ge);
-int		compute_dda(t_dda *dda, int img_x, GameEngine *ge);
-t_cardinal	get_wall_orientation(t_dda *dda);
+/*
+**	dda : raytracing engine
+*/
+void			init_dda(t_dda *dda, int img_x, t_game_engine *ge);
+void			detect_collision(t_dda *dda, t_game_engine *ge);
+int				compute_dda(t_dda *dda, int img_x, t_game_engine *ge);
+t_cardinal		get_wall_orientation(t_dda *dda);
 
-void	move_front(GameEngine *ge);
-void	move_back(GameEngine *ge);
-void	rot_left(GameEngine *ge);
-void	rot_right(GameEngine *ge);
+/*
+**	Keyboards events
+*/
+void			move_front(t_game_engine *ge);
+void			move_back(t_game_engine *ge);
+void			rot_left(t_game_engine *ge);
+void			rot_right(t_game_engine *ge);
+int				key_hook(int keycode, void *param);
+int				main_hook(void *param);
 
-int		key_hook(int keycode,void *param);
-int		main_hook(void *param);
-
-int		compute_fps();
-int		img_vertline_put(int img_x, t_dda *dda, GameEngine *ge,
+/*
+**	display
+*/
+int				img_vertline_put(int img_x, t_dda *dda, t_game_engine *ge,
 						t_img *tex, int tex_x, t_img *img);
-int		draw(void *param);
+int				draw(void *param);
+int				compute_fps();
 
-int		load_cub_file(GameEngine *ge, char *path);
-int		load_map_dimensions(GameEngine *ge, char *line);
-int		load_colors(GameEngine *ge, char *line);
-int		load_sprite(GameEngine *ge, char *line);
-int		load_map(GameEngine *ge, int fd, char *line);
-int		load_textures(GameEngine *ge, char *line);
+/*
+**	loading cub file
+*/
+int				load_cub_file(t_game_engine *ge, char *path);
+int				load_map_dimensions(t_game_engine *ge, char *line);
+int				load_colors(t_game_engine *ge, char *line);
+int				load_sprite(t_game_engine *ge, char *line);
+int				load_map(t_game_engine *ge, int fd, char *line);
+int				load_textures(t_game_engine *ge, char *line);
+int				check_map(char *map);
 
-int check_map(char *map);
+#endif

@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-int	init_engine(GameEngine *ge)
+int	init_engine(t_game_engine *ge)
 {
 	ge->moveSpeed = 0.1;
 	ge->rotSpeed = 0.06;
@@ -13,7 +13,7 @@ int	init_engine(GameEngine *ge)
 	return (1);
 }
 
-void	load_tex(GameEngine *ge, int n)
+void	load_tex(t_game_engine *ge, int n)
 {
 	int		i;
 	t_img	*tex;
@@ -35,7 +35,7 @@ void	load_tex(GameEngine *ge, int n)
 	}
 }
 
-void	set_hooks(GameEngine *ge)
+void	set_hooks(t_game_engine *ge)
 {
 	mlx_loop_hook(ge->mlx_ptr, &main_hook, ge);
 	mlx_key_hook(ge->mlx_win, &key_hook, ge);
@@ -45,7 +45,7 @@ void	set_hooks(GameEngine *ge)
 
 int		main(int argc, char *argv[])
 {
-	GameEngine	ge;
+	t_game_engine	ge;
 	init_engine(&ge);
 	(void) argv;
 

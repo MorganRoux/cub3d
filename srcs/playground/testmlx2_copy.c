@@ -109,11 +109,11 @@ int		extract_tex_vertline(int *tex, int *lb, int n)
 
 int		draw(void *param)
 {
-	GameEngine	*ge;
+	t_game_engine	*ge;
 	void		*img;
 	char		*img_data;
 
-	ge = (GameEngine *)param;
+	ge = (t_game_engine *)param;
 
 	// double time = 0; //time of current frame
 	// double oldTime = 0; //time of previous frame
@@ -254,9 +254,9 @@ int		draw(void *param)
 
 int		key_hook(int keycode,void *param)
 {
-	GameEngine *ge;
+	t_game_engine *ge;
 
-	ge = (GameEngine *)param;
+	ge = (t_game_engine *)param;
 	if(keycode == KEY_UP)
 	{
 		if(worldMap[(int)(ge->pl.pos.x + ge->dir.x * ge->moveSpeed)][(int)(ge->pl.pos.y)] == 0) 
@@ -298,7 +298,7 @@ int		key_hook(int keycode,void *param)
 
 int 	main()
 {
-	GameEngine ge;
+	t_game_engine ge;
 
 	ge.moveSpeed = 0.1; //the constant value is in squares/second
 	ge.rotSpeed = 0.06; //the constant value is in radians/second

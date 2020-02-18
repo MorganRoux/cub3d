@@ -6,13 +6,13 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:04:58 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/18 10:59:57 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/18 11:16:16 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_dda(t_dda *dda, int img_x, GameEngine *ge)
+void	init_dda(t_dda *dda, int img_x, t_game_engine *ge)
 {
 	dda->camera_x = 2 * img_x / (double)ge->screen_w - 1;
 	dda->ray_dir_x = ge->dir.x + ge->plane.x * dda->camera_x;
@@ -51,7 +51,7 @@ t_cardinal	get_wall_orientation(t_dda *dda)
 	
 }
 
-void		detect_collision(t_dda *dda, GameEngine *ge)
+void		detect_collision(t_dda *dda, t_game_engine *ge)
 {
 	int		hit;
 	char	*world_map;
@@ -85,7 +85,7 @@ void		detect_collision(t_dda *dda, GameEngine *ge)
 **	perp_dist:	corrected dist to the wall by ray_dir (fisheye removed)
 **	
 */
-int		get_line_height(t_dda *dda, GameEngine *ge)
+int		get_line_height(t_dda *dda, t_game_engine *ge)
 {
 	int		tex_x;
 	double	perp_dist;
@@ -111,7 +111,7 @@ int		get_line_height(t_dda *dda, GameEngine *ge)
 	return (tex_x);
 }
 
-int		compute_dda(t_dda *dda, int img_x, GameEngine *ge)
+int		compute_dda(t_dda *dda, int img_x, t_game_engine *ge)
 {
 	int tex_x;
 

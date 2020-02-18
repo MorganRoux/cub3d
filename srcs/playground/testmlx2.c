@@ -30,10 +30,10 @@ typedef struct s_dda
 
 int		draw(void *param)
 {
-	GameEngine	*ge;
+	t_game_engine	*ge;
 	t_img		img;	
 	t_dda		dda;
-	ge = (GameEngine *)param;
+	ge = (t_game_engine *)param;
 
 	//mlx_clear_window ( mlx_ptr, mlx_win );
 	img.p_img = mlx_new_image (mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT );

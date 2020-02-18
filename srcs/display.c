@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:42:09 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/18 11:00:25 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/18 11:16:16 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	copy_pxl(char *dest, char *source, int bpp)
 		dest[i] = source[i];
 }
 
-void	copy_ceil(int *img_y, GameEngine *ge, int *img_n, t_img *img, t_dda *dda)
+void	copy_ceil(int *img_y, t_game_engine *ge, int *img_n, t_img *img, t_dda *dda)
 {
 	while (*img_y < dda->draw_start)
 	{
@@ -63,7 +63,7 @@ void	copy_ceil(int *img_y, GameEngine *ge, int *img_n, t_img *img, t_dda *dda)
 	}
 }
 
-void copy_floor(int *img_y, GameEngine *ge, int *img_n, t_img *img)
+void copy_floor(int *img_y, t_game_engine *ge, int *img_n, t_img *img)
 {
 	while (*img_y < ge->screen_h)
 	{
@@ -76,7 +76,7 @@ void copy_floor(int *img_y, GameEngine *ge, int *img_n, t_img *img)
 	}
 }
 
-int		img_vertline_put(int img_x, t_dda *dda, GameEngine *ge,
+int		img_vertline_put(int img_x, t_dda *dda, t_game_engine *ge,
 						t_img *tex, int tex_x, t_img *img)
 {
 	double	tex_y;
@@ -102,7 +102,7 @@ int		img_vertline_put(int img_x, t_dda *dda, GameEngine *ge,
 	return (0);
 }
 
-void	compute_img(GameEngine *ge, t_img *img)
+void	compute_img(t_game_engine *ge, t_img *img)
 {
 	t_dda	dda;
 	int		tex_x;
@@ -129,10 +129,10 @@ void	compute_img(GameEngine *ge, t_img *img)
 */
 int		draw(void *param)
 {
-	GameEngine	*ge;
+	t_game_engine	*ge;
 	t_img		img;
 
-	ge = (GameEngine *)param;
+	ge = (t_game_engine *)param;
 	compute_img(ge, &img);
 	mlx_put_image_to_window(ge->mlx_ptr, ge->mlx_win, img.p_img, 0, 0);
 	mlx_string_put(ge->mlx_ptr, ge->mlx_win, 0, 20,

@@ -6,12 +6,12 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 11:02:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/18 10:39:49 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/18 11:16:16 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-int		load_map_dimensions(GameEngine *ge, char *line)
+int		load_map_dimensions(t_game_engine *ge, char *line)
 {
 	char	**param;
 
@@ -23,7 +23,7 @@ int		load_map_dimensions(GameEngine *ge, char *line)
 	return (OK);
 }
 
-int		load_colors(GameEngine *ge, char *line)
+int		load_colors(t_game_engine *ge, char *line)
 {
 	char	**param;
 	int		n;
@@ -38,7 +38,7 @@ int		load_colors(GameEngine *ge, char *line)
 	return (OK);
 }
 
-int		load_sprite(GameEngine *ge, char *line)
+int		load_sprite(t_game_engine *ge, char *line)
 {
 	t_img	*sprite;
 	char	**param;
@@ -79,7 +79,7 @@ void	*ft_realloc(void *p, size_t l, size_t newsize)
 	return ((void *)ret);
 }
 
-int		load_line(GameEngine *ge, char *line, int *n)
+int		load_line(t_game_engine *ge, char *line, int *n)
 {
 	if ((int)ft_strlen(line) != ge->smap.w)
 		return (ERROR);
@@ -97,7 +97,7 @@ int		check_map(char *map)
 	return (OK);
 }
 
-int		load_map(GameEngine *ge, int fd, char *firstline)
+int		load_map(t_game_engine *ge, int fd, char *firstline)
 {
 	int		n;
 	char	*line;
@@ -130,7 +130,7 @@ t_cardinal	get_tex_orientation(char l)
 	return (ERROR);
 }
 
-int			load_textures(GameEngine *ge, char *line)
+int			load_textures(t_game_engine *ge, char *line)
 {
 	t_img	*tex;
 	char	**param;

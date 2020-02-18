@@ -6,14 +6,14 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:14:07 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/15 14:42:44 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/18 11:16:16 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "get_next_line.h"
 
-void	check_line(GameEngine *ge, int fd, char *line)
+void	check_line(t_game_engine *ge, int fd, char *line)
 {
 	if (line[0] == 'R')
 		load_map_dimensions(ge, line);
@@ -30,7 +30,7 @@ void	check_line(GameEngine *ge, int fd, char *line)
 		load_textures(ge, line);
 }
 
-int		load_cub_file(GameEngine *ge, char *path)
+int		load_cub_file(t_game_engine *ge, char *path)
 {
 	int		fd;
 	char	*line;

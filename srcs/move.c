@@ -6,13 +6,13 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:42:58 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/15 19:24:38 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/18 11:16:16 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	move_front(GameEngine *ge)
+void	move_front(t_game_engine *ge)
 {
 	char	*world_map;
 	double	new_x;
@@ -27,7 +27,7 @@ void	move_front(GameEngine *ge)
 		ge->pl.pos.y = new_y;
 }
 
-void	move_back(GameEngine *ge)
+void	move_back(t_game_engine *ge)
 {
 	char	*world_map;
 	double	new_x;
@@ -42,7 +42,7 @@ void	move_back(GameEngine *ge)
 		ge->pl.pos.y = new_y;
 }
 
-void	rot_left(GameEngine *ge)
+void	rot_left(t_game_engine *ge)
 {
 	double olddir_x;
 	double oldplane_x;
@@ -57,7 +57,7 @@ void	rot_left(GameEngine *ge)
 					ge->plane.y * cos(ge->rotSpeed);
 }
 
-void	rot_right(GameEngine *ge)
+void	rot_right(t_game_engine *ge)
 {
 	double olddir_x;
 	double oldplane_x;
