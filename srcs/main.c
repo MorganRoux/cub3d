@@ -2,8 +2,8 @@
 
 int	init_engine(t_game_engine *ge)
 {
-	ge->moveSpeed = 0.1;
-	ge->rotSpeed = 0.06;
+	ge->move_speed = 0.1;
+	ge->rot_speed = 0.06;
 	ge->pl.pos.x = 2;
 	ge->pl.pos.y = 2;
 	ge->dir.x = -1;
