@@ -1,9 +1,6 @@
 - verifier si pas derreur dans la map
 - verifier les leaks
-- improve perfs
 - ajouter un sprite
-- femeture
-- touches esc
 - taille fenetre max
 - option -save
 - norme
