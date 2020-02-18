@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:03:54 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/18 15:35:08 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/18 15:40:17 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		key_hook_press(int keycode, void *param)
 	else if (keycode == KEY_RIGHT)
 		ge->keys = ge->keys | ROT_R;
 	else if (keycode == KEY_ESCAPE)
-		exit_game(0, ge);
+		exit_hook(ge);
 	return (0);
 }
 

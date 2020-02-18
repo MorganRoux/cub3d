@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/18 15:34:57 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/18 15:40:10 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ int				key_hook(int keycode, void *param);
 int				key_hook_press(int keycode, void *param);
 int				key_hook_release(int keycode, void *param);
 int				main_hook(void *param);
+int				exit_hook(t_game_engine *ge);
 
 /*
 **	display
@@ -197,7 +198,5 @@ int				load_sprite(t_game_engine *ge, char *line);
 int				load_map(t_game_engine *ge, int fd, char *line);
 int				load_textures(t_game_engine *ge, char *line);
 int				check_map(char *map);
-
-void			exit_game(int code, t_game_engine *ge);
 
 #endif

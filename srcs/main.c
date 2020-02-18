@@ -14,10 +14,11 @@ int		init_engine(t_game_engine *ge)
 	return (1);
 }
 
-void	exit_game(int code, t_game_engine *ge)
+int		exit_hook(t_game_engine *ge)
 {
 	mlx_destroy_window(ge->mlx_ptr, ge->mlx_win);
-	exit(code);
+	exit(0);
+	return (0);
 }
 void	load_tex(t_game_engine *ge, int n)
 {
@@ -45,6 +46,7 @@ void	set_hooks(t_game_engine *ge)
 {
 	mlx_loop_hook(ge->mlx_ptr, &main_hook, ge);
 	mlx_hook(ge->mlx_win, X11_KEY_PRESS, X11_KEY_PRESS_M, &key_hook_press, ge);
+	mlx_hook(ge->mlx_win, 17, 0 , &exit_hook, ge);
 	mlx_hook(ge->mlx_win, X11_KEY_RELEASE, X11_KEY_RELEASE_M, &key_hook_release, ge);
 }
 
