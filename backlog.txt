@@ -1,6 +1,5 @@
 - verifier si pas derreur dans la map
 - verifier les leaks
 - ajouter un sprite
-- taille fenetre max
 - option -save
 - norme

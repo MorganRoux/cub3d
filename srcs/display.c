@@ -22,7 +22,7 @@ int		compute_fps(void)
 	end = clock();
 	cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
 	fps = 1.0 / cpu_time_used;
-	start = clock();
+	start = end;
 	return (fps);
 }
 
@@ -135,8 +135,8 @@ int		draw(void *param)
 	ge = (t_game_engine *)param;
 	compute_img(ge, &img);
 	mlx_put_image_to_window(ge->mlx_ptr, ge->mlx_win, img.p_img, 0, 0);
-	mlx_string_put(ge->mlx_ptr, ge->mlx_win, 0, 20,
-		0x00FFFFFF, ft_strjoin("FPS", ft_itoa(compute_fps())));
+	// mlx_string_put(ge->mlx_ptr, ge->mlx_win, 0, 20,
+	// 	0x00FFFFFF, ft_strjoin("FPS", ft_itoa(compute_fps())));
 	mlx_destroy_image(ge->mlx_ptr,img.p_img);
 	return (0);
 }

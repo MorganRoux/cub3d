@@ -14,14 +14,18 @@
 int		load_map_dimensions(t_game_engine *ge, char *line)
 {
 	char	**param;
+	int		i;
 
 	param = ft_split(line, ' ');
 	ge->screen_w = ft_atoi(param[1]);
 	ge->screen_w =  ge->screen_w > 2560 ? 2560 : ge->screen_w;
 	ge->screen_h = ft_atoi(param[2]);
 	ge->screen_h =  ge->screen_h > 1440 ? 1440 : ge->screen_h;
-	while (*param != 0)
-		free(*param++);
+	i = 0;
+	while (param[i] != 0)
+		free(param[i++]);
+	free(param);
+	
 	return (OK);
 }
 
@@ -29,14 +33,17 @@ int		load_colors(t_game_engine *ge, char *line)
 {
 	char	**param;
 	int		n;
+	int		i;
 
 	param = ft_split(&(line[2]), ',');
 	n = (line[0] == 'F') ? 0 : 1;
 	ge->smap.color[n].r = ft_atoi(param[0]);
 	ge->smap.color[n].v = ft_atoi(param[1]);
 	ge->smap.color[n].b = ft_atoi(param[2]);
-	while (*param != 0)
-		free(*param++);
+	i = 0;
+	while (param[i] != 0)
+		free(param[i++]);
+	free(param);
 	return (OK);
 }
 
@@ -44,6 +51,7 @@ int		load_sprite(t_game_engine *ge, char *line)
 {
 	t_img	*sprite;
 	char	**param;
+	int		i;
 
 	param = ft_split(line, ' ');
 	sprite = &ge->smap.sprite;
@@ -57,8 +65,10 @@ int		load_sprite(t_game_engine *ge, char *line)
 	sprite->data = mlx_get_data_addr(
 				sprite->p_img, &sprite->bits_per_pxl,
 				&sprite->size_line, &sprite->endian);
-	while (*param != 0)
-		free(*param++);
+	i = 0;
+	while (param[i] != 0)
+		free(param[i++]);
+	free(param);
 	return (OK);
 }
 
@@ -136,6 +146,7 @@ int			load_textures(t_game_engine *ge, char *line)
 {
 	t_img	*tex;
 	char	**param;
+	int		i;
 
 	param = ft_split(line, ' ');
 	tex = &ge->smap.textures[get_tex_orientation(line[0])];
@@ -149,7 +160,9 @@ int			load_textures(t_game_engine *ge, char *line)
 	tex->data = mlx_get_data_addr(
 				tex->p_img, &tex->bits_per_pxl,
 				&tex->size_line, &tex->endian);
-	while (*param != 0)
-		free(*param++);
+	i = 0;
+	while (param[i] != 0)
+		free(param[i++]);
+	free(param);
 	return (OK);
 }

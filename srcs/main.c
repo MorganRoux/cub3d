@@ -53,9 +53,9 @@ void	set_hooks(t_game_engine *ge)
 int		main(int argc, char *argv[])
 {
 	t_game_engine	ge;
+	
 	init_engine(&ge);
-	(void) argv;
-
+	
 	if ((ge.mlx_ptr = mlx_init()) == NULL)
 		return (0);
 	if (argc != 2)
@@ -65,6 +65,7 @@ int		main(int argc, char *argv[])
 	if ((ge.mlx_win = mlx_new_window(ge.mlx_ptr, ge.screen_w,
 									ge.screen_h, "Raycaster")) == NULL)
 		return (0);
+	
 	set_hooks(&ge);
 	mlx_loop(ge.mlx_ptr);
 }
