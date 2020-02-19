@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:04:58 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/18 11:16:16 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/19 16:29:13 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void		detect_collision(t_dda *dda, t_game_engine *ge)
 	int		hit;
 	char	*world_map;
 
-	world_map = ge->smap.p_map;
+	world_map = ge->map.p_map;
 	hit = 0;
 	while (hit == 0)
 	{
@@ -72,7 +72,7 @@ void		detect_collision(t_dda *dda, t_game_engine *ge)
 			dda->map_y += dda->step_y;
 			dda->side = 1;
 		}
-		if (world_map[dda->map_y * ge->smap.w + dda->map_x] > 0)
+		if (world_map[dda->map_y * ge->map.w + dda->map_x] > 0)
 			hit = 1;
 	}
 	get_wall_orientation(dda);

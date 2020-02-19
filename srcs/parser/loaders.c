@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 11:02:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/18 15:51:14 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/19 16:29:13 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int		load_colors(t_game_engine *ge, char *line)
 
 	param = ft_split(&(line[2]), ',');
 	n = (line[0] == 'F') ? 0 : 1;
-	ge->smap.color[n].r = ft_atoi(param[0]);
-	ge->smap.color[n].v = ft_atoi(param[1]);
-	ge->smap.color[n].b = ft_atoi(param[2]);
+	ge->map.color[n].r = ft_atoi(param[0]);
+	ge->map.color[n].v = ft_atoi(param[1]);
+	ge->map.color[n].b = ft_atoi(param[2]);
 	i = 0;
 	while (param[i] != 0)
 		free(param[i++]);
@@ -54,7 +54,7 @@ int		load_sprite(t_game_engine *ge, char *line)
 	int		i;
 
 	param = ft_split(line, ' ');
-	sprite = &ge->smap.sprite;
+	sprite = &ge->map.sprite;
 	sprite->path = param[1];
 	sprite->p_img = mlx_xpm_file_to_image(
 					ge->mlx_ptr,
@@ -78,9 +78,9 @@ int		load_map(t_game_engine *ge, int fd, char *firstline)
 	char	*line;
 
 	n = 0;
-	ge->smap.w = ft_strlen(firstline);
-	ge->smap.h = 0;
-	ge->smap.p_map = NULL;
+	ge->map.w = ft_strlen(firstline);
+	ge->map.h = 0;
+	ge->map.p_map = NULL;
 	load_line(ge, firstline, &n);
 	while(get_next_line(fd, &line))
 	{
@@ -89,7 +89,7 @@ int		load_map(t_game_engine *ge, int fd, char *firstline)
 	}
 	load_line(ge, line, &n);
 	free(line);
-	check_map(ge->smap.p_map);
+	check_map(ge->map.p_map);
 	return (OK);
 }
 
@@ -100,7 +100,7 @@ int			load_textures(t_game_engine *ge, char *line)
 	int		i;
 
 	param = ft_split(line, ' ');
-	tex = &ge->smap.textures[get_tex_orientation(line[0])];
+	tex = &ge->map.textures[get_tex_orientation(line[0])];
 	tex->path = param[1];
 	tex->p_img = mlx_xpm_file_to_image(
 					ge->mlx_ptr,

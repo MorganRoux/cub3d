@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/19 16:27:44 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/19 16:29:13 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ typedef struct	s_game_engine
 	void		*mlx_ptr;
 	void		*mlx_win;
 	t_keypress	keys;
-	t_map		smap;
+	t_map		map;
 	double		move_speed;
 	double		rot_speed;
 	t_vect		dir;

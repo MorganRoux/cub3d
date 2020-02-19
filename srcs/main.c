@@ -30,7 +30,7 @@ void	load_tex(t_game_engine *ge, int n)
 	i = 0;
 	while (i < n)
 	{
-		tex = &ge->smap.textures[i];
+		tex = &ge->map.textures[i];
 		tex->p_img = mlx_xpm_file_to_image(
 						ge->mlx_ptr,
 						ft_strjoin(TEX_DIR,tex_path[i]),

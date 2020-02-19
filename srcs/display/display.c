@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:42:09 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/19 16:23:30 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/19 16:29:13 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	compute_img(t_game_engine *ge, t_img *img)
 	{
 		tex_x = compute_dda(&dda, img_x, ge);
 		img_vertline_put(img_x, &dda, ge,
-			&ge->smap.textures[get_wall_orientation(&dda)],
+			&ge->map.textures[get_wall_orientation(&dda)],
 			tex_x, img);
 		img_x++;
 	}
