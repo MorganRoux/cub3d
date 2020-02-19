@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/19 17:27:31 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/19 17:29:20 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,7 @@ int				exit_hook(t_game_engine *ge);
 **	display
 */
 int				img_vertline_put(t_dda *dda, t_game_engine *ge,
-						t_img *tex, int tex_x, t_img *img);
+						t_img *tex, t_img *img);
 int				draw(void *param);
 int				compute_fps();
 void			copy_pxl(char *dest, char *source, int bpp);
