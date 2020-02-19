@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/19 16:29:13 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/19 17:22:29 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,10 @@ typedef struct	s_dda
 	int			line_height;
 	int			side;
 	t_cardinal	card;
+	int			img_x;
+	int			img_y;
+	int			tex_x;
+	int			tex_y;
 }				t_dda;
 
 int				init_engine(t_game_engine *ge);
@@ -160,9 +164,9 @@ int				init_engine(t_game_engine *ge);
 /*
 **	dda : raytracing engine
 */
-void			init_dda(t_dda *dda, int img_x, t_game_engine *ge);
+void			init_dda(t_dda *dda, t_game_engine *ge);
 void			detect_collision(t_dda *dda, t_game_engine *ge);
-int				compute_dda(t_dda *dda, int img_x, t_game_engine *ge);
+int				compute_dda(t_dda *dda, t_game_engine *ge);
 t_cardinal		get_wall_orientation(t_dda *dda);
 
 /*
@@ -183,7 +187,7 @@ int				exit_hook(t_game_engine *ge);
 /*
 **	display
 */
-int				img_vertline_put(int img_x, t_dda *dda, t_game_engine *ge,
+int				img_vertline_put(t_dda *dda, t_game_engine *ge,
 						t_img *tex, int tex_x, t_img *img);
 int				draw(void *param);
 int				compute_fps();

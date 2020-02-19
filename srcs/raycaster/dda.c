@@ -6,15 +6,15 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:04:58 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/19 16:29:13 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/19 17:20:38 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_dda(t_dda *dda, int img_x, t_game_engine *ge)
+void	init_dda(t_dda *dda, t_game_engine *ge)
 {
-	dda->camera_x = 2 * img_x / (double)ge->screen_w - 1;
+	dda->camera_x = 2 * dda->img_x / (double)ge->screen_w - 1;
 	dda->ray_dir_x = ge->dir.x + ge->plane.x * dda->camera_x;
 	dda->ray_dir_y = ge->dir.y + ge->plane.y * dda->camera_x;
 	dda->map_x = (int)(ge->pl.pos.x);
@@ -111,11 +111,11 @@ int		get_line_height(t_dda *dda, t_game_engine *ge)
 	return (tex_x);
 }
 
-int		compute_dda(t_dda *dda, int img_x, t_game_engine *ge)
+int		compute_dda(t_dda *dda, t_game_engine *ge)
 {
 	int tex_x;
 
-	init_dda(dda, img_x, ge);
+	init_dda(dda, ge);
 	detect_collision(dda, ge);
 	tex_x = get_line_height(dda, ge);
 	return (tex_x);
