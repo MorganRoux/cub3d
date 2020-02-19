@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 16:19:57 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/19 16:29:13 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/19 17:24:44 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,28 @@ void	copy_pxl(char *dest, char *source, int bpp)
 		dest[i] = source[i];
 }
 
-void	copy_ceil(int *img_y, t_game_engine *ge, int *img_n, t_img *img, t_dda *dda)
+void	copy_ceil(t_game_engine *ge, int *img_n, t_img *img, t_dda *dda)
 {
-	while (*img_y < dda->draw_start)
+	while (dda->img_y < dda->draw_start)
 	{
 		img->data[*img_n] = ge->map.color[0].r;
 		img->data[*img_n + 1] = ge->map.color[0].v;
 		img->data[*img_n + 2] = ge->map.color[0].b;
 		img->data[*img_n + 3] = 0x00;
-		(*img_y)++;
+		dda->img_y++;
 		*img_n += img->size_line;
 	}
 }
 
-void	copy_floor(int *img_y, t_game_engine *ge, int *img_n, t_img *img)
+void	copy_floor(t_game_engine *ge, int *img_n, t_img *img, t_dda *dda)
 {
-	while (*img_y < ge->screen_h)
+	while (dda->img_y < ge->screen_h)
 	{
 		img->data[*img_n] = ge->map.color[1].r;
 		img->data[*img_n + 1] = ge->map.color[1].v;
 		img->data[*img_n + 2] = ge->map.color[1].b;
 		img->data[*img_n + 3] = 0x00;
-		(*img_y)++;
+		dda->img_y++;
 		*img_n += img->size_line;
 	}
 }

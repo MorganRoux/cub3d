@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:42:09 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/19 17:22:14 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/19 17:25:59 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,26 @@ int		img_vertline_put(t_dda *dda, t_game_engine *ge,
 						t_img *tex, int tex_x, t_img *img)
 {
 	double	tex_y;
-	int		img_y;
 	int		tex_n;
 	int		img_n;
 
 	tex_y = (dda->draw_start - ge->screen_h / 2 +
 			(double)dda->line_height / 2) *
 			(double)TEX_HEIGHT / dda->line_height;
-	img_y = 0;
-	img_n = img_y * img->size_line + dda->img_x * (img->bits_per_pxl / 8);
-	copy_ceil(&img_y, ge, &img_n, img, dda);
-	while (img_y < dda->draw_end)
+	dda->img_y = 0;
+	img_n = dda->img_y * img->size_line + dda->img_x * (img->bits_per_pxl / 8);
+	copy_ceil(ge, &img_n, img, dda);
+	while (dda->img_y < dda->draw_end)
 	{
 		tex_n = ((int)tex_y & (TEX_HEIGHT - 1)) * tex->size_line
 				+ tex_x * (img->bits_per_pxl / 8);
 		copy_pxl(&(img->data[img_n]), &(tex->data[tex_n]),
 				img->bits_per_pxl / 8);
 		tex_y += (double)TEX_HEIGHT / (double)(dda->line_height);
-		img_y++;
+		dda->img_y++;
 		img_n += img->size_line;
 	}
-	copy_floor(&img_y, ge, &img_n, img);
+	copy_floor(ge, &img_n, img, dda);
 	return (0);
 }
 

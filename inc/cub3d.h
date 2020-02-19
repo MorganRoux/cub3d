@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/19 17:22:29 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/19 17:25:01 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,8 +192,8 @@ int				img_vertline_put(t_dda *dda, t_game_engine *ge,
 int				draw(void *param);
 int				compute_fps();
 void			copy_pxl(char *dest, char *source, int bpp);
-void			copy_ceil(int *img_y, t_game_engine *ge, int *img_n, t_img *img, t_dda *dda);
-void			copy_floor(int *img_y, t_game_engine *ge, int *img_n, t_img *img);
+void			copy_ceil(t_game_engine *ge, int *img_n, t_img *img, t_dda *dda);
+void			copy_floor(t_game_engine *ge, int *img_n, t_img *img, t_dda *dda);
 
 /*
 **	loading cub file
