@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/19 17:25:01 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/19 17:27:31 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ typedef struct	s_dda
 	int			img_x;
 	int			img_y;
 	int			tex_x;
-	int			tex_y;
+	double		tex_y;
 }				t_dda;
 
 int				init_engine(t_game_engine *ge);
