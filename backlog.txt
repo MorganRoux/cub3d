@@ -1,5 +1,6 @@
 - verifier si pas derreur dans la map
-- verifier les leaks
 - ajouter un sprite
 - option -save
 - norme
+- check collision lors de move_left move_right
+- gérer orientation de départ pour le joueur

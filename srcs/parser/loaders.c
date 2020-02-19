@@ -72,43 +72,6 @@ int		load_sprite(t_game_engine *ge, char *line)
 	return (OK);
 }
 
-void	*ft_realloc(void *p, size_t l, size_t newsize)
-{
-	char	*ret;
-	char	*ptr;
-	size_t	n;
-
-	n = -1;
-	ptr = p;
-	if (!(ret = (char *)malloc(newsize)))
-		return (NULL);
-	while (++n < l)
-		ret[n] = ptr[n];
-	while (++n < newsize)
-		ret[n] = 0;
-	if (p != NULL)
-		free(p);
-	return ((void *)ret);
-}
-
-int		load_line(t_game_engine *ge, char *line, int *n)
-{
-	if ((int)ft_strlen(line) != ge->smap.w)
-		return (ERROR);
-	ge->smap.h++;
-	if (!(ge->smap.p_map = ft_realloc(ge->smap.p_map, *n, *n + ge->smap.w)))
-		return ERROR;
-	while(*line != 0)
-		ge->smap.p_map[(*n)++]= *line++ - '0';
-	return (OK);
-}
-
-int		check_map(char *map)
-{
-	(void)map;
-	return (OK);
-}
-
 int		load_map(t_game_engine *ge, int fd, char *firstline)
 {
 	int		n;
@@ -128,18 +91,6 @@ int		load_map(t_game_engine *ge, int fd, char *firstline)
 	free(line);
 	check_map(ge->smap.p_map);
 	return (OK);
-}
-t_cardinal	get_tex_orientation(char l)
-{
-	if (l == 'N')
-		return (NO);
-	if (l == 'S')
-		return (SO);
-	if (l == 'E')
-		return (EA);
-	if (l == 'W')
-		return (WE);
-	return (ERROR);
 }
 
 int			load_textures(t_game_engine *ge, char *line)
