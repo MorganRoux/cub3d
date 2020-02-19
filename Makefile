@@ -7,12 +7,15 @@ MLX			=	$(MLX_DIR)/libmlx.a
 LIBS		=	$(LIBFT) $(MLX)
 
 SRCS		=	srcs/main.c \
-				srcs/display.c \
-				srcs/hooks.c \
-				srcs/move.c \
-				srcs/dda.c \
-				srcs/cub_file.c \
-				srcs/loaders.c \
+				srcs/display/display.c \
+				srcs/hooks/hooks.c \
+				srcs/hooks/move.c \
+				srcs/hooks/rot.c \
+				srcs/raycaster/dda.c \
+				srcs/parser/cub_file.c \
+				srcs/parser/loaders.c \
+				srcs/parser/check_map.c \
+				srcs/parser/utils_parser.c \
 				srcs/gnl/get_next_line.c \
 				srcs/gnl/get_next_line_utils.c
 

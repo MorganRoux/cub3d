@@ -1,9 +1,9 @@
 R 1920 1080
-NO ./srcs/playground/bluestone.xpm
-SO ./srcs/playground/greystone.xpm
-WE ./srcs/playground/redbrick.xpm
-EA ./srcs/playground/mossy.xpm
-S ./srcs/playground/redbrick.xpm
+NO ./pics/bluestone.xpm
+SO ./pics/greystone.xpm
+WE ./pics/redbrick.xpm
+EA ./pics/mossy.xpm
+S ./pics/redbrick.xpm
 F 100,100,100
 C 2,100,255
 11111111111111111111111111111
