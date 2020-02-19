@@ -3,7 +3,7 @@ NO ./res/bluestone.xpm
 SO ./res/greystone.xpm
 WE ./res/redbrick.xpm
 EA ./res/mossy.xpm
-S ./res/redbrick.xpm
+S ./res/barrel.xpm
 F 100,100,100
 C 2,100,255
 11111111111111111111111111111
