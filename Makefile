@@ -8,6 +8,8 @@ LIBS		=	$(LIBFT) $(MLX)
 
 SRCS		=	srcs/main.c \
 				srcs/display/display.c \
+				srcs/display/compute_fps.c \
+				srcs/display/copy.c \
 				srcs/hooks/hooks.c \
 				srcs/hooks/move.c \
 				srcs/hooks/rot.c \
