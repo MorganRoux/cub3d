@@ -1,9 +1,9 @@
 R 1920 1080
-NO ./pics/bluestone.xpm
-SO ./pics/greystone.xpm
-WE ./pics/redbrick.xpm
-EA ./pics/mossy.xpm
-S ./pics/redbrick.xpm
+NO ./res/bluestone.xpm
+SO ./res/greystone.xpm
+WE ./res/redbrick.xpm
+EA ./res/mossy.xpm
+S ./res/redbrick.xpm
 F 100,100,100
 C 2,100,255
 11111111111111111111111111111
