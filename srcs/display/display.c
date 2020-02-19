@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:42:09 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/19 17:29:46 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/19 17:30:37 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		img_vertline_put(t_dda *dda, t_game_engine *ge,
 void	compute_img(t_game_engine *ge, t_img *img)
 {
 	t_dda	dda;
-	
+
 	dda.img_x = 0;
 	img->p_img = mlx_new_image(ge->mlx_ptr, ge->screen_w, ge->screen_h);
 	img->data = mlx_get_data_addr(img->p_img, &img->bits_per_pxl,

@@ -6,11 +6,12 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 11:02:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/19 16:29:13 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/19 17:42:41 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
 int		load_map_dimensions(t_game_engine *ge, char *line)
 {
 	char	**param;
@@ -18,14 +19,13 @@ int		load_map_dimensions(t_game_engine *ge, char *line)
 
 	param = ft_split(line, ' ');
 	ge->screen_w = ft_atoi(param[1]);
-	ge->screen_w =  ge->screen_w > 2560 ? 2560 : ge->screen_w;
+	ge->screen_w = ge->screen_w > 2560 ? 2560 : ge->screen_w;
 	ge->screen_h = ft_atoi(param[2]);
-	ge->screen_h =  ge->screen_h > 1440 ? 1440 : ge->screen_h;
+	ge->screen_h = ge->screen_h > 1440 ? 1440 : ge->screen_h;
 	i = 0;
 	while (param[i] != 0)
 		free(param[i++]);
 	free(param);
-	
 	return (OK);
 }
 
@@ -82,7 +82,7 @@ int		load_map(t_game_engine *ge, int fd, char *firstline)
 	ge->map.h = 0;
 	ge->map.p_map = NULL;
 	load_line(ge, firstline, &n);
-	while(get_next_line(fd, &line))
+	while (get_next_line(fd, &line))
 	{
 		load_line(ge, line, &n);
 		free(line);
@@ -93,7 +93,7 @@ int		load_map(t_game_engine *ge, int fd, char *firstline)
 	return (OK);
 }
 
-int			load_textures(t_game_engine *ge, char *line)
+int		load_textures(t_game_engine *ge, char *line)
 {
 	t_img	*tex;
 	char	**param;

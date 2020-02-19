@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_parser.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/19 17:40:47 by mroux             #+#    #+#             */
+/*   Updated: 2020/02/19 17:41:03 by mroux            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 t_cardinal	get_tex_orientation(char l)
@@ -13,19 +25,19 @@ t_cardinal	get_tex_orientation(char l)
 	return (ERROR);
 }
 
-int		load_line(t_game_engine *ge, char *line, int *n)
+int			load_line(t_game_engine *ge, char *line, int *n)
 {
 	if ((int)ft_strlen(line) != ge->map.w)
 		return (ERROR);
 	ge->map.h++;
 	if (!(ge->map.p_map = ft_realloc(ge->map.p_map, *n, *n + ge->map.w)))
-		return ERROR;
-	while(*line != 0)
-		ge->map.p_map[(*n)++]= *line++ - '0';
+		return (ERROR);
+	while (*line != 0)
+		ge->map.p_map[(*n)++] = *line++ - '0';
 	return (OK);
 }
 
-void	*ft_realloc(void *p, size_t l, size_t newsize)
+void		*ft_realloc(void *p, size_t l, size_t newsize)
 {
 	char	*ret;
 	char	*ptr;

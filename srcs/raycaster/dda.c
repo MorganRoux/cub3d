@@ -6,13 +6,13 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:04:58 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/19 17:20:38 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/19 17:36:19 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_dda(t_dda *dda, t_game_engine *ge)
+void		init_dda(t_dda *dda, t_game_engine *ge)
 {
 	dda->camera_x = 2 * dda->img_x / (double)ge->screen_w - 1;
 	dda->ray_dir_x = ge->dir.x + ge->plane.x * dda->camera_x;
@@ -33,7 +33,7 @@ void	init_dda(t_dda *dda, t_game_engine *ge)
 
 /*
 **	find_wall_orientation()
-**	find the texture to apply dependending on the cardinal 
+**	find the texture to apply dependending on the cardinal
 **	orientation
 **	y = -1 : point to North
 **	y = 1 ; point to South
@@ -42,13 +42,13 @@ void	init_dda(t_dda *dda, t_game_engine *ge)
 **	side = 0 : hit along x => E-W
 **	side = 1 : hit along y => S-N
 */
+
 t_cardinal	get_wall_orientation(t_dda *dda)
 {
 	if (dda->side == 0)
 		return ((dda->ray_dir_x >= 0) ? WE : EA);
 	else
 		return ((dda->ray_dir_y >= 0) ? SO : NO);
-	
 }
 
 void		detect_collision(t_dda *dda, t_game_engine *ge)
@@ -83,9 +83,9 @@ void		detect_collision(t_dda *dda, t_game_engine *ge)
 **	Compute height (in pxl) of the line to be drawn on screen
 **	return column of the texture to be printed
 **	perp_dist:	corrected dist to the wall by ray_dir (fisheye removed)
-**	
 */
-int		get_line_height(t_dda *dda, t_game_engine *ge)
+
+int			get_line_height(t_dda *dda, t_game_engine *ge)
 {
 	int		tex_x;
 	double	perp_dist;
@@ -111,7 +111,7 @@ int		get_line_height(t_dda *dda, t_game_engine *ge)
 	return (tex_x);
 }
 
-int		compute_dda(t_dda *dda, t_game_engine *ge)
+int			compute_dda(t_dda *dda, t_game_engine *ge)
 {
 	int tex_x;
 

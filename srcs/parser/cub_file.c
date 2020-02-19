@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:14:07 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/19 16:04:46 by mroux            ###   ########.fr       */
+/*   Updated: 2020/02/19 17:41:40 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,10 @@ int		load_cub_file(t_game_engine *ge, char *path)
 
 	if ((fd = open(path, O_RDONLY)) < 0)
 		return (0);
-	while(get_next_line(fd, &line))
+	while (get_next_line(fd, &line))
 	{
 		check_line(ge, fd, line);
 		free(line);
-
 	}
 	check_line(ge, fd, line);
 	free(line);
