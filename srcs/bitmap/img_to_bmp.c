@@ -18,48 +18,60 @@
 #include "cub3d.h"
 
 
-
-void	init_struct()
+void	init_struct(t_img *img, t_bfh *bfh, t_bih *bih)
 {
-
-}
-int		img_to_bmp(t_img *img, char *file_name)
-{
-	// create a file object that we will use to write our image
-	int						fl;
-	char					*pxl;
-	int						iy;
-	int						ix;
-	t_bfh	bfh;
-	t_bih 	bih;
-	// we want to know how many pixels to reserve
-	int image_size = img->w * img->h;
-	int file_size = 54 + 3 * image_size;
-
 	//int ppm = 300 * 39.375;
 
-	memcpy(&bfh.bitmap_type, "BM", 2);
-	bfh.file_size       = file_size;
-	bfh.reserved1       = 0;
-	bfh.reserved2       = 0;
-	bfh.offset_bits     = 0;
+	memcpy(&bfh->bitmap_type, "BM", 2);
+	bfh->file_size       = 54 + 4 * img->w * img->h;
+	bfh->reserved1       = 0;
+	bfh->reserved2       = 0;
+	bfh->offset_bits     = 54;
 
-	bih.size_header     = sizeof(bih);
-	bih.width           = img->w;
-	bih.height          = img->h;
-	bih.planes          = 1;
-	bih.bit_count       = 24;
-	bih.compression     = 0;
-	bih.image_size      = 3 * image_size;
-	bih.ppm_x           = 0;//ppm;
-	bih.ppm_y           = 0;//ppm;
-	bih.clr_used        = 0;
-	bih.clr_important   = 0;
+	bih->size_header     = 40;
+	bih->width           = img->w;
+	bih->height          = img->h;
+	bih->planes          = 1;
+	bih->bit_count       = 32;
+	bih->compression     = 0;
+	bih->image_size      = 0; //3 * img->w * img->h;
+	bih->ppm_x           = 0;//ppm;
+	bih->ppm_y           = 0;//ppm;
+	bih->clr_used        = 0;
+	bih->clr_important   = 0;
+}
 
-	if ((fl = open(file_name, O_CREAT | O_RDWR)) == -1)
-		printf("error %d\n", errno);
-	write(fl, &bfh, 14);
-	write(fl, &bih, sizeof(bih));
+int		write_header(t_img *img, int fl)
+{
+	t_bfh	bfh;
+	t_bih 	bih;
+
+	init_struct(img, &bfh, &bih);
+	write(fl, &bfh.bitmap_type, 2);
+	write(fl, &bfh.file_size, 4);
+	write(fl, &bfh.reserved1, 2);
+	write(fl, &bfh.reserved2, 2);
+	write(fl, &bfh.offset_bits, 4);
+	write(fl, &bih.size_header, 4);
+	write(fl, &bih.width, 4);
+	write(fl, &bih.height, 4);
+	write(fl, &bih.planes, 2);
+	write(fl, &bih.bit_count, 2);
+	write(fl, &bih.compression, 4);
+	write(fl, &bih.image_size, 4);
+	write(fl, &bih.ppm_x, 4);
+	write(fl, &bih.ppm_y, 4);
+	write(fl, &bih.clr_used, 4);
+	write(fl, &bih.clr_important, 4);
+	return (OK);
+}
+
+int		write_data(t_img *img, int fl)
+{
+	char	*pxl;
+	int		iy;
+	int		ix;
+
 	iy = img->h - 1; 
 	while (iy >= 0) 
 	{
@@ -67,12 +79,29 @@ int		img_to_bmp(t_img *img, char *file_name)
 		while(ix < img->w)
 		{
 			pxl = &img->data[4 * (iy * img->w + ix)];
-			if (write(fl, pxl, 3) == -1)
+			if (write(fl, pxl, 4) == -1)
+			{
 				printf("error %d\n", errno);
+				return (-1);
+			}
 			ix++;
 		}
 		iy--;
 	}
+	return (OK);
+}
+
+int		img_to_bmp(t_img *img, char *file_name)
+{
+	int						fl;
+
+	if ((fl = open(file_name, O_CREAT | O_RDWR, 777)) == -1)
+	{
+		printf("error %d\n", errno);
+		return (-1);
+	}
+	write_header(img, fl);
+	write_data(img, fl);
 	close(fl);
 	return (OK);
 }
