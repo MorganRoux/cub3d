@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/04 17:36:05 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/04 19:17:08 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,18 @@ typedef enum
 /*
 ** 	Vector(2,1) : x, y
 */
-typedef struct	s_vect
+typedef struct		s_vect
 {
 	double x;
 	double y;
-}				t_vect;
+}					t_vect;
 
-typedef struct	s_pxl_color
+typedef struct		s_pxl_color
 {
 	int r;
 	int v;
 	int	b;
-}				t_color;
+}					t_color;
 
 /*
 **	Represent an img in mlx with extra properties
@@ -73,7 +73,7 @@ typedef struct	s_pxl_color
 **	bits_per_pixels :	the depth of the image
 **	path :				if provided, path on disk
 */
-typedef	struct	s_img
+typedef	struct		s_img
 {
 	void	*p_img;
 	char	*data;
@@ -83,7 +83,7 @@ typedef	struct	s_img
 	int		bits_per_pxl;
 	int		endian;
 	char	*path;
-}				t_img;
+}					t_img;
 
 /*
 **	Map properties
@@ -91,21 +91,21 @@ typedef	struct	s_img
 **	Textures : 	NO, SO, EA, WE
 ** 	colors : 	Floor, ceil
 */
-typedef struct	s_world_map
+typedef struct		s_world_map
 {
 	char	*p_map;
-	size_t	size;		
+	size_t	size;
 	int		w;
 	int		h;
 	t_img	textures[8];
 	t_color	color[2];
 	t_img	sprite;
-}				t_map;
+}					t_map;
 
-typedef struct	s_player
+typedef struct		s_player
 {
 	t_vect		pos;
-}				t_player;
+}					t_player;
 
 /*
 **	Game Engine properties
@@ -114,7 +114,7 @@ typedef struct	s_player
 **	dir :		orientation of the player
 **	plane :		orientation of the camera plane
 */
-typedef struct	s_game_engine
+typedef struct		s_game_engine
 {
 	void		*mlx_ptr;
 	void		*mlx_win;
@@ -127,7 +127,7 @@ typedef struct	s_game_engine
 	t_player	pl;
 	int			screen_w;
 	int			screen_h;
-}				t_game_engine;
+}					t_game_engine;
 
 /*
 **	Digital Differential Analysis algorithm
@@ -138,7 +138,7 @@ typedef struct	s_game_engine
 **	camera_x:		pos on the camera plane. used to build ray_dir
 **	map:			which box of the map we're in
 */
-typedef struct	s_dda
+typedef struct		s_dda
 {
 	int			draw_start;
 	int			draw_end;
@@ -160,85 +160,84 @@ typedef struct	s_dda
 	int			img_y;
 	int			tex_x;
 	double		tex_y;
-}				t_dda;
+}					t_dda;
 
 /*
 **	Bitmap structures
 */
+typedef struct		s_bitmap_file_header {
+	unsigned char	bitmap_type[2];
+	int				file_size;
+	short			reserved1;
+	short			reserved2;
+	unsigned int	offset_bits;
+}					t_bfh;
 
-typedef struct 			s_bitmap_file_header {
-		unsigned char   bitmap_type[2];     // 2 bytes
-		int             file_size;          // 4 bytes
-		short           reserved1;          // 2 bytes
-		short           reserved2;          // 2 bytes
-		unsigned int    offset_bits;        // 4 bytes
-} 						t_bfh;
-
-// bitmap image header (40 bytes)
-typedef struct 		s_bitmap_image_header {
-	unsigned int    size_header;        // 4 bytes
-	unsigned int    width;              // 4 bytes
-	unsigned int    height;             // 4 bytes
-	short int       planes;             // 2 bytes
-	short int       bit_count;          // 2 bytes
-	unsigned int    compression;        // 4 bytes
-	unsigned int    image_size;         // 4 bytes
-	unsigned int    ppm_x;              // 4 bytes
-	unsigned int    ppm_y;              // 4 bytes
-	unsigned int    clr_used;           // 4 bytes
-	unsigned int    clr_important;      // 4 bytes
+typedef struct		s_bitmap_image_header {
+	unsigned int	size_header;
+	unsigned int	width;
+	unsigned int	height;
+	short int		planes;
+	short int		bit_count;
+	unsigned int	compression;
+	unsigned int	image_size;
+	unsigned int	ppm_x;
+	unsigned int	ppm_y;
+	unsigned int	clr_used;
+	unsigned int	clr_important;
 }					t_bih;
 
-int				init_engine(t_game_engine *ge);
-
+int					init_engine(t_game_engine *ge);
 /*
 **	dda : raytracing engine
 */
-void			init_dda(t_dda *dda, t_game_engine *ge);
-void			detect_collision(t_dda *dda, t_game_engine *ge);
-int				compute_dda(t_dda *dda, t_game_engine *ge);
-t_cardinal		get_wall_orientation(t_dda *dda);
+void				init_dda(t_dda *dda, t_game_engine *ge);
+void				detect_collision(t_dda *dda, t_game_engine *ge);
+int					compute_dda(t_dda *dda, t_game_engine *ge);
+t_cardinal			get_wall_orientation(t_dda *dda);
 
 /*
 **	Keyboards events
 */
-void			move_front(t_game_engine *ge);
-void			move_back(t_game_engine *ge);
-void			move_left(t_game_engine *ge);
-void			move_right(t_game_engine *ge);
-void			rot_left(t_game_engine *ge);
-void			rot_right(t_game_engine *ge);
-int				key_hook(int keycode, void *param);
-int				key_hook_press(int keycode, void *param);
-int				key_hook_release(int keycode, void *param);
-int				main_hook(void *param);
-int				exit_hook(t_game_engine *ge);
+void				move_front(t_game_engine *ge);
+void				move_back(t_game_engine *ge);
+void				move_left(t_game_engine *ge);
+void				move_right(t_game_engine *ge);
+void				rot_left(t_game_engine *ge);
+void				rot_right(t_game_engine *ge);
+int					key_hook(int keycode, void *param);
+int					key_hook_press(int keycode, void *param);
+int					key_hook_release(int keycode, void *param);
+int					main_hook(void *param);
+int					exit_hook(t_game_engine *ge);
 
 /*
 **	display
 */
-int				img_vertline_put(t_dda *dda, t_game_engine *ge,
+int					img_vertline_put(t_dda *dda, t_game_engine *ge,
 						t_img *tex, t_img *img);
-void			compute_img(t_game_engine *ge, t_img *img);
-int				draw(void *param);
-int				compute_fps();
-void			copy_pxl(char *dest, char *source, int bpp);
-void			copy_ceil(t_game_engine *ge, int *img_n, t_img *img, t_dda *dda);
-void			copy_floor(t_game_engine *ge, int *img_n, t_img *img, t_dda *dda);
-int				img_to_bmp(t_img *img, char *file_name);
+void				compute_img(t_game_engine *ge, t_img *img);
+int					draw(void *param);
+int					compute_fps();
+void				copy_pxl(char *dest, char *source, int bpp);
+void				copy_ceil(t_game_engine *ge, int *img_n,
+							t_img *img, t_dda *dda);
+void				copy_floor(t_game_engine *ge, int *img_n,
+							t_img *img, t_dda *dda);
+int					img_to_bmp(t_img *img, char *file_name);
 
 /*
 **	loading cub file
 */
-int				load_cub_file(t_game_engine *ge, char *path);
-int				load_map_dimensions(t_game_engine *ge, char *line);
-int				load_colors(t_game_engine *ge, char *line);
-int				load_sprite(t_game_engine *ge, char *line);
-int				load_map(t_game_engine *ge, int fd, char *line);
-int				load_textures(t_game_engine *ge, char *line);
-int				load_line(t_game_engine *ge, char *line, int *n);
-int				check_map(t_game_engine *ge);
-t_cardinal		get_tex_orientation(char l);
-void			*ft_realloc(void *p, size_t l, size_t newsize);
+int					load_cub_file(t_game_engine *ge, char *path);
+int					load_map_dimensions(t_game_engine *ge, char *line);
+int					load_colors(t_game_engine *ge, char *line);
+int					load_sprite(t_game_engine *ge, char *line);
+int					load_map(t_game_engine *ge, int fd, char *line);
+int					load_textures(t_game_engine *ge, char *line);
+int					load_line(t_game_engine *ge, char *line, int *n);
+int					check_map(t_game_engine *ge);
+t_cardinal			get_tex_orientation(char l);
+void				*ft_realloc(void *p, size_t l, size_t newsize);
 
 #endif
