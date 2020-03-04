@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/04 16:20:41 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/04 17:36:05 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include <sys/errno.h>
 # include "libftprintf.h"
 # include "get_next_line.h"
 # include "keys.h"
@@ -160,6 +161,33 @@ typedef struct	s_dda
 	int			tex_x;
 	double		tex_y;
 }				t_dda;
+
+/*
+**	Bitmap structures
+*/
+
+typedef struct 			s_bitmap_file_header {
+		unsigned char   bitmap_type[2];     // 2 bytes
+		int             file_size;          // 4 bytes
+		short           reserved1;          // 2 bytes
+		short           reserved2;          // 2 bytes
+		unsigned int    offset_bits;        // 4 bytes
+} 						t_bfh;
+
+// bitmap image header (40 bytes)
+typedef struct 		s_bitmap_image_header {
+	unsigned int    size_header;        // 4 bytes
+	unsigned int    width;              // 4 bytes
+	unsigned int    height;             // 4 bytes
+	short int       planes;             // 2 bytes
+	short int       bit_count;          // 2 bytes
+	unsigned int    compression;        // 4 bytes
+	unsigned int    image_size;         // 4 bytes
+	unsigned int    ppm_x;              // 4 bytes
+	unsigned int    ppm_y;              // 4 bytes
+	unsigned int    clr_used;           // 4 bytes
+	unsigned int    clr_important;      // 4 bytes
+}					t_bih;
 
 int				init_engine(t_game_engine *ge);
 

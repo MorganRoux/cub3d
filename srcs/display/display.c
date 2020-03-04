@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:42:09 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/19 17:30:37 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/04 16:32:36 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	compute_img(t_game_engine *ge, t_img *img)
 
 	dda.img_x = 0;
 	img->p_img = mlx_new_image(ge->mlx_ptr, ge->screen_w, ge->screen_h);
+	img->w = ge->screen_w;
+	img->h = ge->screen_h;
 	img->data = mlx_get_data_addr(img->p_img, &img->bits_per_pxl,
 								&img->size_line, &img->endian);
 	while (dda.img_x < ge->screen_w)

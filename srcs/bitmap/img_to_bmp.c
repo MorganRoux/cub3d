@@ -17,38 +17,26 @@
 
 #include "cub3d.h"
 
-struct bitmap_file_header {
-		unsigned char   bitmap_type[2];     // 2 bytes
-		int             file_size;          // 4 bytes
-		short           reserved1;          // 2 bytes
-		short           reserved2;          // 2 bytes
-		unsigned int    offset_bits;        // 4 bytes
-} bfh;
 
-// bitmap image header (40 bytes)
-struct bitmap_image_header {
-	unsigned int    size_header;        // 4 bytes
-	unsigned int    width;              // 4 bytes
-	unsigned int    height;             // 4 bytes
-	short int       planes;             // 2 bytes
-	short int       bit_count;          // 2 bytes
-	unsigned int    compression;        // 4 bytes
-	unsigned int    image_size;         // 4 bytes
-	unsigned int    ppm_x;              // 4 bytes
-	unsigned int    ppm_y;              // 4 bytes
-	unsigned int    clr_used;           // 4 bytes
-	unsigned int    clr_important;      // 4 bytes
-} bih;
 
+void	init_struct()
+{
+
+}
 int		img_to_bmp(t_img *img, char *file_name)
 {
 	// create a file object that we will use to write our image
-	int fl;
+	int						fl;
+	char					*pxl;
+	int						iy;
+	int						ix;
+	t_bfh	bfh;
+	t_bih 	bih;
 	// we want to know how many pixels to reserve
 	int image_size = img->w * img->h;
-	int file_size = 54 + 4 * image_size;
+	int file_size = 54 + 3 * image_size;
 
-	int ppm = 300 * 39.375;
+	//int ppm = 300 * 39.375;
 
 	memcpy(&bfh.bitmap_type, "BM", 2);
 	bfh.file_size       = file_size;
@@ -62,24 +50,28 @@ int		img_to_bmp(t_img *img, char *file_name)
 	bih.planes          = 1;
 	bih.bit_count       = 24;
 	bih.compression     = 0;
-	bih.image_size      = file_size;
-	bih.ppm_x           = ppm;
-	bih.ppm_y           = ppm;
+	bih.image_size      = 3 * image_size;
+	bih.ppm_x           = 0;//ppm;
+	bih.ppm_y           = 0;//ppm;
 	bih.clr_used        = 0;
 	bih.clr_important   = 0;
 
-	fl = open(file_name, O_CREAT | O_RDWR);
-
+	if ((fl = open(file_name, O_CREAT | O_RDWR)) == -1)
+		printf("error %d\n", errno);
 	write(fl, &bfh, 14);
-	write(fl, &bih, 40);
-	printf("ok");
-	for (int i = 0; i < image_size; i++) 
+	write(fl, &bih, sizeof(bih));
+	iy = img->h - 1; 
+	while (iy >= 0) 
 	{
-		unsigned char color[3] = {
-			img->data[4 * i + 2], img->data[4 * i + 1], img->data[4 * i]
-		};	
-		write(fl, color, sizeof(color));
-
+		ix = 0;
+		while(ix < img->w)
+		{
+			pxl = &img->data[4 * (iy * img->w + ix)];
+			if (write(fl, pxl, 3) == -1)
+				printf("error %d\n", errno);
+			ix++;
+		}
+		iy--;
 	}
 	close(fl);
 	return (OK);
