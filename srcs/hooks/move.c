@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:42:58 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/19 16:29:13 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/04 15:04:02 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	move_back(t_game_engine *ge)
 		ge->pl.pos.y = new_y;
 }
 
-void	move_left(t_game_engine *ge)
+void	move_right(t_game_engine *ge)
 {
 	char	*world_map;
 	double	new_x;
@@ -57,7 +57,7 @@ void	move_left(t_game_engine *ge)
 		ge->pl.pos.y = new_y;
 }
 
-void	move_right(t_game_engine *ge)
+void	move_left(t_game_engine *ge)
 {
 	char	*world_map;
 	double	new_x;

@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:40:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/04 14:57:40 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/04 15:02:26 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ void	init_player(t_game_engine *ge, char dir, size_t pos)
 		ge->dir.x = 1;
 		ge->dir.y = 0;
 	}
-	ge->plane.x = ge->dir.y * 0.66;
-	ge->plane.y = -ge->dir.x * 0.66;
-	ge->pl.pos.x = 2;
-	ge->pl.pos.y = 2;
+	ge->plane.x = -ge->dir.y * 0.66;
+	ge->plane.y = ge->dir.x * 0.66;
+	ge->pl.pos.x = pos % ge->map.w;
+	ge->pl.pos.y = pos / ge->map.w;
 }
 
 int		check_map(t_game_engine *ge)

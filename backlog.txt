@@ -2,5 +2,5 @@
 - ajouter un sprite
 - option -save
 - norme
-- gérer orientation de départ pour le joueur
+- gérer position de départ pour le joueur
 - fix segfault si textures introuvables

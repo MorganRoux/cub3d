@@ -6,13 +6,13 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:32:21 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/19 17:33:11 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/04 15:04:11 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	rot_left(t_game_engine *ge)
+void	rot_right(t_game_engine *ge)
 {
 	double olddir_x;
 	double oldplane_x;
@@ -27,7 +27,7 @@ void	rot_left(t_game_engine *ge)
 					ge->plane.y * cos(ge->rot_speed);
 }
 
-void	rot_right(t_game_engine *ge)
+void	rot_left(t_game_engine *ge)
 {
 	double olddir_x;
 	double oldplane_x;
