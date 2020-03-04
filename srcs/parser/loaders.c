@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 11:02:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/19 17:42:41 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/04 14:54:09 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,9 @@ int		load_map(t_game_engine *ge, int fd, char *firstline)
 		free(line);
 	}
 	load_line(ge, line, &n);
+	ge->map.size = n;
 	free(line);
-	check_map(ge->map.p_map);
+	check_map(ge);
 	return (OK);
 }
 

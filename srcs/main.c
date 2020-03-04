@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:36:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/19 17:39:24 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/04 14:54:08 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ int		init_engine(t_game_engine *ge)
 {
 	ge->move_speed = 0.1;
 	ge->rot_speed = 0.06;
-	ge->pl.pos.x = 2;
-	ge->pl.pos.y = 2;
-	ge->dir.x = -1;
-	ge->dir.y = 0;
-	ge->plane.x = 0;
-	ge->plane.y = 0.66;
+	// ge->pl.pos.x = 2;
+	// ge->pl.pos.y = 2;
+	// ge->dir.x = -1;
+	// ge->dir.y = 0;
+	// ge->plane.x = 0;
+	// ge->plane.y = 0.66;
 	ge->keys = NONE;
 	return (1);
 }

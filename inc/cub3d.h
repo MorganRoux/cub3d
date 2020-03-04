@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/19 17:29:20 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/04 14:23:41 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef	struct	s_img
 typedef struct	s_world_map
 {
 	char	*p_map;
+	size_t	size;		
 	int		w;
 	int		h;
 	t_img	textures[8];
@@ -99,7 +100,7 @@ typedef struct	s_world_map
 	t_img	sprite;
 }				t_map;
 
-typedef struct	s_layer
+typedef struct	s_player
 {
 	t_vect		pos;
 }				t_player;
@@ -205,7 +206,7 @@ int				load_sprite(t_game_engine *ge, char *line);
 int				load_map(t_game_engine *ge, int fd, char *line);
 int				load_textures(t_game_engine *ge, char *line);
 int				load_line(t_game_engine *ge, char *line, int *n);
-int				check_map(char *map);
+int				check_map(t_game_engine *ge);
 t_cardinal		get_tex_orientation(char l);
 void			*ft_realloc(void *p, size_t l, size_t newsize);
 
