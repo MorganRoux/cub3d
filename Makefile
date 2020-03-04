@@ -19,7 +19,8 @@ SRCS		=	srcs/main.c \
 				srcs/parser/check_map.c \
 				srcs/parser/utils_parser.c \
 				srcs/gnl/get_next_line.c \
-				srcs/gnl/get_next_line_utils.c
+				srcs/gnl/get_next_line_utils.c \
+				srcs/bitmap/img_to_bmp.c
 
 SRCS_PG		=	srcs/playground/testmlx2_copy.c
 

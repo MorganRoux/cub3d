@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/04 14:23:41 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/04 16:20:41 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <time.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include <unistd.h>
 # include "libftprintf.h"
 # include "get_next_line.h"
 # include "keys.h"
@@ -190,11 +191,13 @@ int				exit_hook(t_game_engine *ge);
 */
 int				img_vertline_put(t_dda *dda, t_game_engine *ge,
 						t_img *tex, t_img *img);
+void			compute_img(t_game_engine *ge, t_img *img);
 int				draw(void *param);
 int				compute_fps();
 void			copy_pxl(char *dest, char *source, int bpp);
 void			copy_ceil(t_game_engine *ge, int *img_n, t_img *img, t_dda *dda);
 void			copy_floor(t_game_engine *ge, int *img_n, t_img *img, t_dda *dda);
+int				img_to_bmp(t_img *img, char *file_name);
 
 /*
 **	loading cub file
