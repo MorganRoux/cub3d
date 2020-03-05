@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/05 11:12:11 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/05 16:31:17 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include "keys.h"
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
-# define SPRITE_NUMBER 2
+# define SPRITE_NUMBER 1
 # define ERROR -1
 # define OK 0
 
@@ -119,7 +119,7 @@ typedef struct		s_player
 **	delta:			length of ray from one x or y-side to next x or y-side
 **	step:			what direction to step in x or y-direction (either +1 or -1)
 **	camera_x:		pos on the camera plane. used to build ray_dir
-**	map:			which box of the map we're in
+**	map:			which box of the map we're seeking for a wall
 */
 typedef struct		s_dda
 {
@@ -144,8 +144,11 @@ typedef struct		s_dda
 	int			tex_x;
 	double		tex_y;
 	double		*z_buffer;
-	int			spriteOrder[SPRITE_NUMBER];
-	double		spriteDistance[SPRITE_NUMBER];
+	double		transform_x;
+	double		transform_y;
+	int			stripe_screen_x;
+	int			stripe_height;
+
 }					t_dda;
 
 /*
@@ -226,7 +229,8 @@ int					exit_hook(t_game_engine *ge);
 */
 int					img_vertline_put(t_dda *dda, t_game_engine *ge,
 						t_img *tex, t_img *img);
-void				compute_img(t_game_engine *ge, t_img *img);
+void				draw_world(t_game_engine *ge, t_img *img);
+void				draw_sprite(t_game_engine *ge, t_img *img);
 int					draw(void *param);
 int					compute_fps();
 void				copy_pxl(char *dest, char *source, int bpp);
@@ -235,6 +239,8 @@ void				copy_ceil(t_game_engine *ge, int *img_n,
 void				copy_floor(t_game_engine *ge, int *img_n,
 							t_img *img, t_dda *dda);
 int					img_to_bmp(t_img *img, char *file_name);
+
+void				transform_sprite(t_game_engine *ge, t_sprite *sprite);
 
 /*
 **	loading cub file

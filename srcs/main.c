@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:36:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/05 11:02:58 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/05 11:35:22 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		exit_hook(t_game_engine *ge)
 void	save(t_game_engine *ge)
 {
 	t_img			img;
-	compute_img(ge, &img);
+	draw_world(ge, &img);
 	img_to_bmp(&img, "./res/test.bmp");
 }
 
