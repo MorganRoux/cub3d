@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/05 18:54:17 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/05 18:56:10 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,7 +245,7 @@ void				copy_floor(t_game_engine *ge, int *img_n,
 int					img_to_bmp(t_img *img, char *file_name);
 
 void				transform_sprite(t_game_engine *ge, t_sprite *sprite);
-
+void	sort_sprite(t_game_engine *ge, int *sprite_order, double *sprite_distance);
 /*
 **	loading cub file
 */

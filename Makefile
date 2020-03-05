@@ -21,7 +21,8 @@ SRCS		=	srcs/main.c \
 				srcs/gnl/get_next_line.c \
 				srcs/gnl/get_next_line_utils.c \
 				srcs/bitmap/img_to_bmp.c \
-				srcs/display/sprite.c
+				srcs/display/sprite.c \
+				srcs/display/sort.c
 
 SRCS_PG		=	srcs/playground/testmlx2_copy.c
 
