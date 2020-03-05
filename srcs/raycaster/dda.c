@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:04:58 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/05 11:14:31 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/05 11:23:55 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void		detect_collision(t_dda *dda, t_game_engine *ge)
 		if (world_map[dda->map_y * ge->map.w + dda->map_x] > 0)
 			hit = 1;
 	}
-	get_wall_orientation(dda);
 }
 
 /*
@@ -93,7 +92,6 @@ void		detect_collision(t_dda *dda, t_game_engine *ge)
 
 int			get_line_height(t_dda *dda, t_game_engine *ge)
 {
-	int		tex_x;
 	double	perp_dist;
 	double	wall_pos;
 
@@ -109,20 +107,18 @@ int			get_line_height(t_dda *dda, t_game_engine *ge)
 	wall_pos = (dda->side == 0) ? ge->pl.pos.y + perp_dist * dda->ray_dir_y :
 								ge->pl.pos.x + perp_dist * dda->ray_dir_x;
 	wall_pos -= floor((wall_pos));
-	tex_x = (int)(wall_pos * (double)(TEX_WIDTH));
+	dda->tex_x = (int)(wall_pos * (double)(TEX_WIDTH));
 	if (dda->side == 0 && dda->ray_dir_x > 0)
-		tex_x = TEX_WIDTH - tex_x - 1;
+		dda->tex_x = TEX_WIDTH - dda->tex_x - 1;
 	if (dda->side == 1 && dda->ray_dir_y < 0)
-		tex_x = TEX_WIDTH - tex_x - 1;
-	return (tex_x);
+		dda->tex_x = TEX_WIDTH - dda->tex_x - 1;
+	return (perp_dist);
 }
 
 int			compute_dda(t_dda *dda, t_game_engine *ge)
 {
-	int tex_x;
-
 	update_dda(dda, ge);
 	detect_collision(dda, ge);
-	tex_x = get_line_height(dda, ge);
-	return (tex_x);
+	get_line_height(dda, ge);
+	return (OK);
 }

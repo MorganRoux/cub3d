@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:42:09 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/05 11:14:59 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/05 11:22:54 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	compute_img(t_game_engine *ge, t_img *img)
 								&img->size_line, &img->endian);
 	while (dda->img_x < ge->screen_w)
 	{
-		dda->tex_x = compute_dda(dda, ge);
+		compute_dda(dda, ge);
 		img_vertline_put(dda, ge,
 			&ge->map.textures[get_wall_orientation(dda)], img);
 		dda->img_x++;
