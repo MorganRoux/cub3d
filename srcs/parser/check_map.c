@@ -6,39 +6,46 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:40:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/05 10:23:59 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/05 10:52:42 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_player(t_game_engine *ge, char dir, size_t pos)
+void	init_player(t_game_engine *ge, char *map, size_t i)
 {
-	(void)pos;
-	if (dir + '0' == 'N')
+	if (map[i] + '0' == 'N')
 	{
 		ge->dir.x = 0;
 		ge->dir.y = -1;
 	}
-	else if (dir + '0' == 'S')
+	else if (map[i] + '0' == 'S')
 	{
 		ge->dir.x = 0;
 		ge->dir.y = 1;
 	}
-	else if (dir + '0' == 'O')
+	else if (map[i] + '0' == 'O')
 	{
 		ge->dir.x = -1;
 		ge->dir.y = 0;
 	}
-	else if (dir + '0' == 'E')
+	else if (map[i] + '0' == 'E')
 	{
 		ge->dir.x = 1;
 		ge->dir.y = 0;
 	}
+	map[i] = 0;
 	ge->plane.x = -ge->dir.y * 0.66;
 	ge->plane.y = ge->dir.x * 0.66;
-	ge->pl.pos.x = pos % ge->map.w + 0.5;
-	ge->pl.pos.y = pos / ge->map.w + 0.5;
+	ge->pl.pos.x = i % ge->map.w + 0.5;
+	ge->pl.pos.y = i / ge->map.w + 0.5;
+}
+
+void	init_stripe(t_game_engine *ge, char *map, size_t i)
+{
+	(void)ge;
+	(void)map;
+	(void)i;
 }
 
 int		check_map(t_game_engine *ge)
@@ -51,10 +58,9 @@ int		check_map(t_game_engine *ge)
 	while (i < ge->map.size)
 	{
 		if (map[i] >= 9)
-		{
-			init_player(ge, map[i], i);
-			map[i] = 0;
-		}
+			init_player(ge, map, i);
+		if (map[i] == 2)
+			init_stripe(ge, map, i);
 		i++;
 	}
 	return (OK);

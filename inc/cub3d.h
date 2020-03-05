@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/04 19:17:08 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/05 10:40:05 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,12 @@ typedef	struct		s_img
 	char	*path;
 }					t_img;
 
+typedef struct		s_sprite
+{
+	t_img	texture;
+	t_vect	pos;
+}					t_sprite;
+
 /*
 **	Map properties
 **	p_map : 	ptr to the map
@@ -93,13 +99,13 @@ typedef	struct		s_img
 */
 typedef struct		s_world_map
 {
-	char	*p_map;
-	size_t	size;
-	int		w;
-	int		h;
-	t_img	textures[8];
-	t_color	color[2];
-	t_img	sprite;
+	char		*p_map;
+	size_t		size;
+	int			w;
+	int			h;
+	t_img		textures[8];
+	t_color		color[2];
+	t_sprite	sprite[2];
 }					t_map;
 
 typedef struct		s_player

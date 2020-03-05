@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 11:02:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/04 14:54:09 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/05 10:52:33 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,22 +49,22 @@ int		load_colors(t_game_engine *ge, char *line)
 
 int		load_sprite(t_game_engine *ge, char *line)
 {
-	t_img	*sprite;
-	char	**param;
-	int		i;
-
+	t_sprite	*sprite;
+	char		**param;
+	int			i;
+	
 	param = ft_split(line, ' ');
-	sprite = &ge->map.sprite;
-	sprite->path = param[1];
-	sprite->p_img = mlx_xpm_file_to_image(
+	sprite = &ge->map.sprite[0];
+	sprite->texture.path = param[1];
+	sprite->texture.p_img = mlx_xpm_file_to_image(
 					ge->mlx_ptr,
-					sprite->path,
-					&sprite->w, &sprite->h);
-	if (sprite->p_img == 0)
+					sprite->texture.path,
+					&sprite->texture.w, &sprite->texture.h);
+	if (sprite->texture.p_img == 0)
 		return (ERROR);
-	sprite->data = mlx_get_data_addr(
-				sprite->p_img, &sprite->bits_per_pxl,
-				&sprite->size_line, &sprite->endian);
+	sprite->texture.data = mlx_get_data_addr(
+				sprite->texture.p_img, &sprite->texture.bits_per_pxl,
+				&sprite->texture.size_line, &sprite->texture.endian);
 	i = 0;
 	while (param[i] != 0)
 		free(param[i++]);
