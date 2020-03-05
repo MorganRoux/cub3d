@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/05 11:01:39 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/05 11:06:05 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,28 +113,6 @@ typedef struct		s_player
 }					t_player;
 
 /*
-**	Game Engine properties
-**	mlx_ptr :	use by mlx
-**	mlx_win :	ptr to the screen
-**	dir :		orientation of the player
-**	plane :		orientation of the camera plane
-*/
-typedef struct		s_game_engine
-{
-	void		*mlx_ptr;
-	void		*mlx_win;
-	t_keypress	keys;
-	t_map		map;
-	double		move_speed;
-	double		rot_speed;
-	t_vect		dir;
-	t_vect		plane;
-	t_player	pl;
-	int			screen_w;
-	int			screen_h;
-}					t_game_engine;
-
-/*
 **	Digital Differential Analysis algorithm
 **	draw_start/end:	position on the screen of the column to be drawn
 **	side_dist:	 	length of ray from current position to next x or y-side
@@ -169,6 +147,29 @@ typedef struct		s_dda
 	int			spriteOrder[SPRITE_NUMBER];
 	double		spriteDistance[SPRITE_NUMBER];
 }					t_dda;
+
+/*
+**	Game Engine properties
+**	mlx_ptr :	use by mlx
+**	mlx_win :	ptr to the screen
+**	dir :		orientation of the player
+**	plane :		orientation of the camera plane
+*/
+typedef struct		s_game_engine
+{
+	void		*mlx_ptr;
+	void		*mlx_win;
+	t_keypress	keys;
+	t_map		map;
+	double		move_speed;
+	double		rot_speed;
+	t_vect		dir;
+	t_vect		plane;
+	t_player	pl;
+	t_dda		dda;
+	int			screen_w;
+	int			screen_h;
+}					t_game_engine;
 
 /*
 **	Bitmap structures

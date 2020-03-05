@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:36:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/04 17:25:34 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/05 11:02:58 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ int		main(int argc, char *argv[])
 {
 	t_game_engine	ge;
 
-	init_engine(&ge);
 	if ((ge.mlx_ptr = mlx_init()) == NULL)
 		return (0);
 	if (argc < 2)
 		return (0);
 	if (load_cub_file(&ge, argv[1]) < 0)
 		return (0);
+	init_engine(&ge);
 	if (argc == 3 && ft_strcmp(argv[2], "--save") == 0)
 		save(&ge);
 	else if (argc == 2)
