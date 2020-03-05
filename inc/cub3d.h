@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/05 10:40:05 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/05 11:01:39 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@
 # include "keys.h"
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
-# define BYTES_PER_PIXELS 3
-# define TEX_DIR "/Users/mroux/42Cursus/cub3d/repo/srcs/playground/"
+# define SPRITE_NUMBER 2
 # define ERROR -1
 # define OK 0
 
@@ -103,9 +102,9 @@ typedef struct		s_world_map
 	size_t		size;
 	int			w;
 	int			h;
-	t_img		textures[8];
+	t_img		textures[4];
 	t_color		color[2];
-	t_sprite	sprite[2];
+	t_sprite	sprite[SPRITE_NUMBER];
 }					t_map;
 
 typedef struct		s_player
@@ -166,6 +165,9 @@ typedef struct		s_dda
 	int			img_y;
 	int			tex_x;
 	double		tex_y;
+	double		*ZBuffer;
+	int			spriteOrder[SPRITE_NUMBER];
+	double		spriteDistance[SPRITE_NUMBER];
 }					t_dda;
 
 /*

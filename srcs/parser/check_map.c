@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:40:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/05 10:52:42 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/05 10:54:54 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ void	init_player(t_game_engine *ge, char *map, size_t i)
 
 void	init_stripe(t_game_engine *ge, char *map, size_t i)
 {
-	(void)ge;
+	ge->map.sprite[0].pos.x = i % ge->map.w + 0.5;
+	ge->map.sprite[0].pos.y = i / ge->map.w + 0.5;
 	(void)map;
-	(void)i;
 }
 
 int		check_map(t_game_engine *ge)
