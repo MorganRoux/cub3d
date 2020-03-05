@@ -1,5 +1,4 @@
 - verifier si pas derreur dans la map
-- ajouter un sprite
 - gestion de toutes les erreurs : mauvais nom de fichier, write, open, ...
 - norme
 - fix segfault si textures introuvables

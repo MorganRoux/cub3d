@@ -6,27 +6,31 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 11:28:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/05 17:52:49 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/05 18:33:27 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	sort_sprite(t_game_engine *ge, int *sprite_order, double *sprite_distance)
+void	swap(int *sprite_order, double *sprite_distance)
 {
-	t_sprite	*sprite;
+	double		temp;
+
+	temp = sprite_distance[0];
+	sprite_distance[0] = sprite_distance[1];
+	sprite_distance[1] = temp;
+	temp = sprite_order[0];
+	sprite_order[0] = sprite_order[1];
+	sprite_order[1] = (int)temp;
+}
+
+void	sort_loop(int *sprite_order, double *sprite_distance)
+{
 	char		continu;
 	int			i;
-	double		temp;
+	
 	i = 0;
 	continu = 1;
-	sprite = ge->map.sprite;
-	for(int i = 0; i < SPRITE_NUMBER; i++)
-    {
-      sprite_order[i] = i;
-      sprite_distance[i] = ((ge->pl.pos.x - sprite[i].pos.x) * (ge->pl.pos.x - sprite[i].pos.x) 
-	  			+ (ge->pl.pos.y - sprite[i].pos.y) * (ge->pl.pos.y - sprite[i].pos.y));
-    }
 	while (continu)
 	{
 		continu = 0;
@@ -35,17 +39,25 @@ void	sort_sprite(t_game_engine *ge, int *sprite_order, double *sprite_distance)
 			if (sprite_distance[i] < sprite_distance[i + 1])
 			{
 				continu = 1;
-				temp = sprite_distance[i];
-				sprite_distance[i] = sprite_distance[i + 1];
-				sprite_distance[i + 1] = temp;
-				temp = sprite_order[i];
-				sprite_order[i] = sprite_order[i + 1];
-				sprite_order[i + 1] = (int)temp;
+				swap(&sprite_order[i],&sprite_distance[i]);
 			}
 			i++;
 		}
 	}
-    //sortSprites(spriteOrder, spriteDistance, SPRITE_NUMBER);
+}
+
+void	sort_sprite(t_game_engine *ge, int *sprite_order, double *sprite_distance)
+{
+	t_sprite	*sprite;
+	
+	sprite = ge->map.sprite;
+	for(int i = 0; i < SPRITE_NUMBER; i++)
+    {
+      sprite_order[i] = i;
+      sprite_distance[i] = ((ge->pl.pos.x - sprite[i].pos.x) * (ge->pl.pos.x - sprite[i].pos.x) 
+	  			+ (ge->pl.pos.y - sprite[i].pos.y) * (ge->pl.pos.y - sprite[i].pos.y));
+    }
+	sort_loop(sprite_order, sprite_distance);
 }
 
 /*
@@ -106,12 +118,7 @@ void		draw_sprite(t_game_engine *ge, t_img *img)
 		//loop through every vertical stripe of the sprite on screen
 		for(int x = drawStartX; x < drawEndX; x++)
 		{
-			int texX = (int)(256 * (x - (-spriteWidth / 2 + dda->stripe_screen_x)) * TEX_WIDTH / spriteWidth) / 256;
-			//the conditions in the if are:
-			//1) it's in front of camera plane so you don't see things behind you
-			//2) it's on the screen (left)
-			//3) it's on the screen (right)
-			//4) ZBuffer, with perpendicular distance			
+			int texX = (int)(256 * (x - (-spriteWidth / 2 + dda->stripe_screen_x)) * TEX_WIDTH / spriteWidth) / 256;		
 			if(dda->transform_y > 0 && x > 0 && x < ge->screen_w && dda->transform_y < dda->z_buffer[x])
 			{	
 				for(int y = drawStartY; y < drawEndY; y++) //for every pixel of the current stripe
