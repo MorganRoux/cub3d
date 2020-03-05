@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/05 18:44:32 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/05 18:54:17 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,8 @@ typedef struct		s_dda
 	int			stripe_screen_x;
 	int			sprite_height;
 	int			sprite_width;
-
+	int			sprite_order[SPRITE_NUMBER];
+	double		sprite_distance[SPRITE_NUMBER];
 }					t_dda;
 
 /*

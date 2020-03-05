@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 11:28:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/05 18:47:35 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/05 18:54:15 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,38 +104,42 @@ void		compute_dim(t_game_engine *ge)
 		dda->draw_end_x = ge->screen_w - 1;
 }
 
-void		draw_sprite(t_game_engine *ge, t_img *img)
+void		draw_sprite_to_img(t_game_engine *ge, t_img *tex, t_img *img)
 {
-
-	int			sprite_order[SPRITE_NUMBER];
-	double		sprite_distance[SPRITE_NUMBER];
 	t_dda		*dda;
-	t_img		*tex;
 
 	dda = &ge->dda;
-	sort_sprite(ge, sprite_order, sprite_distance);
+	for(int x = dda->draw_start_x; x < dda->draw_end_x; x++)
+	{
+		int texX = (int)(256 * (x - (-dda->sprite_width / 2 + dda->stripe_screen_x)) * TEX_WIDTH / dda->sprite_width) / 256;		
+		if(dda->transform_y > 0 && x > 0 && x < ge->screen_w && dda->transform_y < dda->z_buffer[x])
+		{	
+			for(int y = dda->draw_start_y; y < dda->draw_end_y; y++)
+			{
+				int d = (y) * 256 - ge->screen_h * 128 + dda->sprite_height * 128;
+				int texY = ((d * TEX_HEIGHT) / dda->sprite_height) / 256;
+				int img_n = y * img->size_line + x * (img->bits_per_pxl / 8);
+				int tex_n = ((int)texY & (TEX_HEIGHT - 1)) * tex->size_line
+						+ texX * (img->bits_per_pxl / 8);
+				if ((tex->data[tex_n] & 0x00FFFFFF) != 0)
+					copy_pxl(&(img->data[img_n]), &(tex->data[tex_n]),
+					img->bits_per_pxl / 8);
+			}
+		}
+	}
+}
+
+void		draw_sprite(t_game_engine *ge, t_img *img)
+{
+	t_img	*tex;
+
+	sort_sprite(ge, ge->dda.sprite_order, ge->dda.sprite_distance);
     for(int i = 0; i < SPRITE_NUMBER; i++)
     {
-		tex = &ge->map.sprite[sprite_order[i]].texture;
-		transform_sprite(ge, &ge->map.sprite[sprite_order[i]]);
+		tex = &ge->map.sprite[ge->dda.sprite_order[i]].texture;
+		transform_sprite(ge, &ge->map.sprite[ge->dda.sprite_order[i]]);
 		compute_dim(ge);
-		for(int x = dda->draw_start_x; x < dda->draw_end_x; x++)
-		{
-			int texX = (int)(256 * (x - (-dda->sprite_width / 2 + dda->stripe_screen_x)) * TEX_WIDTH / dda->sprite_width) / 256;		
-			if(dda->transform_y > 0 && x > 0 && x < ge->screen_w && dda->transform_y < dda->z_buffer[x])
-			{	
-				for(int y = dda->draw_start_y; y < dda->draw_end_y; y++)
-				{
-					int d = (y) * 256 - ge->screen_h * 128 + dda->sprite_height * 128;
-					int texY = ((d * TEX_HEIGHT) / dda->sprite_height) / 256;
-					int img_n = y * img->size_line + x * (img->bits_per_pxl / 8);
-					int tex_n = ((int)texY & (TEX_HEIGHT - 1)) * tex->size_line
-							+ texX * (img->bits_per_pxl / 8);
-					if ((tex->data[tex_n] & 0x00FFFFFF) != 0)
-						copy_pxl(&(img->data[img_n]), &(tex->data[tex_n]),
-						img->bits_per_pxl / 8);
-				}
-			}
-    	}
+		draw_sprite_to_img(ge, tex, img);
+		
     }
 }
