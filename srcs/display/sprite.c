@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 11:28:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/05 18:44:34 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/05 18:47:35 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,33 +83,42 @@ void		transform_sprite(t_game_engine *ge, t_sprite *sprite)
 	dda->stripe_screen_x = (int)((ge->screen_w / 2) * (1 + dda->transform_x / dda->transform_y));
 }
 
+void		compute_dim(t_game_engine *ge)
+{
+	t_dda	*dda;
+
+	dda = &ge->dda;
+	dda->sprite_height = abs((int)(ge->screen_h / (dda->transform_y)));
+	dda->draw_start_y = -dda->sprite_height / 2 + ge->screen_h / 2;
+	if(dda->draw_start_y < 0) 
+		dda->draw_start_y = 0;
+	dda->draw_end_y = dda->sprite_height / 2 + ge->screen_h / 2;
+	if(dda->draw_end_y >= ge->screen_h) 
+		dda->draw_end_y = ge->screen_h - 1;
+	dda->sprite_width = abs( (int) (ge->screen_h / (dda->transform_y)));
+	dda->draw_start_x = -dda->sprite_width / 2 + dda->stripe_screen_x;
+	if(dda->draw_start_x < 0) 
+		dda->draw_start_x = 0;
+	dda->draw_end_x = dda->sprite_width / 2 + dda->stripe_screen_x;
+	if(dda->draw_end_x >= ge->screen_w) 
+		dda->draw_end_x = ge->screen_w - 1;
+}
+
 void		draw_sprite(t_game_engine *ge, t_img *img)
 {
 
 	int			sprite_order[SPRITE_NUMBER];
 	double		sprite_distance[SPRITE_NUMBER];
 	t_dda		*dda;
-	//t_sprite	*sprite;
 	t_img		*tex;
 
 	dda = &ge->dda;
 	sort_sprite(ge, sprite_order, sprite_distance);
     for(int i = 0; i < SPRITE_NUMBER; i++)
     {
-		
-		//sprite = &ge->map.sprite[sprite_order[i]];
 		tex = &ge->map.sprite[sprite_order[i]].texture;
 		transform_sprite(ge, &ge->map.sprite[sprite_order[i]]);
-		dda->sprite_height = abs((int)(ge->screen_h / (dda->transform_y)));
-		dda->draw_start_y = -dda->sprite_height / 2 + ge->screen_h / 2;
-		if(dda->draw_start_y < 0) dda->draw_start_y = 0;
-		dda->draw_end_y = dda->sprite_height / 2 + ge->screen_h / 2;
-		if(dda->draw_end_y >= ge->screen_h) dda->draw_end_y = ge->screen_h - 1;
-		dda->sprite_width = abs( (int) (ge->screen_h / (dda->transform_y)));
-		dda->draw_start_x = -dda->sprite_width / 2 + dda->stripe_screen_x;
-		if(dda->draw_start_x < 0) dda->draw_start_x = 0;
-		dda->draw_end_x = dda->sprite_width / 2 + dda->stripe_screen_x;
-		if(dda->draw_end_x >= ge->screen_w) dda->draw_end_x = ge->screen_w - 1;
+		compute_dim(ge);
 		for(int x = dda->draw_start_x; x < dda->draw_end_x; x++)
 		{
 			int texX = (int)(256 * (x - (-dda->sprite_width / 2 + dda->stripe_screen_x)) * TEX_WIDTH / dda->sprite_width) / 256;		
