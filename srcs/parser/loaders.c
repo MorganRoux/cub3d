@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 11:02:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/05 10:52:33 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/05 17:42:49 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,23 @@ int		load_sprite(t_game_engine *ge, char *line)
 	char		**param;
 	int			i;
 	
+	i = 0;
 	param = ft_split(line, ' ');
-	sprite = &ge->map.sprite[0];
-	sprite->texture.path = param[1];
-	sprite->texture.p_img = mlx_xpm_file_to_image(
-					ge->mlx_ptr,
-					sprite->texture.path,
-					&sprite->texture.w, &sprite->texture.h);
-	if (sprite->texture.p_img == 0)
-		return (ERROR);
-	sprite->texture.data = mlx_get_data_addr(
-				sprite->texture.p_img, &sprite->texture.bits_per_pxl,
-				&sprite->texture.size_line, &sprite->texture.endian);
+	while (i < SPRITE_NUMBER)
+	{
+		sprite = &ge->map.sprite[i];
+		sprite->texture.path = param[1];
+		sprite->texture.p_img = mlx_xpm_file_to_image(
+						ge->mlx_ptr,
+						sprite->texture.path,
+						&sprite->texture.w, &sprite->texture.h);
+		if (sprite->texture.p_img == 0)
+			return (ERROR);
+		sprite->texture.data = mlx_get_data_addr(
+					sprite->texture.p_img, &sprite->texture.bits_per_pxl,
+					&sprite->texture.size_line, &sprite->texture.endian);
+		i++;
+	}
 	i = 0;
 	while (param[i] != 0)
 		free(param[i++]);
