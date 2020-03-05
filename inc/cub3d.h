@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/05 11:06:05 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/05 11:12:11 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ typedef struct		s_dda
 	int			img_y;
 	int			tex_x;
 	double		tex_y;
-	double		*ZBuffer;
+	double		*z_buffer;
 	int			spriteOrder[SPRITE_NUMBER];
 	double		spriteDistance[SPRITE_NUMBER];
 }					t_dda;
@@ -201,6 +201,7 @@ int					init_engine(t_game_engine *ge);
 **	dda : raytracing engine
 */
 void				init_dda(t_dda *dda, t_game_engine *ge);
+void				update_dda(t_dda *dda, t_game_engine *ge);
 void				detect_collision(t_dda *dda, t_game_engine *ge);
 int					compute_dda(t_dda *dda, t_game_engine *ge);
 t_cardinal			get_wall_orientation(t_dda *dda);
