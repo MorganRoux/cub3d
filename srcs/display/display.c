@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:42:09 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/05 16:17:50 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/05 18:36:41 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ int		img_vertline_put(t_dda *dda, t_game_engine *ge,
 	int		tex_n;
 	int		img_n;
 
-	dda->tex_y = (dda->draw_start - ge->screen_h / 2 +
+	dda->tex_y = (dda->draw_start_y - ge->screen_h / 2 +
 			(double)dda->line_height / 2) *
 			(double)TEX_HEIGHT / dda->line_height;
 	dda->img_y = 0;
 	img_n = dda->img_y * img->size_line + dda->img_x * (img->bits_per_pxl / 8);
 	copy_ceil(ge, &img_n, img, dda);
-	while (dda->img_y < dda->draw_end)
+	while (dda->img_y < dda->draw_end_y)
 	{
 		tex_n = ((int)dda->tex_y & (TEX_HEIGHT - 1)) * tex->size_line
 				+ dda->tex_x * (img->bits_per_pxl / 8);

@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/05 17:28:47 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/05 18:44:32 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,10 @@ typedef struct		s_player
 */
 typedef struct		s_dda
 {
-	int			draw_start;
-	int			draw_end;
+	int			draw_start_x;
+	int			draw_start_y;
+	int			draw_end_x;
+	int			draw_end_y;
 	double		side_dist_x;
 	double		side_dist_y;
 	double		delta_x;
@@ -147,7 +149,8 @@ typedef struct		s_dda
 	double		transform_x;
 	double		transform_y;
 	int			stripe_screen_x;
-	int			stripe_height;
+	int			sprite_height;
+	int			sprite_width;
 
 }					t_dda;
 

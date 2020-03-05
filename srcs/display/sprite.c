@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 11:28:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/05 18:33:27 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/05 18:44:34 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,11 @@ void		transform_sprite(t_game_engine *ge, t_sprite *sprite)
 	double inv_det;
 
 	dda = &ge->dda;
-	//translate sprite position to relative to camera
 	sprite_x = sprite->pos.x - ge->pl.pos.x;
 	sprite_y = sprite->pos.y - ge->pl.pos.y;
-	inv_det = 1.0 / (ge->plane.x * ge->dir.y - ge->dir.x * ge->plane.y); //required for correct matrix multiplication
+	inv_det = 1.0 / (ge->plane.x * ge->dir.y - ge->dir.x * ge->plane.y);
 	dda->transform_x = inv_det * (ge->dir.y * sprite_x - ge->dir.x * sprite_y);
-	dda->transform_y = inv_det * (-ge->plane.y * sprite_x + ge->plane.x * sprite_y); //this is actually the depth inside the screen, that what Z is in 3D
+	dda->transform_y = inv_det * (-ge->plane.y * sprite_x + ge->plane.x * sprite_y);
 	dda->stripe_screen_x = (int)((ge->screen_w / 2) * (1 + dda->transform_x / dda->transform_y));
 }
 
@@ -90,7 +89,7 @@ void		draw_sprite(t_game_engine *ge, t_img *img)
 	int			sprite_order[SPRITE_NUMBER];
 	double		sprite_distance[SPRITE_NUMBER];
 	t_dda		*dda;
-	t_sprite	*sprite;
+	//t_sprite	*sprite;
 	t_img		*tex;
 
 	dda = &ge->dda;
@@ -98,40 +97,34 @@ void		draw_sprite(t_game_engine *ge, t_img *img)
     for(int i = 0; i < SPRITE_NUMBER; i++)
     {
 		
-		sprite = &ge->map.sprite[sprite_order[i]];
-		tex = &sprite->texture;
-		transform_sprite(ge, sprite);
-		//calculate height of the sprite on screen
-		dda->stripe_height = abs((int)(ge->screen_h / (dda->transform_y))); //using 'transformY' instead of the real distance prevents fisheye
-		//calculate lowest and highest pixel to fill in current stripe
-		int drawStartY = -dda->stripe_height / 2 + ge->screen_h / 2;
-		if(drawStartY < 0) drawStartY = 0;
-		int drawEndY = dda->stripe_height / 2 + ge->screen_h / 2;
-		if(drawEndY >= ge->screen_h) drawEndY = ge->screen_h - 1;
-
-		//calculate width of the sprite
-		int spriteWidth = abs( (int) (ge->screen_h / (dda->transform_y)));
-		int drawStartX = -spriteWidth / 2 + dda->stripe_screen_x;
-		if(drawStartX < 0) drawStartX = 0;
-		int drawEndX = spriteWidth / 2 + dda->stripe_screen_x;
-		if(drawEndX >= ge->screen_w) drawEndX = ge->screen_w - 1;
-		//loop through every vertical stripe of the sprite on screen
-		for(int x = drawStartX; x < drawEndX; x++)
+		//sprite = &ge->map.sprite[sprite_order[i]];
+		tex = &ge->map.sprite[sprite_order[i]].texture;
+		transform_sprite(ge, &ge->map.sprite[sprite_order[i]]);
+		dda->sprite_height = abs((int)(ge->screen_h / (dda->transform_y)));
+		dda->draw_start_y = -dda->sprite_height / 2 + ge->screen_h / 2;
+		if(dda->draw_start_y < 0) dda->draw_start_y = 0;
+		dda->draw_end_y = dda->sprite_height / 2 + ge->screen_h / 2;
+		if(dda->draw_end_y >= ge->screen_h) dda->draw_end_y = ge->screen_h - 1;
+		dda->sprite_width = abs( (int) (ge->screen_h / (dda->transform_y)));
+		dda->draw_start_x = -dda->sprite_width / 2 + dda->stripe_screen_x;
+		if(dda->draw_start_x < 0) dda->draw_start_x = 0;
+		dda->draw_end_x = dda->sprite_width / 2 + dda->stripe_screen_x;
+		if(dda->draw_end_x >= ge->screen_w) dda->draw_end_x = ge->screen_w - 1;
+		for(int x = dda->draw_start_x; x < dda->draw_end_x; x++)
 		{
-			int texX = (int)(256 * (x - (-spriteWidth / 2 + dda->stripe_screen_x)) * TEX_WIDTH / spriteWidth) / 256;		
+			int texX = (int)(256 * (x - (-dda->sprite_width / 2 + dda->stripe_screen_x)) * TEX_WIDTH / dda->sprite_width) / 256;		
 			if(dda->transform_y > 0 && x > 0 && x < ge->screen_w && dda->transform_y < dda->z_buffer[x])
 			{	
-				for(int y = drawStartY; y < drawEndY; y++) //for every pixel of the current stripe
+				for(int y = dda->draw_start_y; y < dda->draw_end_y; y++)
 				{
-					int d = (y) * 256 - ge->screen_h * 128 + dda->stripe_height * 128; //256 and 128 factors to avoid floats
-					int texY = ((d * TEX_HEIGHT) / dda->stripe_height) / 256;
+					int d = (y) * 256 - ge->screen_h * 128 + dda->sprite_height * 128;
+					int texY = ((d * TEX_HEIGHT) / dda->sprite_height) / 256;
 					int img_n = y * img->size_line + x * (img->bits_per_pxl / 8);
 					int tex_n = ((int)texY & (TEX_HEIGHT - 1)) * tex->size_line
 							+ texX * (img->bits_per_pxl / 8);
 					if ((tex->data[tex_n] & 0x00FFFFFF) != 0)
 						copy_pxl(&(img->data[img_n]), &(tex->data[tex_n]),
 						img->bits_per_pxl / 8);
-					
 				}
 			}
     	}

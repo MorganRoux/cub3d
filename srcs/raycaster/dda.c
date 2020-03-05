@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:04:58 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/05 16:03:24 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/05 18:36:41 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,11 @@ int			get_line_height(t_dda *dda, t_game_engine *ge)
 		(dda->map_x - ge->pl.pos.x + (1 - dda->step_x) / 2) / dda->ray_dir_x :
 		(dda->map_y - ge->pl.pos.y + (1 - dda->step_y) / 2) / dda->ray_dir_y;
 	dda->line_height = (int)(ge->screen_h / perp_dist);
-	dda->draw_start = -dda->line_height / 2 + ge->screen_h / 2;
-	dda->draw_start = (dda->draw_start < 0) ? 0 : dda->draw_start;
-	dda->draw_end = dda->line_height / 2 + ge->screen_h / 2;
-	dda->draw_end = (dda->draw_end >= ge->screen_h) ?
-		ge->screen_h - 1 : dda->draw_end;
+	dda->draw_start_y = -dda->line_height / 2 + ge->screen_h / 2;
+	dda->draw_start_y = (dda->draw_start_y < 0) ? 0 : dda->draw_start_y;
+	dda->draw_end_y = dda->line_height / 2 + ge->screen_h / 2;
+	dda->draw_end_y = (dda->draw_end_y >= ge->screen_h) ?
+		ge->screen_h - 1 : dda->draw_end_y;
 	wall_pos = (dda->side == 0) ? ge->pl.pos.y + perp_dist * dda->ray_dir_y :
 								ge->pl.pos.x + perp_dist * dda->ray_dir_x;
 	wall_pos -= floor((wall_pos));

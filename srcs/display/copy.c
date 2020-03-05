@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 16:19:57 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/19 17:24:44 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/05 18:36:41 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	copy_pxl(char *dest, char *source, int bpp)
 
 void	copy_ceil(t_game_engine *ge, int *img_n, t_img *img, t_dda *dda)
 {
-	while (dda->img_y < dda->draw_start)
+	while (dda->img_y < dda->draw_start_y)
 	{
 		img->data[*img_n] = ge->map.color[0].r;
 		img->data[*img_n + 1] = ge->map.color[0].v;
