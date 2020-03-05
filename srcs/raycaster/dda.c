@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:04:58 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/05 11:23:55 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/05 11:24:58 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,8 @@ int			get_line_height(t_dda *dda, t_game_engine *ge)
 		dda->tex_x = TEX_WIDTH - dda->tex_x - 1;
 	if (dda->side == 1 && dda->ray_dir_y < 0)
 		dda->tex_x = TEX_WIDTH - dda->tex_x - 1;
-	return (perp_dist);
+	dda->z_buffer[dda->img_x] = perp_dist;
+	return (OK);
 }
 
 int			compute_dda(t_dda *dda, t_game_engine *ge)
