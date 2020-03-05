@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 11:28:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/05 17:43:02 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/05 17:52:49 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,12 @@
 
 void	sort_sprite(t_game_engine *ge, int *sprite_order, double *sprite_distance)
 {
-	t_sprite *sprite;
-
+	t_sprite	*sprite;
+	char		continu;
+	int			i;
+	double		temp;
+	i = 0;
+	continu = 1;
 	sprite = ge->map.sprite;
 	for(int i = 0; i < SPRITE_NUMBER; i++)
     {
@@ -23,6 +27,24 @@ void	sort_sprite(t_game_engine *ge, int *sprite_order, double *sprite_distance)
       sprite_distance[i] = ((ge->pl.pos.x - sprite[i].pos.x) * (ge->pl.pos.x - sprite[i].pos.x) 
 	  			+ (ge->pl.pos.y - sprite[i].pos.y) * (ge->pl.pos.y - sprite[i].pos.y));
     }
+	while (continu)
+	{
+		continu = 0;
+		while (i < SPRITE_NUMBER - 1)
+		{
+			if (sprite_distance[i] < sprite_distance[i + 1])
+			{
+				continu = 1;
+				temp = sprite_distance[i];
+				sprite_distance[i] = sprite_distance[i + 1];
+				sprite_distance[i + 1] = temp;
+				temp = sprite_order[i];
+				sprite_order[i] = sprite_order[i + 1];
+				sprite_order[i + 1] = (int)temp;
+			}
+			i++;
+		}
+	}
     //sortSprites(spriteOrder, spriteDistance, SPRITE_NUMBER);
 }
 
@@ -92,8 +114,6 @@ void		draw_sprite(t_game_engine *ge, t_img *img)
 			//4) ZBuffer, with perpendicular distance			
 			if(dda->transform_y > 0 && x > 0 && x < ge->screen_w && dda->transform_y < dda->z_buffer[x])
 			{	
-		// 		printf("hey %d", i);
-		// getchar();
 				for(int y = drawStartY; y < drawEndY; y++) //for every pixel of the current stripe
 				{
 					int d = (y) * 256 - ge->screen_h * 128 + dda->stripe_height * 128; //256 and 128 factors to avoid floats
