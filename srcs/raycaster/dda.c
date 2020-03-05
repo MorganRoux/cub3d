@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:04:58 by mroux             #+#    #+#             */
-/*   Updated: 2020/02/19 17:36:19 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/05 10:28:10 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_cardinal	get_wall_orientation(t_dda *dda)
 	if (dda->side == 0)
 		return ((dda->ray_dir_x >= 0) ? WE : EA);
 	else
-		return ((dda->ray_dir_y >= 0) ? SO : NO);
+		return ((dda->ray_dir_y >= 0) ? NO : SO);
 }
 
 void		detect_collision(t_dda *dda, t_game_engine *ge)
