@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:03:54 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/09 19:14:42 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/09 19:19:34 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int		main_hook(void *param)
 		rot_right(ge);
 	if (draw(ge) == ERROR)
 		exit_hook(ge);
-	
 	return (0);
 }
 
