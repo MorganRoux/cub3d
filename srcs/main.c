@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:36:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/09 18:21:52 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/09 18:36:25 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	save(t_game_engine *ge)
 		print_error(ERROR);
 		return;
 	}
-	img_to_bmp(&img, "./res/test.bmp");
+	if (img_to_bmp(&img, "./res/test.bmp") == ERROR)
+		print_error(ERROR);
 }
 
 void	set_hooks(t_game_engine *ge)
