@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/09 16:00:30 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/09 16:20:54 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,13 @@
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 # define SPRITE_NUMBER 2
-# define ERROR -1
-# define OK 0
+
+enum
+{
+	OK,
+	ERROR,
+	ERROR_DIM,
+};
 
 typedef enum
 {

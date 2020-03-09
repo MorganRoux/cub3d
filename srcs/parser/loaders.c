@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 11:02:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/09 15:56:59 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/09 16:27:41 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int		load_map_dimensions(t_game_engine *ge, char *line)
 	int		i;
 
 	param = ft_split(line, ' ');
-	if (check_dim_param(param) == ERROR)
-		return (ERROR);
+	if (check_dim_param(param) != OK)
+		return (ERROR_DIM);
 	ge->screen_w = ft_atoi(param[1]);
 	ge->screen_w = ge->screen_w > 2560 ? 2560 : ge->screen_w;
 	ge->screen_h = ft_atoi(param[2]);
@@ -28,6 +28,8 @@ int		load_map_dimensions(t_game_engine *ge, char *line)
 	while (param[i] != 0)
 		free(param[i++]);
 	free(param);
+	if (ge->screen_h == 0 || ge->screen_w == 0)
+		return (ERROR_DIM);
 	return (OK);
 }
 
