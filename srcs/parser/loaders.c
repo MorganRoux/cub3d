@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 11:02:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/09 16:58:27 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/09 18:11:05 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,12 @@ int		load_sprite(t_game_engine *ge, char *line)
 	t_sprite	*sprite;
 	char		**param;
 	int			i;
+	int			r;
 	
 	i = 0;
 	param = ft_split(line, ' ');
-	if (check_sprite_param(param) == ERROR)
-		return (ERROR);
+	if ((r = check_sprite_param(param)) != OK)
+		return (r);
 	while (i < SPRITE_NUMBER)
 	{
 		sprite = &ge->map.sprite[i];
@@ -111,10 +112,11 @@ int		load_textures(t_game_engine *ge, char *line)
 	t_img	*tex;
 	char	**param;
 	int		i;
+	int		r;
 
 	param = ft_split(line, ' ');
-	if (check_tex_param(param) == ERROR)
-		return (ERROR);
+	if ((r = check_tex_param(param)) != OK)
+		return (r);
 	tex = &ge->map.textures[get_tex_orientation(line[0])];
 	tex->path = param[1];
 	tex->p_img = mlx_xpm_file_to_image(

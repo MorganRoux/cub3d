@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/09 16:55:25 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/09 18:09:26 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ enum
 	ERROR,
 	ERROR_DIM,
 	ERROR_COLORS,
+	ERROR_SPRITE,
+	ERROR_TEX
 };
 
 typedef enum
