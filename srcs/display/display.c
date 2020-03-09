@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:42:09 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/05 18:36:41 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/09 18:18:57 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,14 @@ int		img_vertline_put(t_dda *dda, t_game_engine *ge,
 	return (0);
 }
 
-void	draw_world(t_game_engine *ge, t_img *img)
+int		draw_world(t_game_engine *ge, t_img *img)
 {
 	t_dda	*dda;
 
 	dda = &ge->dda;
 	dda->img_x = 0;
-	dda->z_buffer = malloc(sizeof(double) * ge->screen_w);
+	if(!(dda->z_buffer = malloc(sizeof(double) * ge->screen_w)))
+		return (ERROR);
 	img->p_img = mlx_new_image(ge->mlx_ptr, ge->screen_w, ge->screen_h);
 	img->w = ge->screen_w;
 	img->h = ge->screen_h;
@@ -57,6 +58,7 @@ void	draw_world(t_game_engine *ge, t_img *img)
 			&ge->map.textures[get_wall_orientation(dda)], img);
 		dda->img_x++;
 	}
+	return (OK);
 }
 
 /*
@@ -72,11 +74,12 @@ int		draw(void *param)
 	t_img			img;
 
 	ge = (t_game_engine *)param;
-	draw_world(ge, &img);
+	if(draw_world(ge, &img) == ERROR)
+		return (ERROR);
 	draw_sprite(ge, &img);
 	mlx_put_image_to_window(ge->mlx_ptr, ge->mlx_win, img.p_img, 0, 0);
 	mlx_destroy_image(ge->mlx_ptr, img.p_img);
-	return (0);
+	return (OK);
 }
 
 /*

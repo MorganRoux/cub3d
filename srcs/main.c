@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:36:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/09 17:57:07 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/09 18:21:52 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,12 @@ int		exit_hook(t_game_engine *ge)
 void	save(t_game_engine *ge)
 {
 	t_img			img;
-	draw_world(ge, &img);
+
+	if (draw_world(ge, &img) == ERROR)
+	{
+		print_error(ERROR);
+		return;
+	}
 	img_to_bmp(&img, "./res/test.bmp");
 }
 
@@ -73,4 +78,5 @@ int		main(int argc, char *argv[])
 		set_hooks(&ge);
 		mlx_loop(ge.mlx_ptr);
 	}
+	return (0);
 }

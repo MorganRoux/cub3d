@@ -1,4 +1,3 @@
 - verifier si pas derreur dans la map
-- gestion de toutes les erreurs : mauvais nom de fichier, write, open, ...
 - norme
-- fix segfault si textures introuvables
+- check erreurs -save

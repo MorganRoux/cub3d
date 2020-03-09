@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 19:08:54 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/04 19:11:01 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/09 18:14:21 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int		img_to_bmp(t_img *img, char *file_name)
 	if ((fl = open(file_name, O_CREAT | O_RDWR, 777)) == -1)
 	{
 		printf("error %d\n", errno);
-		return (-1);
+		return (ERROR);
 	}
 	write_header(img, fl);
 	write_data(img, fl);
