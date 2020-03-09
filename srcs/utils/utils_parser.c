@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:40:47 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/04 14:40:39 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/09 16:59:14 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,15 @@ void		*ft_realloc(void *p, size_t l, size_t newsize)
 	if (p != NULL)
 		free(p);
 	return ((void *)ret);
+}
+
+int		check_number(char *s)
+{
+	int	i;
+
+	i = 0;
+	while(s[i] != 0)
+		if (!ft_isdigit(s[i++]))
+			return (ERROR);
+	return (OK);
 }

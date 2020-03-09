@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 11:02:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/09 16:27:41 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/09 16:58:27 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ int		load_map_dimensions(t_game_engine *ge, char *line)
 	while (param[i] != 0)
 		free(param[i++]);
 	free(param);
-	if (ge->screen_h == 0 || ge->screen_w == 0)
-		return (ERROR_DIM);
 	return (OK);
 }
 
@@ -38,14 +36,15 @@ int		load_colors(t_game_engine *ge, char *line)
 	char	**param;
 	int		n;
 	int		i;
+	int		r;
 
-	param = ft_split(&(line[2]), ',');
-	if (check_color_param(param) == ERROR)
-		return (ERROR);
-	n = (line[0] == 'F') ? 0 : 1;
-	ge->map.color[n].r = ft_atoi(param[0]);
-	ge->map.color[n].v = ft_atoi(param[1]);
-	ge->map.color[n].b = ft_atoi(param[2]);
+	param = ft_split_ex(line, ", ");
+	if ((r = check_color_param(param)) != OK)
+		return (r);
+	n = ft_strcmp(param[0], "F") == 0 ? 0 : 1;
+	ge->map.color[n].r = ft_atoi(param[1]);
+	ge->map.color[n].v = ft_atoi(param[2]);
+	ge->map.color[n].b = ft_atoi(param[3]);
 	i = 0;
 	while (param[i] != 0)
 		free(param[i++]);

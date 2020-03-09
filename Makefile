@@ -18,12 +18,13 @@ SRCS		=	srcs/main.c \
 				srcs/parser/loaders.c \
 				srcs/parser/check_map.c \
 				srcs/parser/check_others.c \
-				srcs/parser/utils_parser.c \
 				srcs/gnl/get_next_line.c \
 				srcs/gnl/get_next_line_utils.c \
 				srcs/bitmap/img_to_bmp.c \
 				srcs/display/sprite.c \
-				srcs/display/sort.c
+				srcs/display/sort.c \
+				srcs/utils/utils_parser.c \
+				srcs/utils/ft_split_ex.c
 
 SRCS_PG		=	srcs/playground/testmlx2_copy.c
 
