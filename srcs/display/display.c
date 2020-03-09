@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:42:09 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/09 18:18:57 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/09 18:53:16 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		draw_world(t_game_engine *ge, t_img *img)
 
 	dda = &ge->dda;
 	dda->img_x = 0;
-	if(!(dda->z_buffer = malloc(sizeof(double) * ge->screen_w)))
+	if (!(dda->z_buffer = malloc(sizeof(double) * ge->screen_w)))
 		return (ERROR);
 	img->p_img = mlx_new_image(ge->mlx_ptr, ge->screen_w, ge->screen_h);
 	img->w = ge->screen_w;
@@ -74,7 +74,7 @@ int		draw(void *param)
 	t_img			img;
 
 	ge = (t_game_engine *)param;
-	if(draw_world(ge, &img) == ERROR)
+	if (draw_world(ge, &img) == ERROR)
 		return (ERROR);
 	draw_sprite(ge, &img);
 	mlx_put_image_to_window(ge->mlx_ptr, ge->mlx_win, img.p_img, 0, 0);

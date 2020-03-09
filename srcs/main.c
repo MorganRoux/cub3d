@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:36:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/09 18:36:25 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/09 19:14:56 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,6 @@ int		init_engine(t_game_engine *ge)
 	return (1);
 }
 
-int		exit_hook(t_game_engine *ge)
-{
-	mlx_destroy_window(ge->mlx_ptr, ge->mlx_win);
-	exit(0);
-	return (0);
-}
-
 void	save(t_game_engine *ge)
 {
 	t_img			img;
@@ -39,7 +32,7 @@ void	save(t_game_engine *ge)
 	if (draw_world(ge, &img) == ERROR)
 	{
 		print_error(ERROR);
-		return;
+		return ;
 	}
 	if (img_to_bmp(&img, "./res/test.bmp") == ERROR)
 		print_error(ERROR);
@@ -75,7 +68,7 @@ int		main(int argc, char *argv[])
 	{
 		if ((ge.mlx_win = mlx_new_window(ge.mlx_ptr, ge.screen_w,
 									ge.screen_h, "Raycaster")) == NULL)
-		return (0);
+			return (0);
 		set_hooks(&ge);
 		mlx_loop(ge.mlx_ptr);
 	}

@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 18:55:22 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/05 18:55:43 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/09 19:13:22 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	sort_loop(int *sprite_order, double *sprite_distance)
 {
 	char		continu;
 	int			i;
-	
+
 	i = 0;
 	continu = 1;
 	while (continu)
@@ -39,23 +39,30 @@ void	sort_loop(int *sprite_order, double *sprite_distance)
 			if (sprite_distance[i] < sprite_distance[i + 1])
 			{
 				continu = 1;
-				swap(&sprite_order[i],&sprite_distance[i]);
+				swap(&sprite_order[i], &sprite_distance[i]);
 			}
 			i++;
 		}
 	}
 }
 
-void	sort_sprite(t_game_engine *ge, int *sprite_order, double *sprite_distance)
+void	sort_sprite(t_game_engine *ge, int *sprite_order,
+					double *sprite_distance)
 {
 	t_sprite	*sprite;
-	
+	int			i;
+
+	i = 0;
 	sprite = ge->map.sprite;
-	for(int i = 0; i < SPRITE_NUMBER; i++)
-    {
-      sprite_order[i] = i;
-      sprite_distance[i] = ((ge->pl.pos.x - sprite[i].pos.x) * (ge->pl.pos.x - sprite[i].pos.x) 
-	  			+ (ge->pl.pos.y - sprite[i].pos.y) * (ge->pl.pos.y - sprite[i].pos.y));
-    }
+	while (i < SPRITE_NUMBER)
+	{
+		sprite_order[i] = i;
+		sprite_distance[i] = ((ge->pl.pos.x - sprite[i].pos.x)
+				* (ge->pl.pos.x - sprite[i].pos.x)
+				+ (ge->pl.pos.y - sprite[i].pos.y)
+				* (ge->pl.pos.y - sprite[i].pos.y));
+		i++;
+	}
 	sort_loop(sprite_order, sprite_distance);
+	i++;
 }

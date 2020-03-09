@@ -6,14 +6,14 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:14:07 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/09 16:28:57 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/09 18:58:04 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "get_next_line.h"
 
-int	check_line(t_game_engine *ge, int fd, char *line)
+int		check_line(t_game_engine *ge, int fd, char *line)
 {
 	int r;
 
@@ -41,8 +41,8 @@ int		load_cub_file(t_game_engine *ge, char *path)
 {
 	int		fd;
 	char	*line;
-	int r;
-	
+	int		r;
+
 	if ((fd = open(path, O_RDONLY)) < 0)
 		return (ERROR);
 	while (get_next_line(fd, &line))
@@ -52,7 +52,7 @@ int		load_cub_file(t_game_engine *ge, char *path)
 		free(line);
 	}
 	if ((r = check_line(ge, fd, line)) != OK)
-			return (r);
+		return (r);
 	free(line);
 	return (OK);
 }

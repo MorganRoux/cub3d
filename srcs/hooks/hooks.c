@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:03:54 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/09 18:20:18 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/09 19:14:42 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int		main_hook(void *param)
 		rot_right(ge);
 	if (draw(ge) == ERROR)
 		exit_hook(ge);
+	
 	return (0);
 }
 
@@ -73,5 +74,12 @@ int		key_hook_release(int keycode, void *param)
 		ge->keys = ge->keys & ~ROT_L;
 	else if (keycode == KEY_RIGHT)
 		ge->keys = ge->keys & ~ROT_R;
+	return (0);
+}
+
+int		exit_hook(t_game_engine *ge)
+{
+	mlx_destroy_window(ge->mlx_ptr, ge->mlx_win);
+	exit(0);
 	return (0);
 }

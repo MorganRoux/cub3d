@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 16:32:06 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/09 16:33:36 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/09 18:59:32 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		check_number(char *s)
 	int	i;
 
 	i = 0;
-	while(s[i] != 0)
+	while (s[i] != 0)
 		if (!ft_isdigit(s[i++]))
-			return ERROR;
+			return (ERROR);
 }

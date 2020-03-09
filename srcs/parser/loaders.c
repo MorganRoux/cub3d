@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 11:02:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/09 18:25:54 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/09 18:58:20 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		load_sprite(t_game_engine *ge, char *line)
 	t_sprite	*sprite;
 	char		**param;
 	int			i;
-	
+
 	i = 0;
 	param = ft_split(line, ' ');
 	if (param == NULL || check_sprite_param(param) != OK)

@@ -1,3 +1,2 @@
 - verifier si pas derreur dans la map
 - norme
-- check erreurs -save

@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 11:28:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/09 18:18:30 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/09 18:56:02 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void		draw_sprite_to_img(t_game_engine *ge, t_img *tex, t_img *img)
 	}
 }
 
-int		draw_sprite(t_game_engine *ge, t_img *img)
+int			draw_sprite(t_game_engine *ge, t_img *img)
 {
 	t_img	*tex;
 	int		i;
