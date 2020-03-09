@@ -6,16 +6,18 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:04:58 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/05 18:36:41 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/09 18:27:35 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void		init_dda(t_dda *dda, t_game_engine *ge)
+int		init_dda(t_dda *dda, t_game_engine *ge)
 {
 	dda->img_x = 0;
-	dda->z_buffer = malloc(sizeof(double) * ge->screen_w);
+	if(!(dda->z_buffer = malloc(sizeof(double) * ge->screen_w)))
+		return (ERROR);
+	return (OK);
 }
 
 void		update_dda(t_dda *dda, t_game_engine *ge)

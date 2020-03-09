@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/09 18:17:41 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/09 18:27:45 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,7 +215,7 @@ int					init_engine(t_game_engine *ge);
 /*
 **	dda : raytracing engine
 */
-void				init_dda(t_dda *dda, t_game_engine *ge);
+int					init_dda(t_dda *dda, t_game_engine *ge);
 void				update_dda(t_dda *dda, t_game_engine *ge);
 void				detect_collision(t_dda *dda, t_game_engine *ge);
 int					compute_dda(t_dda *dda, t_game_engine *ge);
