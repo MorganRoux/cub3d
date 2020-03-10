@@ -66,3 +66,11 @@ int			check_number(char *s)
 			return (ERROR);
 	return (OK);
 }
+
+void	print_map(char **lines)
+{
+	printf("\n");
+	while(*lines != 0)
+		printf("%s\n", *lines++);
+	getchar();
+}

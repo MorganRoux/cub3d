@@ -72,6 +72,8 @@ int		check_map(t_game_engine *ge)
 		if (ge->map.p_map[i] == 2)
 			if (init_stripe(ge, &nsprite, i) == ERROR)
 				return (ERROR);
+		if (ge->map.p_map[i] >= 8)
+			ge->map.p_map[i] = 0;
 		i++;
 	}
 	return (OK);

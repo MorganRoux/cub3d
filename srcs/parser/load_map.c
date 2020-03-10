@@ -157,7 +157,7 @@ int		load_map(t_game_engine *ge, int fd, char *firstline)
 		return (ERROR_MAP);
 	if (make_rect(ge->map.w, lines) == ERROR)
 		return (ERROR_MAP);
-	if (flood_map(ge->map.w, ge->map.h, lines) == ERROR)
+	if (flood_map(&ge->map, lines) == ERROR)
 		return (ERROR_MAP);
 	if (create_map(lines, &ge->map) == ERROR)
 		return (ERROR_MAP);

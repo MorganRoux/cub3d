@@ -271,7 +271,7 @@ int					load_sprite(t_game_engine *ge, char *line);
 int					load_map(t_game_engine *ge, int fd, char *firstline);
 int					load_textures(t_game_engine *ge, char *line);
 int					make_rect(int w, char **lines);
-int					flood_map(int w, int h, char **lines);
+int					flood_map(t_map *map, char **lines);
 int					check_map(t_game_engine *ge);
 int					check_dim_param(char **param);
 int					check_color_param(char **param);
@@ -287,5 +287,6 @@ int					load_line(t_game_engine *ge, char *line, int *n);
 t_cardinal			get_tex_orientation(char l);
 void				*ft_realloc(void *p, size_t l, size_t newsize);
 char				**ft_split_ex(char *str, char *charset);
+void				print_map(char **lines);
 
 #endif
