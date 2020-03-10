@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 09:28:49 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/10 15:14:39 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/10 15:34:22 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,14 +119,6 @@ int		get_map_dimensions(char **lines, t_map *map)
 	return (OK);
 }
 
-char	**flowd_map(int w, int h, char **lines)
-{
-	(void)w;
-	(void)h;
-	(void)lines;
-	return (NULL);
-}
-
 int		create_map(char **lines, t_map *map)
 {
 	int		i;
@@ -158,9 +150,10 @@ int		load_map(t_game_engine *ge, int fd, char *firstline)
 	ge->map.p_map = NULL;
 	if ((lines = load_lines(fd, firstline)) == NULL)
 		return (ERROR_MAP);
-	get_map_dimensions(lines, &ge->map);
-	// if ((lines = flowd_map(ge->map.w, ge->map.h, lines)) == NULL)
-	// 	return (ERROR_MAP);
+	if (get_map_dimensions(lines, &ge->map) == ERROR)
+		return (ERROR_MAP);
+	if ((lines = flood_map(ge->map.w, ge->map.h, lines)) == NULL)
+		return (ERROR_MAP);
 	if(create_map(lines, &ge->map) == ERROR)
 		return (ERROR_MAP);
 	if (check_map(ge) == ERROR)

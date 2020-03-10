@@ -19,6 +19,7 @@ SRCS		=	srcs/main.c \
 				srcs/parser/load_map.c \
 				srcs/parser/check_map.c \
 				srcs/parser/check_others.c \
+				srcs/parser/flood_map.c \
 				srcs/gnl/get_next_line.c \
 				srcs/gnl/get_next_line_utils.c \
 				srcs/bitmap/img_to_bmp.c \
