@@ -16,6 +16,7 @@ SRCS		=	srcs/main.c \
 				srcs/raycaster/dda.c \
 				srcs/parser/cub_file.c \
 				srcs/parser/loaders.c \
+				srcs/parser/load_map.c \
 				srcs/parser/check_map.c \
 				srcs/parser/check_others.c \
 				srcs/gnl/get_next_line.c \

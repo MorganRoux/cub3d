@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 11:02:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/09 18:58:20 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/10 09:29:11 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,27 +107,5 @@ int		load_textures(t_game_engine *ge, char *line)
 	while (param[i] != 0)
 		free(param[i++]);
 	free(param);
-	return (OK);
-}
-
-int		load_map(t_game_engine *ge, int fd, char *firstline)
-{
-	int		n;
-	char	*line;
-
-	n = 0;
-	ge->map.w = ft_strlen(firstline);
-	ge->map.h = 0;
-	ge->map.p_map = NULL;
-	load_line(ge, firstline, &n);
-	while (get_next_line(fd, &line))
-	{
-		load_line(ge, line, &n);
-		free(line);
-	}
-	load_line(ge, line, &n);
-	ge->map.size = n;
-	free(line);
-	check_map(ge);
 	return (OK);
 }

@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/09 18:27:45 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/10 10:56:56 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ enum
 	ERROR_DIM,
 	ERROR_COLORS,
 	ERROR_SPRITE,
-	ERROR_TEX
+	ERROR_TEX,
+	ERROR_MAP
 };
 
 typedef enum
@@ -261,7 +262,7 @@ int					load_cub_file(t_game_engine *ge, char *path);
 int					load_map_dimensions(t_game_engine *ge, char *line);
 int					load_colors(t_game_engine *ge, char *line);
 int					load_sprite(t_game_engine *ge, char *line);
-int					load_map(t_game_engine *ge, int fd, char *line);
+int					load_map(t_game_engine *ge, int fd, char *firstline);
 int					load_textures(t_game_engine *ge, char *line);
 int					check_map(t_game_engine *ge);
 int					check_dim_param(char **param);
