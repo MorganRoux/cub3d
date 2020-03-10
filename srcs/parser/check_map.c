@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:40:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/10 15:32:46 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/10 15:35:51 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int		init_player(t_game_engine *ge, size_t i)
 {
-	printf("%c",ge->map.p_map[i] + '0' );
-	getchar();
 	if (ge->map.p_map[i] + '0' == 'N')
 	{
 		ge->dir.x = 0;
