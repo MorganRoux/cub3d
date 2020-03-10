@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 11:02:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/10 09:29:11 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/10 16:57:27 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int		load_colors(t_game_engine *ge, char *line)
 	while (param[i] != 0)
 		free(param[i++]);
 	free(param);
+	
 	return (OK);
 }
 

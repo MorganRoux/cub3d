@@ -1,2 +1,3 @@
 - verifier si pas derreur dans la map
 - norme
+- leaks ft_split_ex ?

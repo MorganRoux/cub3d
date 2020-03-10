@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 09:28:49 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/10 15:34:51 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/10 17:01:55 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,10 @@ char	**load_lines(int fd, char *firstline)
 		n_lines++;
 	}
 	if ((lines = create_new_line(lines, line, n_lines)) == NULL)
-			return (NULL);
+		return (NULL);
 	n_lines++;
 	if ((lines = create_new_line(lines, NULL, n_lines)) == NULL)
 		return (NULL);
-	free(line);
 	return (lines);
 }
 
@@ -136,25 +135,35 @@ int		create_map(char **lines, t_map *map)
 	return (OK);
 }
 
+void	free_lines(char **lines)
+{
+	while(*lines != 0)
+		free(*lines++);
+}
+
 int		load_map(t_game_engine *ge, int fd, char *firstline)
 {
 	int		n;
 	char	**lines;
-
 	n = 0;
 	lines = 0;
 	ge->map.w = 0;
 	ge->map.h = 0;
 	ge->map.flags = 0;
 	ge->map.p_map = NULL;
-	if ((lines = load_lines(fd, firstline)) == NULL)
+	if ((lines = load_lines(fd, ft_strdup(firstline))) == NULL)
 		return (ERROR_MAP);
 	if (get_map_dimensions(lines, &ge->map) == ERROR)
 		return (ERROR_MAP);
-	if ((lines = flood_map(ge->map.w, ge->map.h, lines)) == NULL)
-		return (ERROR_MAP);
+	// if ((lines = flood_map(ge->map.w, ge->map.h, lines)) == NULL)
+	// 	return (ERROR_MAP);
 	if(create_map(lines, &ge->map) == ERROR)
 		return (ERROR_MAP);
+	// while(*lines != 0)
+	// 	printf("%s", *lines++);
+	// if (*lines == 0)
+	// 	printf("yes");
+	// getchar();
 	if (check_map(ge) == ERROR)
 		return (ERROR_MAP);
 	// for(size_t j=0;j<ge->map.size;j++)
@@ -162,5 +171,7 @@ int		load_map(t_game_engine *ge, int fd, char *firstline)
 	// printf("\n");
 	// printf("%zu %d %d", ge->map.size, ge->map.h, ge->map.w);
 	// getchar();
+	free_lines(lines);
+	free(lines);
 	return (OK);
 }
