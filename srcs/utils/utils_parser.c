@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:40:47 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/10 11:48:29 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/10 18:03:55 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void		*ft_realloc(void *p, size_t l, size_t newsize)
 		return (NULL);
 	while (++n < l)
 		ret[n] = ptr[n];
-	while (++n < newsize)
-		ret[n] = 0;
+	while (n < newsize)
+		ret[n++] = 0;
 	if (p != NULL)
 		free(p);
 	return ((void *)ret);

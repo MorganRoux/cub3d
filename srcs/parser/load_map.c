@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 09:28:49 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/10 17:01:55 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/10 17:03:22 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,22 +155,12 @@ int		load_map(t_game_engine *ge, int fd, char *firstline)
 		return (ERROR_MAP);
 	if (get_map_dimensions(lines, &ge->map) == ERROR)
 		return (ERROR_MAP);
-	// if ((lines = flood_map(ge->map.w, ge->map.h, lines)) == NULL)
-	// 	return (ERROR_MAP);
+	if ((lines = flood_map(ge->map.w, ge->map.h, lines)) == NULL)
+		return (ERROR_MAP);
 	if(create_map(lines, &ge->map) == ERROR)
 		return (ERROR_MAP);
-	// while(*lines != 0)
-	// 	printf("%s", *lines++);
-	// if (*lines == 0)
-	// 	printf("yes");
-	// getchar();
 	if (check_map(ge) == ERROR)
 		return (ERROR_MAP);
-	// for(size_t j=0;j<ge->map.size;j++)
-	// 		printf("%c",(ge->map.p_map)[j] + '0');
-	// printf("\n");
-	// printf("%zu %d %d", ge->map.size, ge->map.h, ge->map.w);
-	// getchar();
 	free_lines(lines);
 	free(lines);
 	return (OK);
