@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 09:28:49 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/10 15:34:22 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/10 15:34:51 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ int		get_map_dimensions(char **lines, t_map *map)
 		lines++;
 		map->h = map->h +1;
 	}
-	
 	if (map->w == 0 || map->h == 0)
 		return (ERROR);
 	map->size = map->w * map->h;
