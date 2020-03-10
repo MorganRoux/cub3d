@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:40:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/10 15:21:42 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/10 15:22:54 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,7 @@ int		init_player(t_game_engine *ge, size_t i)
 	else
 		return (ERROR);
 	if ((ge->map.flags & FLAG_PLAYER) == FLAG_PLAYER)
-	{
-		printf("%c %d", ge->map.p_map[i] + '0', ge->map.flags);
-		getchar();
 		return (ERROR);
-	}
 	else
 		ge->map.flags = ge->map.flags | FLAG_PLAYER;
 	ge->map.p_map[i] = 0;
