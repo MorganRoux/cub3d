@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 15:25:19 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/10 18:15:36 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/10 18:23:21 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int		start_flood(char **lines, int i, int j)
 	(void)i;
 	(void)j;
 	(void)lines;
+
+	
 	return (OK);
 }
 
