@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 15:25:19 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/10 18:03:28 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/10 18:05:54 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,10 @@ int		make_rect(int w, char **lines)
 	while (lines[i] != 0)
 	{
 		l = ft_strlen(lines[i]);
-		printf("%d-%d ! ", l, w);
-		getchar();
 		if ((lines[i] = (char *)ft_realloc(lines[i], l, w + 1)) == NULL)
 			return (ERROR);
 		while (l < w)
-			lines[i][l++] = '3';
+			lines[i][l++] = ' ';
 		i++;
 	}
 	return (OK);
@@ -36,11 +34,11 @@ char	**flood_map(int w, int h, char **lines)
 	char 	**s;
 	(void)h;
 	s = lines;
-	printf("\n");
-	while(*lines != 0)
-		printf("%s\n", *lines++);
-	getchar();
-	lines = s;
+	// printf("\n");
+	// while(*lines != 0)
+	// 	printf("%s\n", *lines++);
+	// getchar();
+	// lines = s;
 	if (make_rect(w, lines) == ERROR)
 		return (NULL);
 	//lines = s;
