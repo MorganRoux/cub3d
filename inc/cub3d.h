@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/10 10:56:56 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/10 15:19:58 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,18 @@
 
 enum
 {
-	OK,
-	ERROR,
-	ERROR_DIM,
-	ERROR_COLORS,
-	ERROR_SPRITE,
-	ERROR_TEX,
-	ERROR_MAP
+	OK = 0,
+	ERROR = 1,
+	ERROR_DIM = 2,
+	ERROR_COLORS = 4,
+	ERROR_SPRITE = 8,
+	ERROR_TEX = 16,
+	ERROR_MAP = 32
+};
+
+enum
+{
+	FLAG_PLAYER = 1
 };
 
 typedef enum
@@ -114,6 +119,7 @@ typedef struct		s_world_map
 	t_img		textures[4];
 	t_color		color[2];
 	t_sprite	sprite[SPRITE_NUMBER];
+	int			flags;
 }					t_map;
 
 typedef struct		s_player

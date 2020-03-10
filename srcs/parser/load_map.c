@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 09:28:49 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/10 12:06:08 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/10 15:14:39 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,18 @@ int		erreur(char *err)
 	return (ERROR);
 }
 
-int		check_map_line(char *line, int *flags)
+int		check_map_line(char *line)
 {
 	(void)line;
-	(void)flags;
+	while (*line != 0)
+	{
+		if (*line != '0' && *line != '1' &&
+			*line != '2' && *line != 'N' &&
+			*line != 'S' && *line != 'E' &&
+			*line != 'W' && *line != ' ')
+			return (ERROR);
+		line++;
+	}
 	return (OK);
 }
 
@@ -93,12 +101,11 @@ char	**load_lines(int fd, char *firstline)
 
 int		get_map_dimensions(char **lines, t_map *map)
 {
-	int		flags;
 	size_t	l;
 
 	while (*lines != 0)
 	{
-		if (check_map_line(*lines, &flags) == ERROR)
+		if (check_map_line(*lines) == ERROR)
 			return (ERROR);
 		if ((int)(l = ft_strlen(*lines)) > map->w)
 			map->w = (int)l;
@@ -147,6 +154,7 @@ int		load_map(t_game_engine *ge, int fd, char *firstline)
 	lines = 0;
 	ge->map.w = 0;
 	ge->map.h = 0;
+	ge->map.flags = 0;
 	ge->map.p_map = NULL;
 	if ((lines = load_lines(fd, firstline)) == NULL)
 		return (ERROR_MAP);
@@ -155,11 +163,12 @@ int		load_map(t_game_engine *ge, int fd, char *firstline)
 	// 	return (ERROR_MAP);
 	if(create_map(lines, &ge->map) == ERROR)
 		return (ERROR_MAP);
-	check_map(ge);
-	for(size_t j=0;j<ge->map.size;j++)
-			printf("%c",(ge->map.p_map)[j] + '0');
-	printf("\n");
-	printf("%zu %d %d", ge->map.size, ge->map.h, ge->map.w);
-	getchar();
+	if (check_map(ge) == ERROR)
+		return (ERROR_MAP);
+	// for(size_t j=0;j<ge->map.size;j++)
+	// 		printf("%c",(ge->map.p_map)[j] + '0');
+	// printf("\n");
+	// printf("%zu %d %d", ge->map.size, ge->map.h, ge->map.w);
+	// getchar();
 	return (OK);
 }
