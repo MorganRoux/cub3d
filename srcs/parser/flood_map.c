@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 15:25:19 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/10 18:05:54 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/10 18:15:36 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,44 @@ int		make_rect(int w, char **lines)
 	return (OK);
 }
 
-char	**flood_map(int w, int h, char **lines)
+int		start_flood(char **lines, int i, int j)
+{
+	(void)i;
+	(void)j;
+	(void)lines;
+	return (OK);
+}
+
+int		flood_map(int w, int h, char **lines)
 {
 	char 	**s;
+	int		i;
+	int		j;
 	(void)h;
+	(void)w;
 	s = lines;
-	// printf("\n");
+	i = 0;
+	j = 0;
 	// while(*lines != 0)
 	// 	printf("%s\n", *lines++);
 	// getchar();
 	// lines = s;
-	if (make_rect(w, lines) == ERROR)
-		return (NULL);
-	//lines = s;
-	printf("\n");
+	// if (make_rect(w, lines) == ERROR)
+	// 	return (NULL);
+	while (lines[i] != 0)
+	{
+		while (lines[i][j] != 0)
+		{
+			if (lines[i][j] == ' ')
+				if (start_flood(lines, i, j) == ERROR)
+					return (ERROR);
+			j++;
+		}
+		i++;
+	}
 	while(*lines != 0)
 		printf("%s\n", *lines++);
 	getchar();
 	lines = s;
-	return (lines);
+	return (OK);
 }

@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/10 15:26:23 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/10 18:13:24 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,7 +270,8 @@ int					load_colors(t_game_engine *ge, char *line);
 int					load_sprite(t_game_engine *ge, char *line);
 int					load_map(t_game_engine *ge, int fd, char *firstline);
 int					load_textures(t_game_engine *ge, char *line);
-char				**flood_map(int w, int h, char **lines);
+int					make_rect(int w, char **lines);
+int					flood_map(int w, int h, char **lines);
 int					check_map(t_game_engine *ge);
 int					check_dim_param(char **param);
 int					check_color_param(char **param);
