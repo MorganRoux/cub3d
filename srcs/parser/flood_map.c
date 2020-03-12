@@ -6,28 +6,18 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 15:25:19 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 16:49:35 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 17:59:16 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		make_rect(int w, char **lines)
+int		is_player(char c)
 {
-	int		i;
-	int		l;
-
-	i = 0;
-	while (lines[i] != 0)
-	{
-		l = ft_strlen(lines[i]);
-		if ((lines[i] = (char *)ft_realloc(lines[i], l, w + 1)) == NULL)
-			return (ERROR);
-		while (l < w)
-			lines[i][l++] = ' ';
-		i++;
-	}
-	return (OK);
+	if (c == 'N' || c == 'S' ||
+		c == 'E' || c == 'W')
+		return (1);
+	return (0);
 }
 
 int		flood(char **lines, int i, int j, t_map *map)
@@ -36,7 +26,7 @@ int		flood(char **lines, int i, int j, t_map *map)
 		return (OK);
 	if (j < 0 || j >= map->w)
 		return (OK);
-	if (ft_isalpha(lines[i][j]) == 1)
+	if (is_player(lines[i][j]) == 1)
 		return (ERROR);
 	if (lines[i][j] == '1' || lines[i][j] == '8' || lines[i][j] == '9')
 		return (OK);
@@ -51,9 +41,9 @@ int		flood(char **lines, int i, int j, t_map *map)
 
 int		flood_conditions(char **lines, int i, int j, t_map *map)
 {
-	(void)map;
-	if ((lines[i][j] == ' ' || lines[i][j] == '2' || lines[i][j] == '0') &&
-		(i == 0 || i + 1 == map->h || j == 0 || j + 1 == map->w))
+	if (lines[i][j] == ' ' ||
+		((lines[i][j] == '2' || lines[i][j] == '0') &&
+		(i == 0 || i + 1 == map->h || j == 0 || j + 1 == map->w)))
 		return (OK);
 	return (ERROR);
 }

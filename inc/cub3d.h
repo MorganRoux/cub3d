@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 17:35:30 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 17:45:33 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -317,5 +317,6 @@ void				free_lines(char **lines);
 char				**create_new_line(char **lines, char *newline, int n_lines);
 int					init_sprite_ref(t_sprite *sprite_ref, t_ge *ge);
 void				flag_textures(t_ge *ge, char *line);
+void				print_map(char **lines);
 
 #endif

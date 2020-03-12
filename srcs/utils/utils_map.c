@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 17:02:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 17:19:25 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 17:58:56 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,29 @@ char	**create_new_line(char **lines, char *newline, int n_lines)
 		return (NULL);
 	lines[n_lines] = newline;
 	return (lines);
+}
+
+int		make_rect(int w, char **lines)
+{
+	int		i;
+	int		l;
+
+	i = 0;
+	while (lines[i] != 0)
+	{
+		l = ft_strlen(lines[i]);
+		if ((lines[i] = (char *)ft_realloc(lines[i], l, w + 1)) == NULL)
+			return (ERROR);
+		while (l < w)
+			lines[i][l++] = ' ';
+		i++;
+	}
+	return (OK);
+}
+
+void	print_map(char **lines)
+{
+	while (*lines != 0)
+		printf("%s\n", *lines++);
+	getchar();
 }
