@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 17:02:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 17:58:56 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 18:14:03 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ int		make_rect(int w, char **lines)
 		if ((lines[i] = (char *)ft_realloc(lines[i], l, w + 1)) == NULL)
 			return (ERROR);
 		while (l < w)
-			lines[i][l++] = ' ';
+			lines[i][l++] = '0';
+		l = -1;
+		while (++l < w)
+			lines[i][l] = (lines[i][l] == ' ') ? '0' : lines[i][l];
 		i++;
 	}
 	return (OK);

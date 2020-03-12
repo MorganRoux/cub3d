@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 15:25:19 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 17:59:16 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 18:16:04 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		flood(char **lines, int i, int j, t_map *map)
 		return (ERROR);
 	if (lines[i][j] == '1' || lines[i][j] == '8' || lines[i][j] == '9')
 		return (OK);
-	lines[i][j] = (lines[i][j] == '0' || lines[i][j] == ' ') ? '8' : '9';
+	lines[i][j] = (lines[i][j] == '0') ? '8' : '9';
 	if (flood(lines, i - 1, j, map) == ERROR ||
 		flood(lines, i + 1, j, map) == ERROR ||
 		flood(lines, i, j - 1, map) == ERROR ||
@@ -41,9 +41,8 @@ int		flood(char **lines, int i, int j, t_map *map)
 
 int		flood_conditions(char **lines, int i, int j, t_map *map)
 {
-	if (lines[i][j] == ' ' ||
-		((lines[i][j] == '2' || lines[i][j] == '0') &&
-		(i == 0 || i + 1 == map->h || j == 0 || j + 1 == map->w)))
+	if ((lines[i][j] == '2' || lines[i][j] == '0') &&
+		(i == 0 || i + 1 == map->h || j == 0 || j + 1 == map->w))
 		return (OK);
 	return (ERROR);
 }

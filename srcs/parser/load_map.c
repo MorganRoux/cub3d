@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 09:28:49 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 17:57:45 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 18:16:16 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,14 @@ int		create_map(char **lines, t_map *map)
 	{
 		i = 0;
 		while ((*lines)[i] != 0)
-			map->p_map[n++] = (*lines)[i++] - '0';
+		{
+			if ((*lines)[i] == ' ')
+				map->p_map[n] = 0;
+			else
+				map->p_map[n] = (*lines)[i] - '0';
+			n++;
+			i++;
+		}
 		lines++;
 	}
 	return (OK);
