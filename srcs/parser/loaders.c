@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 11:02:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 16:22:44 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 17:13:34 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,18 +67,9 @@ int		load_sprite(t_ge *ge, char *line)
 	param = ft_split(line, ' ');
 	if (param == NULL || check_sprite_param(param) != OK)
 		return (ERROR_SPRITE);
-	
 	sprite_ref = &ge->map.sprite_ref;
 	sprite_ref->texture.path = param[1];
-	sprite_ref->texture.p_img = mlx_xpm_file_to_image(
-					ge->mlx_ptr,
-					sprite_ref->texture.path,
-					&sprite_ref->texture.w, &sprite_ref->texture.h);
-	if (sprite_ref->texture.p_img == 0)
-		return (ERROR);
-	sprite_ref->texture.data = mlx_get_data_addr(
-				sprite_ref->texture.p_img, &sprite_ref->texture.bits_per_pxl,
-				&sprite_ref->texture.size_line, &sprite_ref->texture.endian);
+	init_sprite_ref(sprite_ref, ge);
 	i++;
 	i = 0;
 	while (param[i] != 0)
@@ -112,14 +103,6 @@ int		load_textures(t_ge *ge, char *line)
 	while (param[i] != 0)
 		free(param[i++]);
 	free(param);
-	
-	if (ft_strncmp(line, "NO", 2) == 0)
-		ge->map.flags = ge->map.flags | FLAG_NO;
-	if (ft_strncmp(line, "SO", 2) == 0)
-		ge->map.flags = ge->map.flags | FLAG_SO;
-	if (ft_strncmp(line, "EA", 2) == 0)
-		ge->map.flags = ge->map.flags | FLAG_EA;
-	if (ft_strncmp(line, "WE", 2) == 0)
-		ge->map.flags = ge->map.flags | FLAG_WE;
+	flag_textures(ge, line);
 	return (OK);
 }
