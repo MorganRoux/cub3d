@@ -6,18 +6,17 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 16:51:56 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 16:53:04 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 17:20:45 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		init_engine(t_ge *ge)
+int			init_engine(t_ge *ge)
 {
 	ge->move_speed = 0.1;
 	ge->rot_speed = 0.06;
 	ge->keys = NONE;
-
 	return (OK);
 }
 
