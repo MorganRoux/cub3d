@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 15:25:19 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 10:43:49 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 11:49:33 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int		flood(char **lines, int i, int j, t_map *map)
 		return (OK);
 	if (ft_isalpha(lines[i][j]) == 1)
 		return (ERROR);
-	if (lines[i][j] == '1' || lines[i][j] == '8')
+	if (lines[i][j] == '1' || lines[i][j] == '8' || lines[i][j] == '9')
 		return (OK);
-	lines[i][j] = '8';
+	lines[i][j] = (lines[i][j] == '0' || lines[i][j] == ' ') ? '8' : '9';
 	if (flood(lines, i - 1, j, map) == ERROR ||
 		flood(lines, i + 1, j, map) == ERROR ||
 		flood(lines, i, j - 1, map) == ERROR ||

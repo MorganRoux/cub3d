@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 09:28:49 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 10:54:37 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 11:41:49 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int		create_map(char **lines, t_map *map)
 	if (!(map->p_map = (char *)malloc(sizeof(char) * map->size)))
 		return (ERROR);
 	n = 0;
+	print_map(lines);
 	while (*lines != 0)
 	{
 		i = 0;
@@ -114,6 +115,7 @@ int		load_map(t_ge *ge, int fd, char *firstline)
 {
 	int		n;
 	char	**lines;
+
 	n = 0;
 	lines = 0;
 	ge->map.w = 0;

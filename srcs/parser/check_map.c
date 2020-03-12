@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:40:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 10:54:37 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 11:47:21 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,32 +48,41 @@ int		init_player(t_ge *ge, size_t i)
 	return (OK);
 }
 
-int		init_stripe(t_ge *ge, int *nsprite, size_t i)
+int		init_sprite(t_ge *ge, size_t i)
 {
+	(void)i;
+	(void)ge;
+	int	*nsprite;
+
+	nsprite = &ge->map.n_sprite;
+	ge->map.sprite = ft_realloc(ge->map.sprite, *nsprite * sizeof(t_sprite),
+								(*nsprite + 1) * sizeof(t_sprite));
 	ge->map.sprite[*nsprite].pos.x = i % ge->map.w + 0.5;
 	ge->map.sprite[*nsprite].pos.y = i / ge->map.w + 0.5;
-	if (*nsprite < SPRITE_NUMBER - 1)
-		*nsprite = *nsprite + 1;
+	*nsprite = *nsprite + 1;
 	return (OK);
 }
 
 int		check_map(t_ge *ge)
 {
 	size_t	i;
-	int		nsprite;
 
 	i = 0;
-	nsprite = 0;
-	while (i < ge->map.size)
+	ge->map.n_sprite = 0;
+	while (i < ge->map.size-1)
 	{
-		if (ge->map.p_map[i] >= 9)
+		if (ge->map.p_map[i] == 8)
+			ge->map.p_map[i] = 0;
+		if (ge->map.p_map[i] == 9)
+			ge->map.p_map[i] = 2;
+		if (ge->map.p_map[i] > 9)
 			if (init_player(ge, i) == ERROR)
 				return (ERROR);
 		if (ge->map.p_map[i] == 2)
-			if (init_stripe(ge, &nsprite, i) == ERROR)
+		{
+			if (init_sprite(ge, i) == ERROR)
 				return (ERROR);
-		if (ge->map.p_map[i] >= 8)
-			ge->map.p_map[i] = 0;
+		}
 		i++;
 	}
 	return (OK);

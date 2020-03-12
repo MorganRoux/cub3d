@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 11:02:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 11:08:20 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 11:20:01 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ int		load_sprite(t_ge *ge, char *line)
 				sprite_ref->texture.p_img, &sprite_ref->texture.bits_per_pxl,
 				&sprite_ref->texture.size_line, &sprite_ref->texture.endian);
 	i++;
-
 	i = 0;
 	while (param[i] != 0)
 		free(param[i++]);
