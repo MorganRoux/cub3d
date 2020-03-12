@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:36:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 15:46:31 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 16:52:14 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,6 @@
 void	print_error(int r)
 {
 	ft_printf("Erreur à la lecture du fichier cub : %d", r);
-}
-
-int		init_engine(t_ge *ge)
-{
-	ge->move_speed = 0.1;
-	ge->rot_speed = 0.06;
-	ge->keys = NONE;
-
-	return (OK);
 }
 
 void	save(t_ge *ge)

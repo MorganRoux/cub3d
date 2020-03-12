@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 16:11:48 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 16:53:14 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,11 +230,15 @@ typedef struct		s_bitmap_image_header {
 	unsigned int	clr_important;
 }					t_bih;
 
+/*
+** init
+*/
 int					init_engine(t_ge *ge);
+int					init_dda(t_ge *ge);
+
 /*
 **	dda : raytracing engine
 */
-int					init_dda(t_ge *ge);
 void				update_dda(t_dda *dda, t_ge *ge);
 void				detect_collision(t_dda *dda, t_ge *ge);
 int					compute_dda(t_dda *dda, t_ge *ge);

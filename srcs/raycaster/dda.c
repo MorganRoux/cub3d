@@ -6,32 +6,11 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:04:58 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 15:07:31 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 16:52:58 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-/*
-**	int		init_dda(t_dda *dda, t_game_engine *ge)
-**	{
-**	dda->img_x = 0;
-**	if (!(dda->z_buffer = malloc(sizeof(double) * ge->screen_w)))
-**		return (ERROR);
-**	return (OK);
-**	}
-*/
-
-int			init_dda(t_ge *ge)
-{
-	if (!(ge->dda.z_buffer = malloc(sizeof(double) * ge->screen_w)))
-		return (ERROR);
-	if (!(ge->dda.sprite_order = (int *)malloc(sizeof(int) * ge->map.n_sprite)))
-		return (ERROR);
-	if (!(ge->dda.sprite_distance = (double *)malloc(sizeof(double) * ge->map.n_sprite)))
-		return (ERROR);
-	return (OK);
-}
 
 void		update_dda(t_dda *dda, t_ge *ge)
 {
