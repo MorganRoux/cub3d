@@ -1,4 +1,4 @@
 - norme
 - sprite infinis
 - param missing
--leaks golbal
+- leaks golbal
