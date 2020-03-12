@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 18:55:22 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 10:54:37 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 11:51:32 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	swap(int *sprite_order, double *sprite_distance)
 	sprite_order[1] = (int)temp;
 }
 
-void	sort_loop(int *sprite_order, double *sprite_distance)
+void	sort_loop(int *sprite_order, double *sprite_distance, int n_sprite)
 {
 	char		continu;
 	int			i;
@@ -34,7 +34,7 @@ void	sort_loop(int *sprite_order, double *sprite_distance)
 	while (continu)
 	{
 		continu = 0;
-		while (i < SPRITE_NUMBER - 1)
+		while (i < n_sprite - 1)
 		{
 			if (sprite_distance[i] < sprite_distance[i + 1])
 			{
@@ -54,7 +54,7 @@ void	sort_sprite(t_ge *ge, int *sprite_order,
 
 	i = 0;
 	sprite = ge->map.sprite;
-	while (i < SPRITE_NUMBER)
+	while (i < ge->map.n_sprite)
 	{
 		sprite_order[i] = i;
 		sprite_distance[i] = ((ge->pl.pos.x - sprite[i].pos.x)
@@ -63,6 +63,6 @@ void	sort_sprite(t_ge *ge, int *sprite_order,
 				* (ge->pl.pos.y - sprite[i].pos.y));
 		i++;
 	}
-	sort_loop(sprite_order, sprite_distance);
+	sort_loop(sprite_order, sprite_distance, ge->map.n_sprite);
 	i++;
 }

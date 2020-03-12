@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 11:28:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 10:54:37 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 12:11:07 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void		draw_line(t_ge *ge, t_img *img, t_img *tex, int x, int y)
 	int		img_n;
 	int		tex_n;
 
+
 	d = (y) * 256 - ge->screen_h * 128 + ge->dda.sprite_height * 128;
 	ge->dda.tex_y = ((d * TEX_HEIGHT) / ge->dda.sprite_height) / 256;
 	img_n = y * img->size_line + x * (img->bits_per_pxl / 8);
@@ -101,13 +102,15 @@ int			draw_sprite(t_ge *ge, t_img *img)
 
 	i = 0;
 	sort_sprite(ge, ge->dda.sprite_order, ge->dda.sprite_distance);
-	while (i < SPRITE_NUMBER)
+	while (i < ge->map.n_sprite)
 	{
 		tex = &ge->map.sprite[ge->dda.sprite_order[i]].texture;
+		
 		transform_sprite(ge, &ge->map.sprite[ge->dda.sprite_order[i]]);
 		compute_dim(ge);
 		draw_sprite_to_img(ge, tex, img);
 		i++;
 	}
+
 	return (OK);
 }
