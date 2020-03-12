@@ -6,13 +6,13 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:40:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 15:38:10 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 16:48:36 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		init_player(t_ge *ge, size_t i)
+int		init_player_dir(t_ge *ge, int i)
 {
 	if (ge->map.p_map[i] + '0' == 'N')
 	{
@@ -36,22 +36,27 @@ int		init_player(t_ge *ge, size_t i)
 	}
 	else
 		return (ERROR);
-	if ((ge->map.flags & FLAG_PLAYER) == FLAG_PLAYER)
+	return (OK);
+}
+
+int		init_player(t_ge *ge, size_t i)
+{
+	if (init_player_dir(ge, i))
 		return (ERROR);
-	else
-		ge->map.flags = ge->map.flags | FLAG_PLAYER;
 	ge->map.p_map[i] = 0;
 	ge->plane.x = -ge->dir.y * 0.66;
 	ge->plane.y = ge->dir.x * 0.66;
 	ge->pl.pos.x = i % ge->map.w + 0.5;
 	ge->pl.pos.y = i / ge->map.w + 0.5;
+	if ((ge->map.flags & FLAG_PLAYER) == FLAG_PLAYER)
+		return (ERROR);
+	else
+		ge->map.flags = ge->map.flags | FLAG_PLAYER;
 	return (OK);
 }
 
 int		init_sprite(t_ge *ge, size_t i)
 {
-	(void)i;
-	(void)ge;
 	int	*nsprite;
 
 	nsprite = &ge->map.n_sprite;
@@ -70,7 +75,7 @@ int		check_map(t_ge *ge)
 
 	i = 0;
 	ge->map.n_sprite = 0;
-	while (i < ge->map.size-1)
+	while (i < ge->map.size - 1)
 	{
 		if (ge->map.p_map[i] == 8)
 			ge->map.p_map[i] = 0;
