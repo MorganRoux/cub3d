@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:42:09 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 15:07:46 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 16:24:40 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int		draw_world(t_ge *ge, t_img *img)
 			&ge->map.textures[get_wall_orientation(dda)], img);
 		dda->img_x++;
 	}
-	//free(dda->z_buffer);
 	return (OK);
 }
 
@@ -70,7 +69,7 @@ int		draw_world(t_ge *ge, t_img *img)
 int		draw(void *param)
 {
 	t_ge	*ge;
-	t_img			img;
+	t_img	img;
 
 	ge = (t_ge *)param;
 	if (draw_world(ge, &img) == ERROR)

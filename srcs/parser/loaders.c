@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 11:02:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 11:20:01 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 16:22:44 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int		load_map_dimensions(t_ge *ge, char *line)
 	while (param[i] != 0)
 		free(param[i++]);
 	free(param);
+	ge->map.flags = ge->map.flags | FLAG_R;
 	return (OK);
 }
 
@@ -49,7 +50,10 @@ int		load_colors(t_ge *ge, char *line)
 	while (param[i] != 0)
 		free(param[i++]);
 	free(param);
-	
+	if (n == 0)
+		ge->map.flags = ge->map.flags | FLAG_F;
+	else
+		ge->map.flags = ge->map.flags | FLAG_C;
 	return (OK);
 }
 
@@ -80,6 +84,7 @@ int		load_sprite(t_ge *ge, char *line)
 	while (param[i] != 0)
 		free(param[i++]);
 	free(param);
+	ge->map.flags = ge->map.flags | FLAG_S;
 	return (OK);
 }
 
@@ -107,5 +112,14 @@ int		load_textures(t_ge *ge, char *line)
 	while (param[i] != 0)
 		free(param[i++]);
 	free(param);
+	
+	if (ft_strncmp(line, "NO", 2) == 0)
+		ge->map.flags = ge->map.flags | FLAG_NO;
+	if (ft_strncmp(line, "SO", 2) == 0)
+		ge->map.flags = ge->map.flags | FLAG_SO;
+	if (ft_strncmp(line, "EA", 2) == 0)
+		ge->map.flags = ge->map.flags | FLAG_EA;
+	if (ft_strncmp(line, "WE", 2) == 0)
+		ge->map.flags = ge->map.flags | FLAG_WE;
 	return (OK);
 }

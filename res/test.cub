@@ -1,11 +1,11 @@
 R 640 480
+F 100,100,100
+C 2,100,255
+S ./res/barrel.xpm
 NO ./res/bluestone.xpm
 SO ./res/greystone.xpm
-WE ./res/redbrick.xpm
 EA ./res/mossy.xpm
-S ./res/barrel.xpm
-C 2,100,255
-F 100,100,100
+WE ./res/redbrick.xpm
 11111111111111111111111111111
 110000S0001100000000000001
 10110000011100000000000010001

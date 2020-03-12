@@ -1,3 +1,2 @@
 - norme
-- sprite infinis
-- param missing
+

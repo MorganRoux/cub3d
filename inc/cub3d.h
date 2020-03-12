@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 15:14:41 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 16:11:48 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 
-enum
+enum error_flags
 {
 	OK = 0,
 	ERROR = 1,
@@ -33,12 +33,23 @@ enum
 	ERROR_COLORS = 4,
 	ERROR_SPRITE = 8,
 	ERROR_TEX = 16,
-	ERROR_MAP = 32
+	ERROR_MAP = 32,
+	ERROR_FLAGS = 64,
 };
 
-enum
+enum init_flags
 {
-	FLAG_PLAYER = 1
+	FLAG_R = 1 << 0,
+	FLAG_F = 1 << 1,
+	FLAG_C = 1 << 2,
+	FLAG_S = 1 << 3,
+	FLAG_NO = 1 << 4,
+	FLAG_SO = 1 << 5,
+	FLAG_EA = 1 << 6,
+	FLAG_WE = 1 << 7,
+	FLAG_MAP = 1 << 8,
+	FLAG_PLAYER = 1 << 9,
+	FLAG_INIT_OK = 511,
 };
 
 typedef enum

@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 09:28:49 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 11:57:38 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 16:21:24 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ int		load_map(t_ge *ge, int fd, char *firstline)
 	lines = 0;
 	ge->map.w = 0;
 	ge->map.h = 0;
-	ge->map.flags = 0;
 	ge->map.p_map = NULL;
 	if ((lines = load_lines(fd, ft_strdup(firstline))) == NULL)
 		return (ERROR_MAP);
@@ -135,5 +134,6 @@ int		load_map(t_ge *ge, int fd, char *firstline)
 		return (ERROR_MAP);
 	free_lines(lines);
 	free(lines);
+	ge->map.flags = ge->map.flags | FLAG_MAP;
 	return (OK);
 }

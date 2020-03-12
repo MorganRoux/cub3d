@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:14:07 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 10:54:37 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 16:22:18 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int		load_cub_file(t_ge *ge, char *path)
 	char	*line;
 	int		r;
 
+	ge->map.flags = 0;
 	if ((fd = open(path, O_RDONLY)) < 0)
 		return (ERROR);
 	while (get_next_line(fd, &line))
@@ -54,5 +55,7 @@ int		load_cub_file(t_ge *ge, char *path)
 	if ((r = check_line(ge, fd, line)) != OK)
 		return (r);
 	free(line);
+	if ((ge->map.flags & FLAG_INIT_OK) != FLAG_INIT_OK)
+		return (ERROR_FLAGS);
 	return (OK);
 }
