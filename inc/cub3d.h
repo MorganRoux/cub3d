@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 17:13:07 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 17:28:34 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 
-enum error_flags
+enum				e_error_flags
 {
 	OK = 0,
 	ERROR = 1,
@@ -37,7 +37,7 @@ enum error_flags
 	ERROR_FLAGS = 64,
 };
 
-enum init_flags
+enum				e_init_flags
 {
 	FLAG_R = 1 << 0,
 	FLAG_F = 1 << 1,
@@ -80,14 +80,14 @@ typedef struct		s_vect
 	double y;
 }					t_vect;
 
-/* 
+/*
 **	int position only to use in sprite.c
 */
-typedef struct	s_pxl
+typedef struct		s_pxl
 {
 	int	x;
 	int	y;
-}				t_pxl;
+}					t_pxl;
 
 typedef struct		s_pxl_color
 {
@@ -285,7 +285,8 @@ void				copy_floor(t_ge *ge, int *img_n,
 int					img_to_bmp(t_img *img, char *file_name);
 
 void				transform_sprite(t_ge *ge, t_sprite *sprite);
-void	sort_sprite(t_ge *ge, int *sprite_order, double *sprite_distance);
+void				sort_sprite(t_ge *ge, int *sprite_order,
+								double *sprite_distance);
 /*
 **	loading cub file
 */
@@ -302,7 +303,6 @@ int					check_dim_param(char **param);
 int					check_color_param(char **param);
 int					check_sprite_param(char **param);
 int					check_tex_param(char **param);
-
 
 /*
 **	utils

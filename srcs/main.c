@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:36:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 16:52:14 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 17:23:59 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		init_main(t_ge *ge, int argc, char *argv[])
 	}
 	init_engine(ge);
 	if (init_dda(ge) == ERROR)
-			return(ERROR);
+		return (ERROR);
 	return (OK);
 }
 
@@ -63,20 +63,8 @@ int		main(int argc, char *argv[])
 {
 	t_ge	ge;
 
-	int	r;
-
-	if ((ge.mlx_ptr = mlx_init()) == NULL)
+	if (init_main(&ge, argc, argv) == ERROR)
 		return (ERROR);
-	if (argc < 2)
-		return (ERROR);
-	if ((r = load_cub_file(&ge, argv[1])) != OK)
-	{
-		print_error(r);
-		return (ERROR);
-	}
-	init_engine(&ge);
-	if (init_dda(&ge) == ERROR)
-			return(ERROR);
 	if (argc == 3 && ft_strcmp(argv[2], "--save") == 0)
 		save(&ge);
 	else if (argc == 2)
