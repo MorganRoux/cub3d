@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:40:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 12:12:18 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 15:14:41 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ int		init_sprite(t_ge *ge, size_t i)
 	int	*nsprite;
 
 	nsprite = &ge->map.n_sprite;
-	ge->map.sprite = ft_realloc(ge->map.sprite, *nsprite * sizeof(t_sprite),
+	ge->map.sprites = ft_realloc(ge->map.sprites, *nsprite * sizeof(t_sprite),
 								(*nsprite + 1) * sizeof(t_sprite));
-	ge->map.sprite[*nsprite].pos.x = i % ge->map.w + 0.5;
-	ge->map.sprite[*nsprite].pos.y = i / ge->map.w + 0.5;
-	ge->map.sprite[*nsprite].texture = ge->map.sprite_ref.texture;
+	ge->map.sprites[*nsprite].pos.x = i % ge->map.w + 0.5;
+	ge->map.sprites[*nsprite].pos.y = i / ge->map.w + 0.5;
+	ge->map.sprites[*nsprite].texture = ge->map.sprite_ref.texture;
 	*nsprite = *nsprite + 1;
 	return (OK);
 }

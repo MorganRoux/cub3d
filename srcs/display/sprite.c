@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 11:28:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 12:11:07 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 15:31:48 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,8 @@ int			draw_sprite(t_ge *ge, t_img *img)
 	sort_sprite(ge, ge->dda.sprite_order, ge->dda.sprite_distance);
 	while (i < ge->map.n_sprite)
 	{
-		tex = &ge->map.sprite[ge->dda.sprite_order[i]].texture;
-		
-		transform_sprite(ge, &ge->map.sprite[ge->dda.sprite_order[i]]);
+		tex = &ge->map.sprites[ge->dda.sprite_order[i]].texture;
+		transform_sprite(ge, &ge->map.sprites[ge->dda.sprite_order[i]]);
 		compute_dim(ge);
 		draw_sprite_to_img(ge, tex, img);
 		i++;

@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 18:55:22 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 11:51:32 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 15:31:38 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	sort_loop(int *sprite_order, double *sprite_distance, int n_sprite)
 	while (continu)
 	{
 		continu = 0;
+		i = 0;
 		while (i < n_sprite - 1)
 		{
 			if (sprite_distance[i] < sprite_distance[i + 1])
@@ -53,7 +54,7 @@ void	sort_sprite(t_ge *ge, int *sprite_order,
 	int			i;
 
 	i = 0;
-	sprite = ge->map.sprite;
+	sprite = ge->map.sprites;
 	while (i < ge->map.n_sprite)
 	{
 		sprite_order[i] = i;

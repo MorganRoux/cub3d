@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 15:09:09 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 15:14:41 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ typedef struct		s_world_map
 	t_img		textures[4];
 	t_color		color[2];
 	t_sprite	sprite_ref;
-	t_sprite	*sprite;
+	t_sprite	*sprites;
 	int			n_sprite;
 	int			flags;
 }					t_map;
