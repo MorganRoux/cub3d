@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 17:01:03 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 17:06:06 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -311,8 +311,10 @@ int					check_number(char *s);
 int					load_line(t_ge *ge, char *line, int *n);
 t_cardinal			get_tex_orientation(char l);
 void				*ft_realloc(void *p, size_t l, size_t newsize);
-char				**ft_split_ex(char *str, char *charset);
 void				replace_comma(char *line);
 void				print_map(char **lines);
+int					check_map_line(char *line);
+void				free_lines(char **lines);
+char				**create_new_line(char **lines, char *newline, int n_lines);
 
 #endif

@@ -6,42 +6,11 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 09:28:49 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 16:21:24 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 17:04:22 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int		erreur(char *err)
-{
-	printf("%s", err);
-	getchar();
-	return (ERROR);
-}
-
-int		check_map_line(char *line)
-{
-	(void)line;
-	while (*line != 0)
-	{
-		if (*line != '0' && *line != '1' &&
-			*line != '2' && *line != 'N' &&
-			*line != 'S' && *line != 'E' &&
-			*line != 'W' && *line != ' ')
-			return (ERROR);
-		line++;
-	}
-	return (OK);
-}
-
-char	**create_new_line(char **lines, char *newline, int n_lines)
-{
-	if ((lines = ft_realloc(lines, n_lines * sizeof(char *), 
-					(n_lines + 1) * sizeof(char *))) == NULL)
-		return (NULL);
-	lines[n_lines] = newline;
-	return (lines);
-}
 
 char	**load_lines(int fd, char *firstline)
 {
@@ -56,7 +25,7 @@ char	**load_lines(int fd, char *firstline)
 	while (get_next_line(fd, &line))
 	{
 		if ((lines = create_new_line(lines, line, n_lines)) == NULL)
-			return (NULL);	
+			return (NULL);
 		n_lines++;
 	}
 	if ((lines = create_new_line(lines, line, n_lines)) == NULL)
@@ -78,7 +47,7 @@ int		get_map_dimensions(char **lines, t_map *map)
 		if ((int)(l = ft_strlen(*lines)) > map->w)
 			map->w = (int)l;
 		lines++;
-		map->h = map->h +1;
+		map->h = map->h + 1;
 	}
 	if (map->w == 0 || map->h == 0)
 		return (ERROR);
@@ -102,12 +71,6 @@ int		create_map(char **lines, t_map *map)
 		lines++;
 	}
 	return (OK);
-}
-
-void	free_lines(char **lines)
-{
-	while(*lines != 0)
-		free(*lines++);
 }
 
 int		load_map(t_ge *ge, int fd, char *firstline)

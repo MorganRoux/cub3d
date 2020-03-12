@@ -26,7 +26,8 @@ SRCS		=	srcs/main.c \
 				srcs/bitmap/img_to_bmp.c \
 				srcs/display/sprite.c \
 				srcs/display/sort.c \
-				srcs/utils/utils_parser.c
+				srcs/utils/utils_parser.c \
+				srcs/utils/utils_map.c
 
 SRCS_PG		=	srcs/playground/testmlx2_copy.c
 
