@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 09:28:49 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 10:44:17 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 10:54:37 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	free_lines(char **lines)
 		free(*lines++);
 }
 
-int		load_map(t_game_engine *ge, int fd, char *firstline)
+int		load_map(t_ge *ge, int fd, char *firstline)
 {
 	int		n;
 	char	**lines;

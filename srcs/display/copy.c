@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 16:19:57 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/05 18:36:41 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 10:54:37 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	copy_pxl(char *dest, char *source, int bpp)
 		dest[i] = source[i];
 }
 
-void	copy_ceil(t_game_engine *ge, int *img_n, t_img *img, t_dda *dda)
+void	copy_ceil(t_ge *ge, int *img_n, t_img *img, t_dda *dda)
 {
 	while (dda->img_y < dda->draw_start_y)
 	{
@@ -34,7 +34,7 @@ void	copy_ceil(t_game_engine *ge, int *img_n, t_img *img, t_dda *dda)
 	}
 }
 
-void	copy_floor(t_game_engine *ge, int *img_n, t_img *img, t_dda *dda)
+void	copy_floor(t_ge *ge, int *img_n, t_img *img, t_dda *dda)
 {
 	while (dda->img_y < ge->screen_h)
 	{

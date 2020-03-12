@@ -6,13 +6,13 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 11:28:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/09 18:56:02 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 10:54:37 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void		transform_sprite(t_game_engine *ge, t_sprite *sprite)
+void		transform_sprite(t_ge *ge, t_sprite *sprite)
 {
 	t_dda	*dda;
 	double	sprite_x;
@@ -30,7 +30,7 @@ void		transform_sprite(t_game_engine *ge, t_sprite *sprite)
 				(1 + dda->transform_x / dda->transform_y));
 }
 
-void		compute_dim(t_game_engine *ge)
+void		compute_dim(t_ge *ge)
 {
 	t_dda	*dda;
 
@@ -51,7 +51,7 @@ void		compute_dim(t_game_engine *ge)
 		dda->draw_end_x = ge->screen_w - 1;
 }
 
-void		draw_line(t_game_engine *ge, t_img *img, t_img *tex, int x, int y)
+void		draw_line(t_ge *ge, t_img *img, t_img *tex, int x, int y)
 {
 	int		d;
 	int		img_n;
@@ -67,7 +67,7 @@ void		draw_line(t_game_engine *ge, t_img *img, t_img *tex, int x, int y)
 				img->bits_per_pxl / 8);
 }
 
-void		draw_sprite_to_img(t_game_engine *ge, t_img *tex, t_img *img)
+void		draw_sprite_to_img(t_ge *ge, t_img *tex, t_img *img)
 {
 	t_dda	*dda;
 	int		x;
@@ -94,7 +94,7 @@ void		draw_sprite_to_img(t_game_engine *ge, t_img *tex, t_img *img)
 	}
 }
 
-int			draw_sprite(t_game_engine *ge, t_img *img)
+int			draw_sprite(t_ge *ge, t_img *img)
 {
 	t_img	*tex;
 	int		i;

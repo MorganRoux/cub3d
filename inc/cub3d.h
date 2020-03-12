@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 10:44:02 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 10:54:37 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,7 +191,7 @@ typedef struct		s_game_engine
 	t_dda		dda;
 	int			screen_w;
 	int			screen_h;
-}					t_game_engine;
+}					t_ge;
 
 /*
 **	Bitmap structures
@@ -218,61 +218,61 @@ typedef struct		s_bitmap_image_header {
 	unsigned int	clr_important;
 }					t_bih;
 
-int					init_engine(t_game_engine *ge);
+int					init_engine(t_ge *ge);
 /*
 **	dda : raytracing engine
 */
-int					init_dda(t_dda *dda, t_game_engine *ge);
-void				update_dda(t_dda *dda, t_game_engine *ge);
-void				detect_collision(t_dda *dda, t_game_engine *ge);
-int					compute_dda(t_dda *dda, t_game_engine *ge);
+int					init_dda(t_dda *dda, t_ge *ge);
+void				update_dda(t_dda *dda, t_ge *ge);
+void				detect_collision(t_dda *dda, t_ge *ge);
+int					compute_dda(t_dda *dda, t_ge *ge);
 t_cardinal			get_wall_orientation(t_dda *dda);
 
 /*
 **	Keyboards events
 */
-void				move_front(t_game_engine *ge);
-void				move_back(t_game_engine *ge);
-void				move_left(t_game_engine *ge);
-void				move_right(t_game_engine *ge);
-void				rot_left(t_game_engine *ge);
-void				rot_right(t_game_engine *ge);
+void				move_front(t_ge *ge);
+void				move_back(t_ge *ge);
+void				move_left(t_ge *ge);
+void				move_right(t_ge *ge);
+void				rot_left(t_ge *ge);
+void				rot_right(t_ge *ge);
 int					key_hook(int keycode, void *param);
 int					key_hook_press(int keycode, void *param);
 int					key_hook_release(int keycode, void *param);
 int					main_hook(void *param);
-int					exit_hook(t_game_engine *ge);
+int					exit_hook(t_ge *ge);
 
 /*
 **	display
 */
-int					img_vertline_put(t_dda *dda, t_game_engine *ge,
+int					img_vertline_put(t_dda *dda, t_ge *ge,
 						t_img *tex, t_img *img);
-int					draw_world(t_game_engine *ge, t_img *img);
-int					draw_sprite(t_game_engine *ge, t_img *img);
+int					draw_world(t_ge *ge, t_img *img);
+int					draw_sprite(t_ge *ge, t_img *img);
 int					draw(void *param);
 int					compute_fps();
 void				copy_pxl(char *dest, char *source, int bpp);
-void				copy_ceil(t_game_engine *ge, int *img_n,
+void				copy_ceil(t_ge *ge, int *img_n,
 							t_img *img, t_dda *dda);
-void				copy_floor(t_game_engine *ge, int *img_n,
+void				copy_floor(t_ge *ge, int *img_n,
 							t_img *img, t_dda *dda);
 int					img_to_bmp(t_img *img, char *file_name);
 
-void				transform_sprite(t_game_engine *ge, t_sprite *sprite);
-void	sort_sprite(t_game_engine *ge, int *sprite_order, double *sprite_distance);
+void				transform_sprite(t_ge *ge, t_sprite *sprite);
+void	sort_sprite(t_ge *ge, int *sprite_order, double *sprite_distance);
 /*
 **	loading cub file
 */
-int					load_cub_file(t_game_engine *ge, char *path);
-int					load_map_dimensions(t_game_engine *ge, char *line);
-int					load_colors(t_game_engine *ge, char *line);
-int					load_sprite(t_game_engine *ge, char *line);
-int					load_map(t_game_engine *ge, int fd, char *firstline);
-int					load_textures(t_game_engine *ge, char *line);
+int					load_cub_file(t_ge *ge, char *path);
+int					load_map_dimensions(t_ge *ge, char *line);
+int					load_colors(t_ge *ge, char *line);
+int					load_sprite(t_ge *ge, char *line);
+int					load_map(t_ge *ge, int fd, char *firstline);
+int					load_textures(t_ge *ge, char *line);
 int					make_rect(int w, char **lines);
 int					flood_map(t_map *map, char **lines);
-int					check_map(t_game_engine *ge);
+int					check_map(t_ge *ge);
 int					check_dim_param(char **param);
 int					check_color_param(char **param);
 int					check_sprite_param(char **param);
@@ -283,7 +283,7 @@ int					check_tex_param(char **param);
 **	utils
 */
 int					check_number(char *s);
-int					load_line(t_game_engine *ge, char *line, int *n);
+int					load_line(t_ge *ge, char *line, int *n);
 t_cardinal			get_tex_orientation(char l);
 void				*ft_realloc(void *p, size_t l, size_t newsize);
 char				**ft_split_ex(char *str, char *charset);

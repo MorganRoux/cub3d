@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:40:47 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 10:44:32 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 10:54:37 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_cardinal	get_tex_orientation(char l)
 	return (ERROR);
 }
 
-int			load_line(t_game_engine *ge, char *line, int *n)
+int			load_line(t_ge *ge, char *line, int *n)
 {
 	if ((int)ft_strlen(line) != ge->map.w)
 		return (ERROR);

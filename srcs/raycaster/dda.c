@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:04:58 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/09 19:20:43 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 10:54:37 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 **	}
 */
 
-void		update_dda(t_dda *dda, t_game_engine *ge)
+void		update_dda(t_dda *dda, t_ge *ge)
 {
 	dda->camera_x = 2 * dda->img_x / (double)ge->screen_w - 1;
 	dda->ray_dir_x = ge->dir.x + ge->plane.x * dda->camera_x;
@@ -61,7 +61,7 @@ t_cardinal	get_wall_orientation(t_dda *dda)
 		return ((dda->ray_dir_y >= 0) ? NO : SO);
 }
 
-void		detect_collision(t_dda *dda, t_game_engine *ge)
+void		detect_collision(t_dda *dda, t_ge *ge)
 {
 	int		hit;
 	char	*world_map;
@@ -94,7 +94,7 @@ void		detect_collision(t_dda *dda, t_game_engine *ge)
 **	perp_dist:	corrected dist to the wall by ray_dir (fisheye removed)
 */
 
-int			get_line_height(t_dda *dda, t_game_engine *ge)
+int			get_line_height(t_dda *dda, t_ge *ge)
 {
 	double	perp_dist;
 	double	wall_pos;
@@ -120,7 +120,7 @@ int			get_line_height(t_dda *dda, t_game_engine *ge)
 	return (OK);
 }
 
-int			compute_dda(t_dda *dda, t_game_engine *ge)
+int			compute_dda(t_dda *dda, t_ge *ge)
 {
 	update_dda(dda, ge);
 	detect_collision(dda, ge);

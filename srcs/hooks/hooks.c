@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:03:54 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 10:36:30 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 10:55:28 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int		main_hook(void *param)
 {
-	t_game_engine *ge;
+	t_ge *ge;
 
-	ge = (t_game_engine *)param;
+	ge = (t_ge *)param;
 	if ((ge->keys & UP) != 0)
 		move_front(ge);
 	if ((ge->keys & DOWN) != 0)
@@ -36,9 +36,9 @@ int		main_hook(void *param)
 
 int		key_hook_press(int keycode, void *param)
 {
-	t_game_engine *ge;
+	t_ge *ge;
 
-	ge = (t_game_engine *)param;
+	ge = (t_ge *)param;
 	if (keycode == KEY_W)
 		ge->keys = ge->keys | UP;
 	else if (keycode == KEY_S)
@@ -58,9 +58,9 @@ int		key_hook_press(int keycode, void *param)
 
 int		key_hook_release(int keycode, void *param)
 {
-	t_game_engine *ge;
+	t_ge *ge;
 
-	ge = (t_game_engine *)param;
+	ge = (t_ge *)param;
 	if (keycode == KEY_W)
 		ge->keys = ge->keys & ~UP;
 	else if (keycode == KEY_S)
@@ -76,10 +76,9 @@ int		key_hook_release(int keycode, void *param)
 	return (0);
 }
 
-int		exit_hook(t_game_engine *ge)
+int		exit_hook(t_ge *ge)
 {
 	mlx_destroy_window(ge->mlx_ptr, ge->mlx_win);
-	getchar();
 	exit(0);
 	return (0);
 }

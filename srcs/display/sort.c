@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 18:55:22 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/09 19:13:22 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 10:54:37 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	sort_loop(int *sprite_order, double *sprite_distance)
 	}
 }
 
-void	sort_sprite(t_game_engine *ge, int *sprite_order,
+void	sort_sprite(t_ge *ge, int *sprite_order,
 					double *sprite_distance)
 {
 	t_sprite	*sprite;

@@ -6,13 +6,13 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:40:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/10 15:35:51 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 10:54:37 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		init_player(t_game_engine *ge, size_t i)
+int		init_player(t_ge *ge, size_t i)
 {
 	if (ge->map.p_map[i] + '0' == 'N')
 	{
@@ -48,7 +48,7 @@ int		init_player(t_game_engine *ge, size_t i)
 	return (OK);
 }
 
-int		init_stripe(t_game_engine *ge, int *nsprite, size_t i)
+int		init_stripe(t_ge *ge, int *nsprite, size_t i)
 {
 	ge->map.sprite[*nsprite].pos.x = i % ge->map.w + 0.5;
 	ge->map.sprite[*nsprite].pos.y = i / ge->map.w + 0.5;
@@ -57,7 +57,7 @@ int		init_stripe(t_game_engine *ge, int *nsprite, size_t i)
 	return (OK);
 }
 
-int		check_map(t_game_engine *ge)
+int		check_map(t_ge *ge)
 {
 	size_t	i;
 	int		nsprite;

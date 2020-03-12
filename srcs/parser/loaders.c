@@ -6,13 +6,13 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 11:02:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 10:36:36 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 10:54:37 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		load_map_dimensions(t_game_engine *ge, char *line)
+int		load_map_dimensions(t_ge *ge, char *line)
 {
 	char	**param;
 	int		i;
@@ -31,7 +31,7 @@ int		load_map_dimensions(t_game_engine *ge, char *line)
 	return (OK);
 }
 
-int		load_colors(t_game_engine *ge, char *line)
+int		load_colors(t_ge *ge, char *line)
 {
 	char	**param;
 	int		n;
@@ -53,7 +53,7 @@ int		load_colors(t_game_engine *ge, char *line)
 	return (OK);
 }
 
-int		load_sprite(t_game_engine *ge, char *line)
+int		load_sprite(t_ge *ge, char *line)
 {
 	t_sprite	*sprite;
 	char		**param;
@@ -85,7 +85,7 @@ int		load_sprite(t_game_engine *ge, char *line)
 	return (OK);
 }
 
-int		load_textures(t_game_engine *ge, char *line)
+int		load_textures(t_ge *ge, char *line)
 {
 	t_img	*tex;
 	char	**param;

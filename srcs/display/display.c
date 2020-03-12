@@ -6,13 +6,13 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:42:09 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/09 18:53:16 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 10:54:37 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		img_vertline_put(t_dda *dda, t_game_engine *ge,
+int		img_vertline_put(t_dda *dda, t_ge *ge,
 						t_img *tex, t_img *img)
 {
 	int		tex_n;
@@ -38,7 +38,7 @@ int		img_vertline_put(t_dda *dda, t_game_engine *ge,
 	return (0);
 }
 
-int		draw_world(t_game_engine *ge, t_img *img)
+int		draw_world(t_ge *ge, t_img *img)
 {
 	t_dda	*dda;
 
@@ -58,6 +58,7 @@ int		draw_world(t_game_engine *ge, t_img *img)
 			&ge->map.textures[get_wall_orientation(dda)], img);
 		dda->img_x++;
 	}
+	free(dda->z_buffer);
 	return (OK);
 }
 
@@ -70,10 +71,10 @@ int		draw_world(t_game_engine *ge, t_img *img)
 
 int		draw(void *param)
 {
-	t_game_engine	*ge;
+	t_ge	*ge;
 	t_img			img;
 
-	ge = (t_game_engine *)param;
+	ge = (t_ge *)param;
 	if (draw_world(ge, &img) == ERROR)
 		return (ERROR);
 	draw_sprite(ge, &img);

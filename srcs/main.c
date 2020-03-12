@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:36:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 10:48:58 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 10:54:37 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	print_error(int r)
 	ft_printf("Erreur à la lecture du fichier cub : %d", r);
 }
 
-int		init_engine(t_game_engine *ge)
+int		init_engine(t_ge *ge)
 {
 	ge->move_speed = 0.1;
 	ge->rot_speed = 0.06;
@@ -25,7 +25,7 @@ int		init_engine(t_game_engine *ge)
 	return (1);
 }
 
-void	save(t_game_engine *ge)
+void	save(t_ge *ge)
 {
 	t_img			img;
 
@@ -39,7 +39,7 @@ void	save(t_game_engine *ge)
 		print_error(ERROR);
 }
 
-void	set_hooks(t_game_engine *ge)
+void	set_hooks(t_ge *ge)
 {
 	mlx_loop_hook(ge->mlx_ptr, &main_hook, ge);
 	mlx_hook(ge->mlx_win, X11_KEY_PRESS, X11_KEY_PRESS_M, &key_hook_press, ge);
@@ -50,7 +50,7 @@ void	set_hooks(t_game_engine *ge)
 
 int		main(int argc, char *argv[])
 {
-	t_game_engine	ge;
+	t_ge	ge;
 	int				r;
 
 	if ((ge.mlx_ptr = mlx_init()) == NULL)
