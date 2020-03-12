@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 16:53:14 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 17:01:03 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,15 @@ typedef struct		s_vect
 	double x;
 	double y;
 }					t_vect;
+
+/* 
+**	int position only to use in sprite.c
+*/
+typedef struct	s_pxl
+{
+	int	x;
+	int	y;
+}				t_pxl;
 
 typedef struct		s_pxl_color
 {

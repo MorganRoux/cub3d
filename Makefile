@@ -7,6 +7,7 @@ MLX			=	$(MLX_DIR)/libmlx.a
 LIBS		=	$(LIBFT) $(MLX)
 
 SRCS		=	srcs/main.c \
+				srcs/init.c \
 				srcs/display/display.c \
 				srcs/display/compute_fps.c \
 				srcs/display/copy.c \
