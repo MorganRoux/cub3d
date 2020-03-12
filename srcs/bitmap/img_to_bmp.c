@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 19:08:54 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/09 18:52:54 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 17:32:24 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int		write_data(t_img *img, int fl)
 			pxl = &img->data[4 * (iy * img->w + ix)];
 			if (write(fl, pxl, 4) == -1)
 			{
-				printf("error %d\n", errno);
+				ft_printf("error %d\n", errno);
 				return (-1);
 			}
 			ix++;
