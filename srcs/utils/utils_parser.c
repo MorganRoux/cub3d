@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:40:47 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 10:32:50 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 10:44:32 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,12 @@ void	replace_comma(char *line)
 			*line = ' ';
 		line++;
 	}
+}
+
+void	print_map(char **lines)
+{
+	printf("\n");
+	while(*lines != 0)
+		printf("%s\n", *lines++);
+	getchar();
 }
