@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:36:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 17:23:59 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 18:18:11 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_error(int r)
 {
-	ft_printf("Erreur à la lecture du fichier cub : %d", r);
+	ft_printf("Error\nErreur à la lecture du fichier cub : %d", r);
 }
 
 void	save(t_ge *ge)
