@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:03:54 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/10 17:01:12 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 10:36:30 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int		key_hook_release(int keycode, void *param)
 int		exit_hook(t_game_engine *ge)
 {
 	mlx_destroy_window(ge->mlx_ptr, ge->mlx_win);
+	getchar();
 	exit(0);
 	return (0);
 }

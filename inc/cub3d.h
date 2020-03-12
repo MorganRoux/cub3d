@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/10 18:13:24 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 10:39:10 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,7 +271,7 @@ int					load_sprite(t_game_engine *ge, char *line);
 int					load_map(t_game_engine *ge, int fd, char *firstline);
 int					load_textures(t_game_engine *ge, char *line);
 int					make_rect(int w, char **lines);
-int					flood_map(int w, int h, char **lines);
+int					flood_map(char **lines);
 int					check_map(t_game_engine *ge);
 int					check_dim_param(char **param);
 int					check_color_param(char **param);
@@ -287,5 +287,6 @@ int					load_line(t_game_engine *ge, char *line, int *n);
 t_cardinal			get_tex_orientation(char l);
 void				*ft_realloc(void *p, size_t l, size_t newsize);
 char				**ft_split_ex(char *str, char *charset);
+void				replace_comma(char *line);
 
 #endif

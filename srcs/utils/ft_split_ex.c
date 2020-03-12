@@ -6,12 +6,12 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 16:53:43 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/09 18:59:07 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 10:34:23 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-
+#include <stdio.h>
 int		is_charset(char c, char *charset)
 {
 	while (*charset != 0)

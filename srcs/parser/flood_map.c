@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 15:25:19 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/10 18:23:21 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 10:39:40 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,13 @@ int		start_flood(char **lines, int i, int j)
 	return (OK);
 }
 
-int		flood_map(int w, int h, char **lines)
+int		flood_map(char **lines)
 {
-	char 	**s;
 	int		i;
 	int		j;
-	(void)h;
-	(void)w;
-	s = lines;
 	i = 0;
 	j = 0;
-	// while(*lines != 0)
-	// 	printf("%s\n", *lines++);
-	// getchar();
-	// lines = s;
-	// if (make_rect(w, lines) == ERROR)
-	// 	return (NULL);
+
 	while (lines[i] != 0)
 	{
 		while (lines[i][j] != 0)
@@ -66,9 +57,5 @@ int		flood_map(int w, int h, char **lines)
 		}
 		i++;
 	}
-	while(*lines != 0)
-		printf("%s\n", *lines++);
-	getchar();
-	lines = s;
 	return (OK);
 }

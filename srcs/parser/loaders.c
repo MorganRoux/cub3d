@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 11:02:45 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/10 16:57:27 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 10:36:36 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int		load_colors(t_game_engine *ge, char *line)
 	int		n;
 	int		i;
 
-	param = ft_split_ex(line, ", ");
+	replace_comma(line);
+	param = ft_split(line, ' ');
 	if (param == NULL || check_color_param(param) != OK)
 		return (ERROR_COLORS);
 	n = ft_strcmp(param[0], "F") == 0 ? 0 : 1;

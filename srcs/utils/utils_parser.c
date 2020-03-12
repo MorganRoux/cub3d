@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:40:47 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/10 18:03:55 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 10:32:50 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,14 @@ int			check_number(char *s)
 		if (!ft_isdigit(s[i++]))
 			return (ERROR);
 	return (OK);
+}
+
+void	replace_comma(char *line)
+{
+	while (*line != 0)
+	{
+		if (*line == ',')
+			*line = ' ';
+		line++;
+	}
 }
