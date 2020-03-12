@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 14:56:31 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 15:09:09 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include "keys.h"
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
-# define SPRITE_NUMBER 2
 
 enum
 {
