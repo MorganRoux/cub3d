@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:42:09 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 10:54:37 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 15:07:46 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ int		draw_world(t_ge *ge, t_img *img)
 
 	dda = &ge->dda;
 	dda->img_x = 0;
-	if (!(dda->z_buffer = malloc(sizeof(double) * ge->screen_w)))
-		return (ERROR);
 	img->p_img = mlx_new_image(ge->mlx_ptr, ge->screen_w, ge->screen_h);
 	img->w = ge->screen_w;
 	img->h = ge->screen_h;
@@ -58,7 +56,7 @@ int		draw_world(t_ge *ge, t_img *img)
 			&ge->map.textures[get_wall_orientation(dda)], img);
 		dda->img_x++;
 	}
-	free(dda->z_buffer);
+	//free(dda->z_buffer);
 	return (OK);
 }
 

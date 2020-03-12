@@ -6,7 +6,7 @@
 /*   By: mroux <mroux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:13:02 by mroux             #+#    #+#             */
-/*   Updated: 2020/03/12 11:06:17 by mroux            ###   ########.fr       */
+/*   Updated: 2020/03/12 14:56:31 by mroux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,8 +168,8 @@ typedef struct		s_dda
 	int			stripe_screen_x;
 	int			sprite_height;
 	int			sprite_width;
-	int			sprite_order[SPRITE_NUMBER];
-	double		sprite_distance[SPRITE_NUMBER];
+	int			*sprite_order;
+	double		*sprite_distance;
 }					t_dda;
 
 /*
@@ -224,7 +224,7 @@ int					init_engine(t_ge *ge);
 /*
 **	dda : raytracing engine
 */
-int					init_dda(t_dda *dda, t_ge *ge);
+int					init_dda(t_ge *ge);
 void				update_dda(t_dda *dda, t_ge *ge);
 void				detect_collision(t_dda *dda, t_ge *ge);
 int					compute_dda(t_dda *dda, t_ge *ge);
