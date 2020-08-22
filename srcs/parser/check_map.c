@@ -66,6 +66,7 @@ int		init_sprite(t_ge *ge, size_t i)
 	ge->map.sprites[*nsprite].pos.y = i / ge->map.w + 0.5;
 	ge->map.sprites[*nsprite].texture = ge->map.sprite_ref.texture;
 	*nsprite = *nsprite + 1;
+	getchar();
 	return (OK);
 }
 
