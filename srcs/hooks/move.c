@@ -14,60 +14,68 @@
 
 void	move_front(t_ge *ge)
 {
-	char	*world_map;
+//	char	*world_map;
 	double	new_x;
 	double	new_y;
 
 	new_x = ge->pl.pos.x + ge->dir.x * ge->move_speed;
 	new_y = ge->pl.pos.y + ge->dir.y * ge->move_speed;
-	world_map = ge->map.p_map;
-	if (world_map[(int)(ge->pl.pos.y) * ge->map.w + (int)new_x] == 0)
+//	world_map = ge->map.p_map;
+//	if (0 < new_x && new_x < ge->map.w)
+//	if (world_map[(int)(ge->pl.pos.y) * ge->map.w + (int)new_x] == 0)
 		ge->pl.pos.x = new_x;
-	if (world_map[(int)new_y * ge->map.w + (int)(ge->pl.pos.x)] == 0)
+//	if (0 < new_y && new_y < ge->map.h)
+//	if (world_map[(int)new_y * ge->map.w + (int)(ge->pl.pos.x)] == 0)
 		ge->pl.pos.y = new_y;
 }
 
 void	move_back(t_ge *ge)
 {
-	char	*world_map;
+//	char	*world_map;
 	double	new_x;
 	double	new_y;
 
 	new_x = ge->pl.pos.x - ge->dir.x * ge->move_speed;
 	new_y = ge->pl.pos.y - ge->dir.y * ge->move_speed;
-	world_map = ge->map.p_map;
-	if (world_map[(int)(ge->pl.pos.y) * ge->map.w + (int)new_x] == 0)
+//	world_map = ge->map.p_map;
+//	if (0 < new_x && new_x < ge->map.w)
+//	if (world_map[(int)(ge->pl.pos.y) * ge->map.w + (int)new_x] == 0)
 		ge->pl.pos.x = new_x;
-	if (world_map[(int)new_y * ge->map.w + (int)(ge->pl.pos.x)] == 0)
+//	if (0 < new_y && new_y < ge->map.h)
+//	if (world_map[(int)new_y * ge->map.w + (int)(ge->pl.pos.x)] == 0)
 		ge->pl.pos.y = new_y;
 }
 
 void	move_right(t_ge *ge)
 {
-	char	*world_map;
+//	char	*world_map;
 	double	new_x;
 	double	new_y;
 
 	new_x = ge->pl.pos.x - ge->dir.y * ge->move_speed;
 	new_y = ge->pl.pos.y + ge->dir.x * ge->move_speed;
-	world_map = ge->map.p_map;
-	if (world_map[(int)(ge->pl.pos.y) * ge->map.w + (int)new_x] == 0)
+//	world_map = ge->map.p_map;
+//	if (0 < new_x && new_x < ge->map.w)
+//	if (world_map[(int)(ge->pl.pos.y) * ge->map.w + (int)new_x] == 0)
 		ge->pl.pos.x = new_x;
-	if (world_map[(int)new_y * ge->map.w + (int)(ge->pl.pos.x)] == 0)
+//	if (0 < new_y && new_y < ge->map.h)
+//	if (world_map[(int)new_y * ge->map.w + (int)(ge->pl.pos.x)] == 0)
 		ge->pl.pos.y = new_y;
 }
 
 void	move_left(t_ge *ge)
 {
-	char	*world_map;
+//	char	*world_map;
 	double	new_x;
 	double	new_y;
 
 	new_x = ge->pl.pos.x + ge->dir.y * ge->move_speed;
 	new_y = ge->pl.pos.y - ge->dir.x * ge->move_speed;
-	world_map = ge->map.p_map;
-	if (world_map[(int)(ge->pl.pos.y) * ge->map.w + (int)new_x] == 0)
+//	world_map = ge->map.p_map;
+//	if (0 < new_x && new_x < ge->map.w)
+//	if (world_map[(int)(ge->pl.pos.y) * ge->map.w + (int)new_x] == 0)
 		ge->pl.pos.x = new_x;
-	if (world_map[(int)new_y * ge->map.w + (int)(ge->pl.pos.x)] == 0)
+//	if (0 < new_y && new_y < ge->map.h)
+//	if (world_map[(int)new_y * ge->map.w + (int)(ge->pl.pos.x)] == 0)
 		ge->pl.pos.y = new_y;
 }
