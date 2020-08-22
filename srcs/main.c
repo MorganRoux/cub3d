@@ -35,7 +35,7 @@ void	set_hooks(t_ge *ge)
 {
 	mlx_loop_hook(ge->mlx_ptr, &main_hook, ge);
 	mlx_hook(ge->mlx_win, X11_KEY_PRESS, X11_KEY_PRESS_M, &key_hook_press, ge);
-	mlx_hook(ge->mlx_win, 17, 0, &exit_hook, ge);
+	mlx_hook(ge->mlx_win, 33, 0, &exit_hook, ge);
 	mlx_hook(ge->mlx_win, X11_KEY_RELEASE, X11_KEY_RELEASE_M,
 			&key_hook_release, ge);
 }
@@ -70,7 +70,7 @@ int		main(int argc, char *argv[])
 	else if (argc == 2)
 	{
 		if ((ge.mlx_win = mlx_new_window(ge.mlx_ptr, ge.screen_w,
-									ge.screen_h, "Raycaster")) == NULL)
+									ge.screen_h, "Cub3D")) == NULL)
 			return (0);
 		set_hooks(&ge);
 		mlx_loop(ge.mlx_ptr);
