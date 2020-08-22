@@ -32,7 +32,7 @@ int		option_di(t_flags *flags, int n)
 	s[0] = (n == 0 && flags->precision == 0) ? 0 : s[0];
 	print_arg_nbr(s, flags);
 	flags->nprint += (ft_strlen(s) > (unsigned long)flags->len) ? ft_strlen(s)
-				: flags->len;
+				: (unsigned long)flags->len;
 	free(nbr);
 	free(s);
 	free(zero);
@@ -55,7 +55,7 @@ int		option_ux(char *nbr, int n, t_flags *flags)
 	s[0] = (n == 0 && flags->precision == 0) ? 0 : s[0];
 	print_arg_nbr(s, flags);
 	flags->nprint += (ft_strlen(s) > (unsigned long)flags->len) ?
-					ft_strlen(s) : flags->len;
+					ft_strlen(s) : (unsigned long)flags->len;
 	free(s);
 	free(zero);
 	return (0);

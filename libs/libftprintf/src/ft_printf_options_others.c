@@ -38,7 +38,7 @@ void	option_s(va_list *ap, t_flags *flags)
 		tmp = ft_strdup("(null)");
 	s = ft_substr(tmp, 0, flags->precision);
 	flags->nprint += (ft_strlen(s) > (unsigned long)flags->len) ?
-					ft_strlen(s) : flags->len;
+					ft_strlen(s) : (unsigned long)flags->len;
 	print_arg(s, flags);
 	free(s);
 	if (ft_strcmp("(null)", tmp) == 0)
@@ -65,7 +65,7 @@ void	option_p(va_list *ap, t_flags *flags)
 	s = ft_strjoin(zero, nbr);
 	print_arg(s, flags);
 	flags->nprint += (ft_strlen(s) > (unsigned long)flags->len) ?
-					ft_strlen(s) : flags->len;
+					ft_strlen(s) : (unsigned long)flags->len;
 	free(nbr);
 	free(s);
 	free(zero);

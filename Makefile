@@ -1,7 +1,7 @@
 NAME		=	cub3d
 
 LIBFT_DIR	=	./libs/libftprintf
-MLX_DIR		=	./libs/minilibx_opengl_20191021
+MLX_DIR		=	./libs/minilibx-linux
 LIBFT		=	$(LIBFT_DIR)/libftprintf.a
 MLX			=	$(MLX_DIR)/libmlx.a
 LIBS		=	$(LIBFT) $(MLX)
@@ -45,7 +45,7 @@ COMPILE		=	$(CC) $(FLAGS) $(INC_PATH) -L$(LIBFT_DIR) -lftprintf -L$(MLX_DIR) -lm
 all:		$(NAME)
 
 $(NAME):	$(LIBS) ${OBJS}
-			$(COMPILE) $(OBJS) -o $(NAME)
+		$(CC) $(FLAGS) -o $@ $(OBJS) $(LIBS) -lbsd -lX11 -lXext -lm 
 $(LIBFT):	
 			make -C $(LIBFT_DIR)
 $(MLX):			
@@ -58,7 +58,6 @@ clean:
 
 fclean:		
 			make fclean -C $(LIBFT_DIR)
-			make fclean -C $(MLX_DIR)
 			rm -f ${OBJS}
 			rm -f ${NAME}
 

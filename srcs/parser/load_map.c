@@ -82,10 +82,8 @@ int		create_map(char **lines, t_map *map)
 
 int		load_map(t_ge *ge, int fd, char *firstline)
 {
-	int		n;
 	char	**lines;
 
-	n = 0;
 	lines = 0;
 	ge->map.w = 0;
 	ge->map.h = 0;
