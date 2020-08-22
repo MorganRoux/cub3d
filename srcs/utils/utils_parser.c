@@ -51,8 +51,8 @@ void		*ft_realloc(void *p, size_t l, size_t newsize)
 		ret[n] = ptr[n];
 	while (n < newsize)
 		ret[n++] = 0;
-//	if (p != NULL)
-//		free(p);
+	if (p != NULL)
+		free(p);
 	return ((void *)ret);
 }
 

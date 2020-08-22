@@ -66,7 +66,6 @@ int		init_sprite(t_ge *ge, size_t i)
 	ge->map.sprites[*nsprite].pos.y = i / ge->map.w + 0.5;
 	ge->map.sprites[*nsprite].texture = ge->map.sprite_ref.texture;
 	*nsprite = *nsprite + 1;
-	getchar();
 	return (OK);
 }
 
@@ -76,6 +75,7 @@ int		check_map(t_ge *ge)
 
 	i = 0;
 	ge->map.n_sprite = 0;
+	ge->map.sprites = NULL;
 	while (i < ge->map.size - 1)
 	{
 		if (ge->map.p_map[i] == 8)
