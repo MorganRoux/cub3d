@@ -14,7 +14,7 @@
 
 int			init_engine(t_ge *ge)
 {
-	ge->move_speed = 0.1;
+	ge->move_speed = 0.7;
 	ge->rot_speed = 0.06;
 	ge->keys = NONE;
 	return (OK);
