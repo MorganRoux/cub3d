@@ -16,14 +16,17 @@ int		load_map_dimensions(t_ge *ge, char *line)
 {
 	char	**param;
 	int		i;
+	int		maxw;
+	int		maxh;
 
+	mlx_get_screen_size(ge->mlx_ptr, &maxw, &maxh);
 	param = ft_split(line, ' ');
 	if (param == NULL || check_dim_param(param) != OK)
 		return (ERROR_DIM);
 	ge->screen_w = ft_atoi(param[1]);
-	ge->screen_w = ge->screen_w > 2560 ? 2560 : ge->screen_w;
+	ge->screen_w = ge->screen_w > maxw ? maxw : ge->screen_w;
 	ge->screen_h = ft_atoi(param[2]);
-	ge->screen_h = ge->screen_h > 1440 ? 1440 : ge->screen_h;
+	ge->screen_h = ge->screen_h > maxh ? maxh : ge->screen_h;
 	i = 0;
 	while (param[i] != 0)
 		free(param[i++]);
